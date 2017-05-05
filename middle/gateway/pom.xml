@@ -1,0 +1,80 @@
+<project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://maven.apache.org/POM/4.0.0"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <groupId>com.zhiyin.frame</groupId>
+    <artifactId>api-gate</artifactId>
+    <version>0.0.1-SNAPSHOT</version>
+    <packaging>pom</packaging>
+
+    <name>${project.artifactId}</name>
+
+    <properties>
+        <java.version>1.8</java.version>
+    </properties>
+
+
+    <modules>
+        <module>eureka-server</module>
+        <module>service-A</module>
+        <module>service-B</module>
+        <module>api-gateway</module>
+        <!--<module>simple-webapp</module>-->
+
+        <module>user-api</module>
+        <module>user-api-gray</module>
+    </modules>
+
+
+    <!--<parent>-->
+    <!--<groupId>com.zhiyin</groupId>-->
+    <!--<artifactId>zhiyin-parent</artifactId>-->
+    <!--<version>0.0.1-SNAPSHOT</version>-->
+    <!--</parent>-->
+
+    <!--<dependencies>-->
+    <!--<dependency>-->
+    <!--<groupId>org.springframework.boot</groupId>-->
+    <!--<artifactId>spring-boot-starter-web</artifactId>-->
+    <!--</dependency>-->
+    <!--<dependency>-->
+    <!--<groupId>org.springframework.boot</groupId>-->
+    <!--<artifactId>spring-boot-starter-actuator</artifactId>-->
+    <!--</dependency>-->
+    <!--<dependency>-->
+    <!--<groupId>org.springframework.cloud</groupId>-->
+    <!--<artifactId>spring-cloud-starter</artifactId>-->
+    <!--</dependency>-->
+    <!--<dependency>-->
+    <!--<groupId>org.springframework.boot</groupId>-->
+    <!--<artifactId>spring-boot-starter-test</artifactId>-->
+    <!--<scope>test</scope>-->
+    <!--</dependency>-->
+
+    <!--<dependency>-->
+    <!--<groupId>org.assertj</groupId>-->
+    <!--<artifactId>assertj-core</artifactId>-->
+    <!--</dependency>-->
+
+    <!--</dependencies>-->
+
+    <dependencyManagement>
+        <dependencies>
+
+            <dependency>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-starter-parent</artifactId>
+                <version>1.4.1.RELEASE</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+            <dependency>
+                <groupId>org.springframework.cloud</groupId>
+                <artifactId>spring-cloud-dependencies</artifactId>
+                <!--<version>Brixton.RELEASE</version>-->
+                <version>Camden.RELEASE</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
+</project>

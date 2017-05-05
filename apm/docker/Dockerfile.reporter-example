@@ -1,0 +1,17 @@
+FROM openjdk:8
+
+MAINTAINER huiwq1990
+
+WORKDIR /opt/spring-cloud/lib
+
+EXPOSE 8080
+
+COPY reporter-example.jar reporter-example.jar
+
+ENTRYPOINT ["/usr/bin/java"]
+CMD ["-jar", "reporter-example.jar"]
+
+
+#ADD entrypoint.sh entrypoint.sh
+#RUN chmod +x entrypoint.sh
+#ENTRYPOINT ["/usr/share/zookeeper/entrypoint.sh"]

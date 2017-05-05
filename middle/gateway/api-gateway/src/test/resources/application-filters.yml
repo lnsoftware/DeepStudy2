@@ -1,0 +1,19 @@
+
+
+server:
+  port: 0
+
+
+zuul:
+  routes:
+    local:
+      path: /local/**
+      serviceId: local
+
+ribbon:
+  eureka:
+    enabled: true
+
+local:
+  ribbon:
+    listOfServers: http://localhost:${server.port}

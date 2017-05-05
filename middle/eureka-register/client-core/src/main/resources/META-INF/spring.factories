@@ -1,0 +1,4 @@
+# Auto Configuration
+org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
+com.zhiyin.eureka.instrument.web.client.ServerMarkWebClientAutoConfiguration,\
+com.zhiyin.eureka.instrument.web.client.support.RibbonDiscoveryRuleAutoConfiguration

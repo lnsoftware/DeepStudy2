@@ -1,0 +1,34 @@
+
+spring:
+  application:
+    name: apm-demo
+
+#management:
+#  port: 8081
+#  security:
+#    enabled: false
+#
+#security:
+#  basic:
+#    enabled: false
+#  user:
+#    name: admin
+#    password: admin
+
+server:
+  port: 8080
+
+# settings for metrics reporter
+reporter:
+  metrics:
+#    types: console
+    types: elasticsearch
+    interval: 5
+    timeUnit: seconds
+    es:
+      hosts: elasticsearch-server:9200
+
+
+hystrix:
+  metrics:
+    enabled: true

@@ -1,0 +1,130 @@
+<project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://maven.apache.org/POM/4.0.0"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <artifactId>thrid-env-server</artifactId>
+    <version>0.0.1-SNAPSHOT</version>
+    <packaging>jar</packaging>
+
+    <properties>
+        <java.version>1.8</java.version>
+    </properties>
+
+    <parent>
+        <groupId>com.zhiyin.frame.bootx</groupId>
+        <artifactId>spring-boot-extend</artifactId>
+        <version>0.0.1-SNAPSHOT</version>
+    </parent>
+
+    <dependencies>
+
+        <dependency>
+            <groupId>com.fasterxml.jackson.dataformat</groupId>
+            <artifactId>jackson-dataformat-yaml</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.fasterxml.jackson.core</groupId>
+            <artifactId>jackson-databind</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.commons</groupId>
+            <artifactId>commons-lang3</artifactId>
+            <version>3.4</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-web</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-test</artifactId>
+            <scope>test</scope>
+        </dependency>
+
+    </dependencies>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <configuration>
+                    <source>1.8</source>
+                    <target>1.8</target>
+                </configuration>
+            </plugin>
+
+            <!--<plugin>-->
+            <!--<groupId>org.apache.maven.plugins</groupId>-->
+            <!--<artifactId>maven-war-plugin</artifactId>-->
+            <!--<version>2.6</version>-->
+            <!--<configuration>-->
+            <!--<warName>${project.artifactId}</warName>-->
+            <!--<failOnMissingWebXml>false</failOnMissingWebXml>-->
+            <!--</configuration>-->
+            <!--</plugin>-->
+
+        </plugins>
+    </build>
+
+    <!--<profiles>-->
+    <!--<profile>-->
+    <!--<id>local</id>-->
+    <!--<properties>-->
+    <!--<env>local</env>-->
+    <!--</properties>-->
+    <!--<build>-->
+    <!--<resources>-->
+    <!--<resource>-->
+    <!--<directory>deploy/local</directory>-->
+    <!--</resource>-->
+    <!--<resource>-->
+    <!--<directory>src/main/resources</directory>-->
+    <!--</resource>-->
+    <!--</resources>-->
+    <!--</build>-->
+    <!--</profile>-->
+
+    <!--<profile>-->
+    <!--<id>dev</id>-->
+    <!--<properties>-->
+    <!--<env>dev</env>-->
+    <!--</properties>-->
+    <!--<activation>-->
+    <!--<activeByDefault>true</activeByDefault>-->
+    <!--</activation>-->
+    <!--<build>-->
+    <!--<resources>-->
+    <!--<resource>-->
+    <!--<directory>deploy/dev</directory>-->
+    <!--</resource>-->
+    <!--<resource>-->
+    <!--<directory>src/main/resources</directory>-->
+    <!--</resource>-->
+    <!--</resources>-->
+    <!--</build>-->
+    <!--</profile>-->
+    <!--<profile>-->
+    <!--<id>product</id>-->
+    <!--<properties>-->
+    <!--<env>product</env>-->
+    <!--</properties>-->
+    <!--<build>-->
+    <!--<resources>-->
+    <!--<resource>-->
+    <!--<directory>deploy/product</directory>-->
+    <!--</resource>-->
+    <!--<resource>-->
+    <!--<directory>src/main/resources</directory>-->
+    <!--</resource>-->
+    <!--</resources>-->
+    <!--</build>-->
+    <!--</profile>-->
+    <!--</profiles>-->
+
+</project>

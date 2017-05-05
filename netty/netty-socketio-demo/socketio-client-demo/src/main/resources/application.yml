@@ -1,0 +1,8 @@
+wss:
+  server:
+    port: 9092
+    host: localhost
+    url: http://${wss.server.host}:${wss.server.port}
+
+#spring.main.web_environment=false
+#spring.main.show_banner=false

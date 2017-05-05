@@ -1,0 +1,16 @@
+
+spring:
+  application:
+    name: zipkin-server
+
+  datasource:
+    #spanstore-jdbc-0.9.3.jar
+    schema: classpath:/mysql.sql
+    url: jdbc:mysql://10.51.119.172:3306/zipkin
+    username: zipkin
+    password: zipkin
+    driver-class-name: com.mysql.jdbc.Driver
+      # Switch this on to create the schema on startup:
+    initialize: true
+    continueOnError: true
+

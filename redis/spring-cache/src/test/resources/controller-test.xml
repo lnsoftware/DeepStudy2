@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	   xmlns:mvc="http://www.springframework.org/schema/mvc"
+	   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	   xmlns:context="http://www.springframework.org/schema/context" xmlns:tx="http://www.springframework.org/schema/tx"
+	   xsi:schemaLocation="http://www.springframework.org/schema/mvc
+	http://www.springframework.org/schema/mvc/spring-mvc.xsd
+
+
+
+
+		http://www.springframework.org/schema/beans 
+		http://www.springframework.org/schema/beans/spring-beans-4.0.xsd
+
+
+		http://www.springframework.org/schema/tx 
+		http://www.springframework.org/schema/tx/spring-tx-4.0.xsd
+		http://www.springframework.org/schema/context 
+		http://www.springframework.org/schema/context/spring-context-4.0.xsd">
+
+
+
+	
+	
+	<!-- 数据库配置文件位置 -->
+	<context:property-placeholder location="classpath:/config.properties" />
+
+    <bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource">
+        <property name="driverClassName" value="${jdbc.driverClassName}"/>
+        <property name="url" value="${jdbc.url}"/>
+        <property name="username" value="${jdbc.username}"/>
+        <property name="password" value="${jdbc.password}"/>
+        <property name="maxActive" value="${jdbc.maxActive}" />
+		<property name="maxIdle" value="${jdbc.maxIdle}" />
+		<property name="maxWait" value="${jdbc.maxWait}" />
+		<property name="initialSize" value="${jdbc.initialSize}"/>
+		<property name="minIdle" value="${jdbc.minIdle}"/>
+		<property name="minEvictableIdleTimeMillis" value="${jdbc.minEvictableIdleTimeMillis}"/>
+		<property name="timeBetweenEvictionRunsMillis" value="${jdbc.timeBetweenEvictionRunsMillis}"/>
+		<property name="numTestsPerEvictionRun" value="${jdbc.numTestsPerEvictionRun}" />
+    </bean>
+
+
+
+	<bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+		<property name="dataSource" ref="dataSource" />
+		<property name="mapperLocations" value="classpath:sqlmap/*/*.xml"></property>
+	
+        <property name="configLocation" value="classpath:mybatis-config.xml"></property>
+        
+		
+		  <property name="plugins">
+		    <array>
+		      <bean class="com.github.pagehelper.PageHelper">
+		        <property name="properties">
+		          <value>
+		            dialect=mysql
+		            reasonable=true
+		          </value>
+		        </property>
+		      </bean>
+		    </array>
+		  </property>
+       
+    </bean>
+	<!-- Mybatis end -->
+	<!-- http://www.cnblogs.com/yeahwell/p/4226575.html -->
+	<bean id="sqlSession" class="org.mybatis.spring.SqlSessionTemplate" scope="prototype">
+        <constructor-arg index="0" name="sqlSessionFactory" ref="sqlSessionFactory"></constructor-arg>
+    </bean>
+	
+	
+	 <bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+        <property name="dataSource" ref="dataSource"></property>
+        <!-- <property name="dataSource_refundorder" ref="dataSource_refundorder"></property> -->
+    </bean>
+    
+    <tx:annotation-driven  transaction-manager="transactionManager" />
+	<!-- Activates annotation-based bean configuration -->
+	<context:annotation-config />
+	<mvc:annotation-driven />  
+
+	<!-- Scans for application @Components to deploy -->
+	<context:component-scan base-package="com.travelsky" />
+</beans>

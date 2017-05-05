@@ -1,0 +1,8 @@
+
+
+logging:
+  level: debug
+
+hystrix:
+  metrics:
+    enabled: true

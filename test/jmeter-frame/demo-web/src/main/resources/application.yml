@@ -1,0 +1,47 @@
+# suppress inspection "UnusedProperty" for whole file
+
+
+#logging.level.org.springframework.boot.autoconfigure.security.AuthenticationManagerConfiguration=INFO
+
+
+spring:
+  application:
+    name: jmeter-demoserver
+  boot:
+    admin:
+      url: http://localhost:10008
+
+
+management:
+  port: 8081
+  security:
+    enabled: false
+
+security:
+  basic:
+    enabled: false
+  user:
+    name: admin
+    password: admin
+
+server:
+  port: 8080
+
+# tomcat最大线程数，默认为200
+  tomcat:
+    max-threads: 800
+# tomcat的URI编码
+    uri-encoding: UTF-8
+# 存放Tomcat的日志、Dump等文件的临时文件夹，默认为系统的tmp文件夹（如：C:\Users\Shanhy\AppData\Local\Temp）
+    basedir: /springboot-tomcat-tmp
+# 打开Tomcat的Access日志，并可以设置日志格式的方法：
+#server.tomcat.access-log-enabled=true
+#server.tomcat.access-log-pattern=
+# accesslog目录，默认在basedir/logs
+#server.tomcat.accesslog.directory=
+
+logging:
+# 日志文件目录
+  path: /springboot-tomcat-tmp
+# 日志文件名称，默认为spring.log
+  file: ./target/myapp.log

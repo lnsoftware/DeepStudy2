@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+    <!--<include resource="org/springframework/boot/logging/logback/base.xml" />-->
+
+    <include resource="com/zhiyin/logging/logback/base-conf-default.xml"/>
+    <!--<root level="INFO">-->
+    <!--<appender-ref ref="STDOUT"/>-->
+    <!--<appender-ref ref="all_info" level="INFO"/>-->
+    <!--<appender-ref ref="all_error"/>-->
+    <!--</root>-->
+</configuration>

@@ -1,0 +1,18 @@
+
+server:
+  port: 8088
+
+spring:
+  application:
+    name: config-server
+  config:
+    location: /opt/config-server.yml
+
+eureka:
+  client:
+    enabled: true
+    serviceUrl:
+      defaultZone: http://eureka-server:8761/eureka/
+  instance:
+    preferIpAddress: true
+

@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<configuration>
+	<appender name="all_error"
+		class="ch.qos.logback.core.rolling.RollingFileAppender">
+		<filter class="ch.qos.logback.classic.filter.LevelFilter">
+			<level>ERROR</level>
+			<onMatch>ACCEPT</onMatch>
+			<onMismatch>DENY</onMismatch>
+		</filter>
+		<File>./log/mylog_all_error.log</File>
+		<rollingPolicy class="ch.qos.logback.core.rolling.FixedWindowRollingPolicy">
+			<FileNamePattern>./log/mylog_all_error.%i.log</FileNamePattern>
+			<MinIndex>1</MinIndex>
+			<MaxIndex>5</MaxIndex>
+		</rollingPolicy>
+		<triggeringPolicy
+			class="ch.qos.logback.core.rolling.SizeBasedTriggeringPolicy">
+			<MaxFileSize>5MB</MaxFileSize>
+		</triggeringPolicy>
+		<layout class="ch.qos.logback.classic.PatternLayout">
+			<Pattern>%date [%thread] %-5level %logger{80} - %msg%n</Pattern>
+		</layout>
+	</appender>
+	<appender name="all_info"
+		class="ch.qos.logback.core.rolling.RollingFileAppender">
+		<filter class="ch.qos.logback.classic.filter.ThresholdFilter">
+			<level>INFO</level>
+		</filter>
+		<File>./log/mylog_all_info.log</File>
+		<rollingPolicy class="ch.qos.logback.core.rolling.FixedWindowRollingPolicy">
+			<FileNamePattern>./log/mylog_all_info.%i.log</FileNamePattern>
+			<MinIndex>1</MinIndex>
+			<MaxIndex>5</MaxIndex>
+		</rollingPolicy>
+		<triggeringPolicy
+			class="ch.qos.logback.core.rolling.SizeBasedTriggeringPolicy">
+			<MaxFileSize>5MB</MaxFileSize>
+		</triggeringPolicy>
+		<layout class="ch.qos.logback.classic.PatternLayout">
+			<Pattern>%date [%thread] %-5level %logger{80} - %msg%n</Pattern>
+		</layout>
+	</appender>
+	<appender name="a"
+		class="ch.qos.logback.core.rolling.RollingFileAppender">
+		<File>./log/mylog_a_debug.log</File>
+		<rollingPolicy class="ch.qos.logback.core.rolling.FixedWindowRollingPolicy">
+			<FileNamePattern>./log/mylog_a_debug.%i.log</FileNamePattern>
+			<MinIndex>1</MinIndex>
+			<MaxIndex>5</MaxIndex>
+		</rollingPolicy>
+		<triggeringPolicy
+			class="ch.qos.logback.core.rolling.SizeBasedTriggeringPolicy">
+			<MaxFileSize>5MB</MaxFileSize>
+		</triggeringPolicy>
+		<layout class="ch.qos.logback.classic.PatternLayout">
+			<Pattern>%date [%thread] %-5level %logger{80} - %msg%n</Pattern>
+		</layout>
+	</appender>
+
+	<appender name="b"
+		class="ch.qos.logback.core.rolling.RollingFileAppender">
+		<File>./log/mylog_b_info.log</File>
+		<rollingPolicy class="ch.qos.logback.core.rolling.FixedWindowRollingPolicy">
+			<FileNamePattern>./log/mylog_b_info.%i.log</FileNamePattern>
+			<MinIndex>1</MinIndex>
+			<MaxIndex>5</MaxIndex>
+		</rollingPolicy>
+		<triggeringPolicy
+			class="ch.qos.logback.core.rolling.SizeBasedTriggeringPolicy">
+			<MaxFileSize>5MB</MaxFileSize>
+		</triggeringPolicy>
+		<layout class="ch.qos.logback.classic.PatternLayout">
+			<Pattern>%date [%thread] %-5level %logger{80} - %msg%n</Pattern>
+		</layout>
+	</appender>
+
+	<appender name="c"
+		class="ch.qos.logback.core.rolling.RollingFileAppender">
+		<File>./log/mylog_c_warn.log</File>
+		<rollingPolicy class="ch.qos.logback.core.rolling.FixedWindowRollingPolicy">
+			<FileNamePattern>./log/mylog_c_warn.%i.log</FileNamePattern>
+			<MinIndex>1</MinIndex>
+			<MaxIndex>5</MaxIndex>
+		</rollingPolicy>
+		<triggeringPolicy
+			class="ch.qos.logback.core.rolling.SizeBasedTriggeringPolicy">
+			<MaxFileSize>5MB</MaxFileSize>
+		</triggeringPolicy>
+		<layout class="ch.qos.logback.classic.PatternLayout">
+			<Pattern>%date [%thread] %-5level %logger{80} - %msg%n</Pattern>
+		</layout>
+	</appender>
+
+	<appender name="d"
+		class="ch.qos.logback.core.rolling.RollingFileAppender">
+		<File>./log/mylog_d_error.log</File>
+		<rollingPolicy class="ch.qos.logback.core.rolling.FixedWindowRollingPolicy">
+			<FileNamePattern>./log/mylog_c_error.%i.log</FileNamePattern>
+			<MinIndex>1</MinIndex>
+			<MaxIndex>5</MaxIndex>
+		</rollingPolicy>
+		<triggeringPolicy
+			class="ch.qos.logback.core.rolling.SizeBasedTriggeringPolicy">
+			<MaxFileSize>5MB</MaxFileSize>
+		</triggeringPolicy>
+		<layout class="ch.qos.logback.classic.PatternLayout">
+			<Pattern>%date [%thread] %-5level %logger{80} - %msg%n</Pattern>
+		</layout>
+	</appender>
+
+	<logger name="com.hg.awesome.log.testlevel.a" level="DEBUG">
+		<appender-ref ref="a" />
+	</logger>
+
+	<logger name="com.hg.awesome.log.testlevel.b" level="INFO">
+		<appender-ref ref="b" />
+	</logger>
+
+	<logger name="com.hg.awesome.log.testlevel.c" level="warn">
+		<appender-ref ref="c" />
+	</logger>
+
+	<logger name="com.hg.awesome.log.testlevel.d" level="error">
+		<appender-ref ref="d" />
+	</logger>
+	
+	<root>
+		<appender-ref ref="all_info" level="INFO" />
+		<appender-ref ref="all_error" />
+	</root>
+	
+</configuration>  
+ 
+
+
+
+
+

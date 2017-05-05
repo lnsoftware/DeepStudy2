@@ -1,0 +1,41 @@
+
+// 大热点到小热点,播放器在工作，音频会提示
+{
+       "locationLatitude": 39.99073,
+ "locationLongitude": 116.27943,
+   "locationLoordSystem": "3",
+   
+    "preLat":39.98910141343689,
+    "preLon":116.35415476015766,
+    "preCoord":3,
+   
+   "eventType": "LocationChangeEvent",
+   "anchorRoleId":1,
+   "subjectType": "2",
+   "playContentId": "0",
+   "subjectId": "huiwq19902",
+   "playerStatus": "T",
+   "playContentId":1101,
+   "preAnchorRoleId": "1"
+  }
+
+
+
+// 小热点到大热点，播放器在工作，不会切换
+
+{
+       "preLat": 39.99073,
+ "preLon": 116.27943,
+   "locationLoordSystem": "3",
+   
+    "locationLatitude":39.98910141343689,
+    "locationLongitude":116.35415476015766,
+    "preCoord":3,
+   
+   "eventType": "LocationChangeEvent",
+   "anchorRoleId":1,
+   "subjectType": "2",
+   "playContentId": "0",
+   "subjectId": "huiwq19902",
+   "playerStatus": "T",
+   "preAnchorRoleId": "1"}

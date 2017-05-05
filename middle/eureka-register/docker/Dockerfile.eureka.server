@@ -1,0 +1,20 @@
+FROM openjdk:8
+
+MAINTAINER huiwq1990
+
+WORKDIR /opt/spring-cloud/lib
+EXPOSE 8761
+
+COPY eureka-server.jar eureka-server.jar
+
+ENTRYPOINT ["/usr/bin/java"]
+CMD ["-jar", "eureka-server.jar"]
+
+
+
+
+
+
+#ADD entrypoint.sh entrypoint.sh
+#RUN chmod +x entrypoint.sh
+#ENTRYPOINT ["/usr/share/zookeeper/entrypoint.sh"]

@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+
+<mapper namespace="com.bfa.sbgl.app.api.security.mapper.AuthUserRoleMapper">
+	<!-- 查询字段 -->
+	<sql id="UserColumns">
+		id,name
+	</sql>
+
+
+	<!-- 查询结果集 -->
+	<resultMap id="UserRoleResultMap" type="com.bfa.sbgl.app.api.security.entity.AuthRole">
+		<result property="id" column="id" />
+		<result property="name" column="name" />
+	</resultMap>
+
+
+	<select id="selectByUser" resultMap="UserRoleResultMap">
+		select a.id,a.name from role a left JOIN user_role b on a.id = b.role_id where b.user_id = #{userId}
+	</select>
+
+
+</mapper>

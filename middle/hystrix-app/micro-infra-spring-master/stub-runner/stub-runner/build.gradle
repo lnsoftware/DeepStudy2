@@ -1,0 +1,179 @@
+description = 'Runs stubs for service collaborators'
+
+apply plugin: 'application'
+
+mainClassName = 'com.ofg.stub.StubRunnerMain'
+
+dependencies {
+    compile project(':micro-deps-root:micro-deps')
+    compile 'org.apache.ivy:ivy:2.4.0'
+    compile 'org.codehaus.groovy:groovy-all'
+    compile 'com.github.tomakehurst:wiremock'
+    compile 'javax.servlet:javax.servlet-api:3.1.0'
+    compile "org.apache.curator:curator-x-discovery"
+    compile "org.apache.curator:curator-test"
+    compile "commons-io:commons-io"
+    compile "org.slf4j:slf4j-api"
+    compile "org.slf4j:log4j-over-slf4j"
+    compile 'ch.qos.logback:logback-classic'
+    compile 'args4j:args4j:2.32'
+    compile 'com.nurkiewicz.asyncretry:asyncretry-jdk7:0.0.6'
+
+    compile "org.eclipse.aether:aether-api:${aetherVersion}"
+    compile "org.eclipse.aether:aether-impl:${aetherVersion}"
+    compile "org.eclipse.aether:aether-transport-file:${aetherVersion}"
+    compile "org.eclipse.aether:aether-transport-http:${aetherVersion}"
+    compile "org.eclipse.aether:aether-connector-basic:${aetherVersion}"
+    compile 'org.apache.maven:maven-aether-provider:3.3.9'
+
+    testCompile 'org.spockframework:spock-core'
+    testCompile 'info.solidsoft.spock:spock-global-unroll'
+    testCompile 'cglib:cglib-nodep'
+    testCompile 'org.objenesis:objenesis'
+}
+
+ext {
+    repositoryPath = getPropertyByEither('r', 'repository')
+    testingZookeeperPort = getPropertyByEither('z', 'zookeeperPort')
+    zookeeperLocation = getPropertyByEither('zl', 'zookeeperLocation')
+    stubRepositoryRoot = getPropertyByEither('sr', 'stubRepositoryRoot')
+    stubsGroup = getPropertyByEither('sg', 'stubsGroup')
+    stubsModule = getPropertyByEither('sm', 'stubsModule')
+    stubsSuffix = getPropertyByEither('ss', 'stubsSuffix')
+    minPortValue = getPropertyByEither('minp', 'minPort')
+    maxPortValue = getPropertyByEither('maxp', 'maxPort')
+    skipLocalRepo = getPropertyByEither('s', 'skipLocalRepo')
+    skipLocalRepo = getPropertyByEither('wo', 'workOffline')
+    useMicroserviceDefinitions = getPropertyByEither('md', 'useMicroserviceDefinitions')
+    waitForServiceConnect = getPropertyByEither('wsc', 'waitForServiceConnect')
+    waitTimeout = getPropertyByEither('wt', 'waitTimeout')
+    context = getPropertyByEither('c', 'context')
+    serviceName = getPropertyByEither('n', 'serviceName')
+    arguments = project.hasProperty('args') ? project.property('args') : []
+    /* example of args:
+     '-c pl -minp 10000 -maxp 10005 -n com/ofg/twitter-places-analyzer -sr http://dl.bintray.com/4finance/micro -zl localhost:2181 -s'
+     */
+}
+
+Object getPropertyByEither(String paramName1, String paramName2, Object defaultValue = null) {
+    return project.hasProperty(paramName1) ? project.property(paramName1) :
+            project.hasProperty(paramName2) ? project.property(paramName2) : defaultValue
+}
+
+run {
+    main = 'com.ofg.stub.StubRunnerMain'
+    List argumentList
+    if (arguments) {
+        argumentList = (arguments.split(' ') as List).findAll { it != null }
+    } else {
+        argumentList = parseArguments()
+    }
+    args = argumentList
+    if (args) {
+        println "Running task with args $args"
+    }
+}
+
+List parseArguments() {
+    println "Trying to parse the project arguments"
+    List arguments = []
+    appendToListIfNotNull(repositoryPath, '-r', arguments)
+    appendToListIfNotNull(testingZookeeperPort, '-z', arguments)
+    appendToListIfNotNull(zookeeperLocation, '-zl', arguments)
+    appendToListIfNotNull(stubRepositoryRoot, '-sr', arguments)
+    appendToListIfNotNull(stubsGroup, '-sg', arguments)
+    appendToListIfNotNull(stubsModule, '-sm', arguments)
+    appendToListIfNotNull(stubsSuffix, '-ss', arguments)
+    appendToListIfNotNull(minPortValue, '-minp', arguments)
+    appendToListIfNotNull(maxPortValue, '-maxp', arguments)
+    appendToListIfNotNull(skipLocalRepo, '-s', arguments)
+    appendToListIfNotNull(skipLocalRepo, '-wo', arguments)
+    appendToListIfNotNull(useMicroserviceDefinitions, '-md', arguments)
+    appendToListIfNotNull(waitForServiceConnect, '-wsc', arguments)
+    appendToListIfNotNull(waitTimeout, '-wt', arguments)
+    appendToListIfNotNull(context, '-c', arguments)
+    appendToListIfNotNull(serviceName, '-n', arguments)
+    return arguments
+}
+
+Object appendToListIfNotNull(String argument, String prefix, List list) {
+    if (argument != null) {
+        list << "$prefix"
+        if (!argument.isAllWhitespace()) {
+            list << argument
+        }
+    }
+}
+
+if (rootProject.hasProperty("withFatJars") || rootProject.hasProperty("withFatJarsNexus")) {
+
+    apply plugin: 'spring-boot'
+
+    project.gradle.projectsEvaluated {
+        applicationDefaultJvmArgs = project.gradle.startParameter.systemPropertiesArgs.entrySet().collect {
+            "-D${it.key}=${it.value}"
+        }
+        project.tasks.findAll { it.name.startsWith('publish') || it.name == 'bintrayUpload' }*.dependsOn(bootJars)
+    }
+
+    if (rootProject.hasProperty("withFatJarsNexus")) {
+        publishing {
+            publications {
+                //It should be a separate `fatJarNexus(MavenPublication)` to publish two artifacts simultaneously, but there is Gradle limitation:
+                //UnsupportedOperationException: Publishing is not yet able to resolve a dependency on a project with multiple different publications
+                mavenJava(MavenPublication) {
+                    artifactId "${project.name}-fatjar" //separate artifact to not conflict with a normal jar deployed to jcenter
+
+                    artifact fatJar
+                }
+            }
+            repositories {
+                maven {
+                    name "fatJars"
+                    url getProperty('mavenRepoUrl')
+                    credentials {
+                        username getProperty('mavenUser')
+                        password getProperty('mavenPassword')
+                    }
+                }
+            }
+        }
+    } else {
+        publishing {
+            publications {
+                mavenJava(MavenPublication) {
+                    artifact fatJar {
+                        classifier "fatJar"
+                    }
+                }
+            }
+        }
+    }
+
+    springBoot {
+        backupSource = false
+    }
+
+    bootRepackage {
+        classifier = 'fatJar'
+    }
+
+    jar {
+        exclude('logback.xml')
+    }
+
+    task fatJar(type: Jar) {
+        classifier = 'fatJar'
+        from sourceSets.main.output
+    }
+
+    task fatJarBoot(type: BootRepackage, dependsOn: fatJar) {
+        withJarTask = fatJar
+    }
+
+    task bootJars(dependsOn: [build, sourcesJar, javadocJar, fatJarBoot])
+
+    artifacts {
+        archives fatJar
+    }
+}

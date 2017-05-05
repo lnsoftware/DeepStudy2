@@ -1,0 +1,10 @@
+
+spring:
+  application:
+    name: sample-hystrix-monitor
+
+server:
+  port: 8989
+
+logging:
+  level: DEBUG

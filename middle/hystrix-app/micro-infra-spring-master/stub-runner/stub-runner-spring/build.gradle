@@ -1,0 +1,16 @@
+description = 'Spring configuration for stub-runner'
+
+dependencies {
+    compile project(':micro-deps-root:micro-deps')
+    compile project(':stub-runner-root:stub-runner')
+    compile 'org.springframework.cloud:spring-cloud-starter-zookeeper-discovery'
+
+    compile 'org.codehaus.groovy:groovy-all'
+    compile 'org.springframework:spring-context'
+    compile 'org.apache.ivy:ivy:2.4.0'
+
+    testCompile 'org.spockframework:spock-core'
+    testCompile 'info.solidsoft.spock:spock-global-unroll'
+    testCompile 'cglib:cglib-nodep'
+    testCompile 'org.objenesis:objenesis'
+}

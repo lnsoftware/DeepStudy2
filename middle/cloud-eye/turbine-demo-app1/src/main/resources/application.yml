@@ -1,0 +1,13 @@
+
+spring:
+  application:
+    name: trubine-demo-app
+    version: 0.0.1
+
+server:
+#  contextPath: /demo-app
+  port: 10008
+
+logging:
+  file: logs/${spring.application.name}.log
+

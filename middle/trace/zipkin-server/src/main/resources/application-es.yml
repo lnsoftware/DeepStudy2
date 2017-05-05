@@ -1,0 +1,11 @@
+
+
+
+zipkin:
+  storage:
+    type: elasticsearch #mysql #mem
+    elasticsearch:
+#      cluster: elasticsearch
+#      hosts: http://localhost:9200
+      cluster: elasticCluster_Prod
+      hosts: http://10.6.107.40:9200

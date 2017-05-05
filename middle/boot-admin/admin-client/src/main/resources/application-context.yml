@@ -1,0 +1,48 @@
+
+spring:
+  application:
+    name: admin-client
+    version: 0.0.1
+
+  boot:
+    admin:
+#      url: http://localhost:10008
+      client:
+        prefer-ip: true
+        service-url: http://${server.address}:${server.port}${server.contextPath}
+
+
+server:
+  contextPath: /${spring.application.name}
+  port: 8085
+
+info:
+  version: 0.0.1
+  info: ${spring.application.name}
+
+management:
+  security:
+    enabled: false
+#  context-path: /manage
+
+security:
+  basic:
+    enabled: false
+  user:
+    name: zy
+    password: zy
+
+
+
+
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://localhost:8761/eureka/ ##${EUREKA_SERVICE_URL:http://localhost:8761}/eureka/
+  instance:
+    prefer-ip-address: true
+    home-page-url-path: ${server.contextPath}/
+    statusPageUrlPath: ${server.contextPath}/info
+    healthCheckUrlPath: ${server.contextPath}/health
+    metadata-map:
+      management.context-path: /${server.contextPath}

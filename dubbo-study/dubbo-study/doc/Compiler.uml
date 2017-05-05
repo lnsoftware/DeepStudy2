@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Diagram>
+  <ID>JAVA</ID>
+  <OriginalElement>com.alibaba.dubbo.common.compiler.support.AbstractCompiler</OriginalElement>
+  <nodes>
+    <node x="101.25" y="0.0">com.alibaba.dubbo.common.extension.SPI</node>
+    <node x="83.75" y="79.0">com.alibaba.dubbo.common.compiler.Compiler</node>
+    <node x="128.0" y="237.0">com.alibaba.dubbo.common.compiler.support.JavassistCompiler</node>
+    <node x="57.25" y="158.0">com.alibaba.dubbo.common.compiler.support.AbstractCompiler</node>
+    <node x="0.0" y="237.0">com.alibaba.dubbo.common.compiler.support.JdkCompiler</node>
+  </nodes>
+  <notes />
+  <edges>
+    <edge source="com.alibaba.dubbo.common.compiler.support.JavassistCompiler" target="com.alibaba.dubbo.common.compiler.support.AbstractCompiler">
+      <point x="0.0" y="-14.5" />
+      <point x="199.5" y="212.0" />
+      <point x="161.5" y="212.0" />
+      <point x="34.75" y="14.5" />
+    </edge>
+    <edge source="com.alibaba.dubbo.common.compiler.support.AbstractCompiler" target="com.alibaba.dubbo.common.compiler.Compiler">
+      <point x="0.0" y="-14.5" />
+      <point x="0.0" y="14.5" />
+    </edge>
+    <edge source="com.alibaba.dubbo.common.compiler.Compiler" target="com.alibaba.dubbo.common.extension.SPI">
+      <point x="0.0" y="-14.5" />
+      <point x="0.0" y="14.5" />
+    </edge>
+    <edge source="com.alibaba.dubbo.common.compiler.support.JdkCompiler" target="com.alibaba.dubbo.common.compiler.support.AbstractCompiler">
+      <point x="0.0" y="-14.5" />
+      <point x="54.0" y="212.0" />
+      <point x="92.0" y="212.0" />
+      <point x="-34.75" y="14.5" />
+    </edge>
+  </edges>
+  <settings layout="Hierarchic Group" zoom="1.0" x="70.0" y="134.0" />
+  <SelectedNodes />
+  <Categories />
+  <SCOPE>All</SCOPE>
+  <VISIBILITY>private</VISIBILITY>
+</Diagram>
+

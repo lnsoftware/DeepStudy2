@@ -1,0 +1,28 @@
+
+
+
+spring:
+  application:
+    name: user-api
+
+# routes to serviceId
+zuul:
+  routes:
+    user-api:
+      path: /user-api/**
+      stripPrefix: false
+      serviceId: user-api
+    user-api-gray:
+      path: /user-api-gray/**
+      stripPrefix: false
+
+ribbon:
+  eureka:
+   enabled: true
+
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://localhost:8761/eureka/
+server:
+  port: 8082

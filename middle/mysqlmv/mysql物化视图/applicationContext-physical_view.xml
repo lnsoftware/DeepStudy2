@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:util="http://www.springframework.org/schema/util"
+       xsi:schemaLocation="
+http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-2.5.xsd
+http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.5.xsd
+http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-2.5.xsd"
+       default-autowire="no" default-init-method="init" default-destroy-method="destroy">
+	
+	<!-- 数据变更任务存储器, 可替换成自己的存储器, 实现PhysicalViewTaskStorage接口 -->
+	<bean name="physicalViewTaskStorageHandler" class="com.gohouse.service.physicalview.task.DefaultTaskStorageHandler">
+	
+	</bean>
+	
+	<bean name="physicalViewDataChangeTaskFactory" class="com.gohouse.service.physicalview.task.PhysicalViewDataChangeTaskFactory">
+		
+		<!-- 数据变更任务处理器线程数目-->
+		<property name="taskProcessThreads" value="1"></property>
+		
+		<!-- 数据变更任务存储器 -->
+		<property name="physicalViewTaskStorageHandler" ref="physicalViewTaskStorageHandler" />
+		
+		<!-- 更新其他缓存(memcache等)的处理器,自己实现PhysicalViewCacheHandler接口
+		<property name="physicalViewCacheHandler" ref="physicalViewCacheHandler" />
+		-->
+		
+		<!-- 为物化视图注册自己的数据同步处理器
+		<property name="handlers">
+			<map>
+				<entry key="property_lot" value-ref="com.Class" /> 
+			</map>
+		</property>
+		-->
+	</bean>
+	
+	<bean name="mysqlBinaryLogReaderFactory" class="com.gohouse.service.physicalview.mysqllog.MysqlBinaryLogReaderFactory">
+		
+	</bean>
+
+	<bean name="physicalViewDataChangeMonitor" class="com.gohouse.service.physicalview.monitor.PhysicalViewDataChangeMonitor" init-method="init">
+		
+		<!-- 监听器的延时启动时长(单位：毫秒) -->
+		<property name="delay" value="0"></property>
+		
+		<!-- 监听器的周期(单位：毫秒) -->
+		<property name="period" value="10000"></property>
+		
+		<!-- mysql连接的配置 -->
+		<property name="mysqlDriver" value="com.mysql.jdbc.Driver"></property>
+		<property name="mysqlHost" value="127.0.0.1:3306"></property>
+		<property name="mysqlUsername" value="root"></property>
+		<property name="mysqlPassword" value="123456"></property>
+		
+		<!-- 物化视图映射表 -->
+		<property name="physicalViewMappingDB" value="test"></property>
+		<property name="physicalViewMappingTable" value="physical_view_mapping"></property>
+		
+		<!-- 是否开启物化视图映射表自动发现新视图 -->
+		<property name="autoDiscoveryView" value="true"></property>
+		
+		<!-- 开启物化视图映射表自动发现新视图的延时启动时长(单位：毫秒)-->
+		<property name="autoDiscoveryViewDelay" value="0"></property>
+		
+		<!-- 开启物化视图映射表自动发现新视图的周期(单位：毫秒)-->
+		<property name="autoDiscoveryViewPeriod" value="300000"></property>
+		
+		<!-- 数据变更任务处理器-->
+		<property name="physicalViewDataChangeTaskFactory" ref="physicalViewDataChangeTaskFactory"></property>
+		
+		<!-- mysql二进制日志读取器-->
+		<property name="mysqlBinaryLogReaderFactory" ref="mysqlBinaryLogReaderFactory"></property>
+	</bean>
+   
+</beans>

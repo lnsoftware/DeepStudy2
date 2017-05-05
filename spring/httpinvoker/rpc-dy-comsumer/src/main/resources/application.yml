@@ -1,0 +1,11 @@
+# Spring properties
+spring:
+  application:
+     name: msg-provider  # Service registers under this name
+
+
+# HTTP Server
+server:
+  port: 8080   # HTTP (Tomcat) port
+#  context-path: /msg-provider
+

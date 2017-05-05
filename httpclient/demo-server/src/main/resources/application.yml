@@ -1,0 +1,9 @@
+
+# Spring properties
+spring:
+  application:
+    name: comm  # Identify this application
+
+# HTTP Server
+server:
+  port: 8080   # HTTP (Tomcat) port

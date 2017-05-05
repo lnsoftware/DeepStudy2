@@ -1,0 +1,10 @@
+country:
+  yaml:
+    key: country yaml value
+global:
+  default:
+   yaml:
+     key: overridden country-specific yaml value
+custom:
+  country:
+   key: custom country yaml value

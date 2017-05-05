@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="
+        http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://camel.apache.org/schema/spring http://camel.apache.org/schema/spring/camel-spring.xsd
+       ">
+	<bean id="jmsConnectionFactory" class="org.apache.activemq.ActiveMQConnectionFactory">
+		<!-- 虚拟测试 -->
+		<!-- <property name="brokerURL" value="vm://localhost?broker.persistent=false" 
+			/> -->
+
+		<property name="brokerURL" value="tcp://localhost:61616" />
+	</bean>
+	<bean id="pooledConnectionFactory" class="org.apache.activemq.pool.PooledConnectionFactory"
+		init-method="start" destroy-method="stop">
+		<property name="maxConnections" value="8" />
+		<property name="connectionFactory" ref="jmsConnectionFactory" />
+	</bean>
+
+	<bean id="jmsTemplate" class="org.springframework.jms.core.JmsTemplate">
+		<property name="connectionFactory" ref="pooledConnectionFactory" />
+	</bean>
+
+	<camelContext xmlns="http://camel.apache.org/schema/spring">
+
+		<route>
+			<from uri="activemq:Zhiyin_Event" />
+			<multicast parallelProcessing="true">
+				<filter>
+					<method ref="camelBean" method="ElasticSearchIndexUpdate" />
+					<to uri="activemq:ElasticSearchIndexUpdate" />
+				</filter>
+
+			</multicast>
+		</route>
+	</camelContext>
+
+	<bean id="camelBean" class="com.zhiyin.event.route.CamelRouteRule" />
+</beans>

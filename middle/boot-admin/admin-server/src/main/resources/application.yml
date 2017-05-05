@@ -1,0 +1,40 @@
+
+spring:
+  application:
+    name: admin-server
+#  boot:
+#    admin:
+#      url: http://localhost:${server.port}
+#      username: admin
+#      password: admin
+
+
+
+server:
+  port: 10008
+
+#endpoints:
+#  health:
+#    sensitive: false
+
+#management:
+#  port: 10009
+#  security:
+#    enabled: false
+
+security:
+  basic:
+    enabled: false
+  user:
+    name: admin
+    password: admin
+  ignored: /api/**
+
+info:
+  version: 0.0.1
+  stage: test
+
+management:
+  security:
+    enabled: false
+    roles: SUPERUSER

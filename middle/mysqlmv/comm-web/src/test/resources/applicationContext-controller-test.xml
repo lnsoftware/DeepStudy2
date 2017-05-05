@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:mvc="http://www.springframework.org/schema/mvc"
+       xmlns:elasticsearch="http://www.springframework.org/schema/data/elasticsearch"
+       xsi:schemaLocation="http://www.springframework.org/schema/data/elasticsearch
+	http://www.springframework.org/schema/data/elasticsearch/spring-elasticsearch.xsd
+		http://www.springframework.org/schema/mvc
+	http://www.springframework.org/schema/mvc/spring-mvc.xsd
+
+
+
+
+		http://www.springframework.org/schema/beans 
+		http://www.springframework.org/schema/beans/spring-beans-4.0.xsd
+
+
+
+
+		http://www.springframework.org/schema/context 
+		http://www.springframework.org/schema/context/spring-context-4.0.xsd">
+
+
+    <context:property-placeholder
+            location="classpath:config/redis.properties"/>
+
+    <import resource="classpath:search-context/spring-redis.xml"/>
+
+    <elasticsearch:repositories base-package="com.zhiyin.search.es.repository"/>
+
+    <!-- 	ES虚拟服务器 -->
+    <!-- 	<elasticsearch:node-client id="client" local="true" /> -->
+
+    <!-- 本地ES服务器 -->
+    <elasticsearch:transport-client id="client"
+                                    cluster-nodes="127.0.0.1:9300" cluster-name="elasticsearch"/>
+
+    <!-- 	<elasticsearch:transport-client id="client" -->
+    <!-- 	cluster-nodes="123.57.230.238:9300" cluster-name="elasticsearch" /> -->
+
+    <bean name="elasticsearchTemplate"
+          class="org.springframework.data.elasticsearch.core.ElasticsearchTemplate">
+        <constructor-arg name="client" ref="client"/>
+    </bean>
+
+
+    <context:component-scan base-package="com.zhiyin.search.es.controller">
+        <context:include-filter type="annotation" expression="org.springframework.stereotype.Controller"/>
+        <context:exclude-filter type="annotation"
+                                expression="org.springframework.stereotype.Service"></context:exclude-filter>
+    </context:component-scan>
+
+
+    <mvc:annotation-driven></mvc:annotation-driven>
+
+
+</beans>

@@ -1,0 +1,29 @@
+## 基于bus，可刷新
+server:
+  port: 7002
+
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://localhost:8761/eureka/
+
+spring:
+  application:
+    name: config-client
+  cloud:
+    config:
+      ## 服务发现
+      discovery:
+        enabled: true
+        serviceId: config-server
+      profile: default
+      failFast: true
+    #kafka
+    stream:
+      kafka:
+        binder:
+          zk-nodes: 101.200.185.137:2181
+          brokers: 101.200.185.137:9092
+    bus:
+      trace:
+        enabled: true

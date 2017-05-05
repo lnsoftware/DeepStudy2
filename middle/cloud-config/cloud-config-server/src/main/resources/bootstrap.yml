@@ -1,0 +1,8 @@
+spring:
+  application:
+    name: configserver
+  profiles:
+    active: native
+
+
+#spring.cloud.config.uri=http://shanhy:password@localhost:8888

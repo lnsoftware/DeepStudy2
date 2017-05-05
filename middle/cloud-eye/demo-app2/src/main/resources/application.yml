@@ -1,0 +1,20 @@
+
+spring:
+  application:
+    name: demo-app
+    version: 0.0.1
+
+server:
+#  contextPath: /demo-app
+  port: 8080
+
+
+turbine:
+  appConfig: node01,node02 ## 配置需要聚合的应用
+  aggregator:
+    clusterConfig: MAIN
+  clusterNameExpression: metadata['cluster']
+
+logging:
+  file: logs/${spring.application.name}.log
+

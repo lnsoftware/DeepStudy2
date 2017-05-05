@@ -1,0 +1,17 @@
+server:
+  port: 1111
+
+spring:
+  application:
+    name: GrayRobbin
+eureka:
+  client:
+    registerWithEureka: false
+    fetchRegistry: false
+
+ribbon:
+  invoker:
+    marks:
+      local:
+        serverMark: GRAY
+        candidateServerMarks: ONLINE1,*

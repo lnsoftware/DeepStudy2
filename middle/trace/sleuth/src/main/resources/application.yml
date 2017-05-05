@@ -1,0 +1,41 @@
+
+
+otherapp:
+  port: 9547
+
+spring:
+
+  #zipkin config
+  zipkin:
+      #defult is true,to use zipkin,false:not use
+    enabled: true
+    baseUrl: http://localhost:9966
+
+    sleuth:
+      sampler:
+        # �����ʣ�Ĭ��0.1��10%,�������ʱÿ�ζ�����trace���޸�Ϊ1.0������������Ӱ�죬ע������ʱ�޸�Ϊ����ֵ
+        percentage: 1.0
+      hystrix:
+        strategy:
+          enabled: true
+      #https://github.com/ReactiveX/RxJava/issues/2297
+      rxjava:
+        schedulers:
+          hook:
+            enabled: false
+      # stream format  to send trace msg: enable sleuth.stream to use stream
+      # default is true,refer to SleuthStreamAutoConfiguration.java
+      stream:
+        enabled: true
+      # skip tracing urls' pattern,refer to org.springframework.cloud.sleuth.instrument.web.TraceWebAutoConfiguration
+      #web:
+        #skipPattern: /eureka.*
+
+# zipkin properties for ServiceApplication.java to debug when there is no zipkin server
+sample:
+  zipkin:
+    # When enabled=false, traces log to the console. Comment to send to zipkin
+    enabled: true
+
+server:
+  port: 9987

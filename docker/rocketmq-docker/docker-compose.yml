@@ -1,0 +1,29 @@
+version: '2'
+services:
+    mqbroker:
+        container_name: mqbroker
+        image: mqbroker
+        ports:
+            - "10911:10911"
+            - "10909:10909"
+        expose:
+            - 10911
+            - 10909
+        links:
+            - mqnamesrv
+        depends_on:
+            - mqnamesrv
+        networks:
+            - spring-cloud-network
+    mqnamesrv:
+        container_name: mqnamesrv
+        image: mqnamesrv
+        expose:
+            - 9876
+        ports:
+            - "9876:9876"
+        networks:
+            - spring-cloud-network
+networks:
+    spring-cloud-network:
+        driver: bridge

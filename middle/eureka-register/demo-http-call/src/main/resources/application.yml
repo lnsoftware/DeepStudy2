@@ -1,0 +1,36 @@
+
+# Spring properties
+spring:
+  application:
+    name: chat-comsumer  # Identify this application
+
+
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://localhost:8761/eureka/
+  instance:
+    statusPageUrl: https://${eureka.hostname}/info
+    healthCheckUrl: https://${eureka.hostname}/health
+    homePageUrl: https://${eureka.hostname}/
+
+ribbon:
+  eureka:
+    enabled: true
+
+# HTTP Server
+server:
+  port: 8099   # HTTP (Tomcat) port
+
+## acutor 设置
+management:
+  security:
+    enabled: false
+    role: SUPERUSER
+
+security:
+  basic:
+    enabled: false
+  user:
+    name: admin
+    password: admin

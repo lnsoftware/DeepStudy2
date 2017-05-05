@@ -1,0 +1,20 @@
+{
+    "pl": {
+        "this": "foo/bar/registration",
+        "dependencies": {
+            "users": {
+                "path": "foo/bar/users",
+                "stubs": "foo.bar:users:stubs"
+            },
+            "newsletter": {
+                "path": "foo/bar/comms/newsletter"
+            },
+            "confirmation": {
+                "path": "foo/bar/security/confirmation"
+            },
+            "foo-bar": {
+                "path": "com/ofg/foo/bar"
+            }
+        }
+    }
+}

@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:dubbo="http://code.alibabatech.com/schema/dubbo"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://code.alibabatech.com/schema/dubbo http://code.alibabatech.com/schema/dubbo/dubbo.xsd">
+
+
+    <dubbo:application name="msg-notify-proovider" owner="zhiyin" organization="dubbox"/>
+    <dubbo:protocol name="dubbo"/>
+
+    <dubbo:registry address="zookeeper://101.200.185.137:2181" version="product"/>
+    <!-- 扫描注解包路径，多个包用逗号分隔，不填pacakge表示扫描当前ApplicationContext中所有的类 -->
+    <dubbo:annotation package="com.hg.msg"/>
+
+    <!-- <dubbo:reference id="userService" interface="boot.dubbo.api.UserService"  protocol="rest"/>-->
+    <dubbo:provider/>
+</beans>

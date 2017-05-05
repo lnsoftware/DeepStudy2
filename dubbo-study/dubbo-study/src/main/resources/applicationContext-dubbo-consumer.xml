@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:dubbo="http://code.alibabatech.com/schema/dubbo" xmlns="http://www.springframework.org/schema/beans"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://code.alibabatech.com/schema/dubbo http://code.alibabatech.com/schema/dubbo/dubbo.xsd">
+
+
+    <!-- 提供方应用信息，用于计算依赖关系 -->
+    <dubbo:application name="${dubbo.application.name}" owner="${dubbo.application.owner}" organization="redcocoon"/>
+    <!--<dubbo:application name="zhiyin-dbs" owner="zhiyin" organization="redcocoon" />-->
+
+    <!-- 用dubbo协议在20880端口暴露服务 -->
+    <!--<dubbo:protocol name="dubbo" port="${dubbo.protocol.port}" host="${dubbo.protocol.host}" serialization="kryo" />-->
+
+    <!-- 使用zookeeper注册中心暴露服务地址 -->
+    <dubbo:registry address="${dubbo.registry.address}" check="false"/>
+    <!--<dubbo:registry address="zookeeper://101.200.185.137:2181" check="false" />-->
+
+
+    <!-- 延迟到Spring初始化完成后，再暴露服务,服务调用超时设置为6秒,超时不重试-->
+    <!--<dubbo:provider version="${dubbo.provider.version}" delay="-1" timeout="6000" retries="0"/>-->
+
+    <dubbo:consumer check="false" version="${dubbo.comsumer.version}"/>
+    <!--<dubbo:consumer check = "false" version="LOCAL" />-->
+
+    <!--通过扫描暴露服务-->
+    <dubbo:annotation package="${dubbo.annotation.package}"/>
+
+    <!--<dubbo:reference interface="com.zhiyin.ourchat.demo.service.IDialogLatestService" id="dialogLatestService" />-->
+
+</beans>

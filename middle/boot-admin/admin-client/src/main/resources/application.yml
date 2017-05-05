@@ -1,0 +1,36 @@
+
+spring:
+  application:
+    name: admin-client
+    version: 0.0.1
+  boot:
+    admin:
+      client:
+        prefer-ip: true
+
+server:
+  contextPath: /${spring.application.name}
+  port: 8085
+
+info:
+  version: 0.0.1
+  info: ${spring.application.name}
+
+management:
+  security:
+    enabled: false
+#  context-path: /manage
+
+security:
+  basic:
+    enabled: false
+  user:
+    name: zy
+    password: zy
+
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://localhost:8761/eureka/
+  instance:
+    prefer-ip-address: true

@@ -1,0 +1,17 @@
+spring:
+#  datasource:
+#    url: jdbc:mysql://localhost:3306/test
+#    driver-class-name: com.mysql.jdbc.Driver
+#    username: root #配置数据库用户名
+#    password: root #配置数据库密码
+#  jpa:
+#    show-sql: true
+#  hibernate:
+#    ddl-auto: update
+  cloud:
+    config:
+      server:
+        git:
+          uri: https://github.com/rpicloud/guide-cloud-config
+    bus:
+      enabled: false

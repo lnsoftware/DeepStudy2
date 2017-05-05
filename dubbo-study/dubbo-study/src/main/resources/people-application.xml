@@ -1,0 +1,12 @@
+<beans xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:cutesource="http://blog.csdn.net/cutesource/schema/people"
+       xmlns="http://www.springframework.org/schema/beans"
+       xsi:schemaLocation="
+            http://www.springframework.org/schema/beans
+            http://www.springframework.org/schema/beans/spring-beans.xsd
+            http://blog.csdn.net/cutesource/schema/people
+            http://blog.csdn.net/cutesource/schema/people.xsd">
+
+    <cutesource:people id="people1" name="hg" age="27"/>
+
+</beans>

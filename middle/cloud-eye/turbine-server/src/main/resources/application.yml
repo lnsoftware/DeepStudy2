@@ -1,0 +1,44 @@
+
+spring:
+  application:
+    name: sample-hystrix-monitor
+  cloud:
+    config:
+      enabled: false
+      discovery:
+        enabled: false
+
+server:
+  port: 8989
+
+#InstanceDiscovery:
+#    impl: com.netflix.turbine.discovery.FileBasedInstanceDiscovery
+#  impl: com.netflix.turbine.discovery.ConfigPropertyBasedDiscovery
+
+#turbine:
+#  appConfig: myFirstHystrixCluster
+#  aggregator:
+#    clusterConfig: myFirstHystrixCluster
+#
+#  instanceUrlSuffix:
+#    myFirstHystrixCluster: /hystrix.stream
+#
+#  ConfigPropertyBasedDiscovery:
+#    myFirstHystrixCluster:
+#      instances: localhost:8989
+
+turbine:
+  clusterNameExpression: 'default'
+  appConfig: TrubineDemoAppCluster
+  aggregator:
+    clusterConfig: TrubineDemoAppCluster
+
+  instanceUrlSuffix:
+    TrubineDemoAppCluster: /hystrix.stream
+
+  ConfigPropertyBasedDiscovery:
+    TrubineDemoAppCluster:
+      instances: localhost:8081
+
+logging:
+  level: DEBUG

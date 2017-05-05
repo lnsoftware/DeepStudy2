@@ -1,0 +1,32 @@
+
+
+server:
+  port: 8080
+#  contextPath: /oauth-resource
+
+management:
+  security:
+    enabled: false
+
+#security:
+#  basic:
+#    enabled: false
+
+#security:
+#  user:
+#    name: admin
+#    password: password
+
+auth:
+ server:
+#  url: http://localhost:8096/auth-server/oauth/check_token/
+  url: http://localhost:8081/zy-oauth-server/oauth/check_token/
+  clientId: admin
+  clientsecret: admin
+
+
+logging:
+  level:
+    org:
+      springframework:
+        security: debug

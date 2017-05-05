@@ -1,0 +1,33 @@
+<project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://maven.apache.org/POM/4.0.0"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <groupId>com.zhiyin.rpc</groupId>
+    <artifactId>httpinvoker-demo</artifactId>
+    <packaging>pom</packaging>
+    <name>${project.artifactId}</name>
+
+    <properties>
+        <java.version>1.8</java.version>
+    </properties>
+
+    <parent>
+        <groupId>com.zhiyin.rpc</groupId>
+        <artifactId>spring-httpinvoker</artifactId>
+        <version>0.0.1</version>
+    </parent>
+
+    <modules>
+        <module>demo-core</module>
+        <module>demo-provider</module>
+        <module>demo-consumer</module>
+    </modules>
+
+    <dependencies>
+        <dependency>
+            <groupId>com.zhiyin.rpc</groupId>
+            <artifactId>demo-core</artifactId>
+            <version>0.0.1</version>
+        </dependency>
+    </dependencies>
+
+</project>

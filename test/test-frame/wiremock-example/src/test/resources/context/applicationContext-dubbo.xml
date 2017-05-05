@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:dubbo="http://code.alibabatech.com/schema/dubbo" xmlns="http://www.springframework.org/schema/beans"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://code.alibabatech.com/schema/dubbo http://code.alibabatech.com/schema/dubbo/dubbo.xsd">
+
+
+    <dubbo:application name="chat-consumer" owner="zhiyin" organization="zhiyin"/>
+
+    <dubbo:protocol name="dubbo" serialization="kryo"/>
+
+    <dubbo:registry address="zookeeper://101.200.185.137:2181"/>
+
+
+    <!-- 扫描注解包路径，多个包用逗号分隔，不填pacakge表示扫描当前ApplicationContext中所有的类 -->
+    <dubbo:annotation package="com.zhiyin.ourchat.controller"/>
+
+
+    <!--表示服务消费端对所有订阅的服务都添加缓存功能-->
+    <!--<dubbo:consumer cache="mixcache"/>-->
+
+    <!--<dubbo:reference id="msgNotifyService" interface="com.hg.msg.service.IMsgNotifyService"   />-->
+</beans>

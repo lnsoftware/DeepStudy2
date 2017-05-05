@@ -1,0 +1,10 @@
+
+
+
+
+eureka:
+  client:
+    enabled: false
+#spring:
+#  datasource:
+#    schema: classpath

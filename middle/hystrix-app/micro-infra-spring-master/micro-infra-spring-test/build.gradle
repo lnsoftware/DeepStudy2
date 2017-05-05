@@ -1,0 +1,5 @@
+description = 'Microservice testing utilities'
+
+dependencies {
+    compile project(":micro-deps-root:micro-deps-spring-test-config")
+}

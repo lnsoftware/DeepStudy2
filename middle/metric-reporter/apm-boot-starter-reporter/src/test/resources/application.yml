@@ -1,0 +1,14 @@
+
+spring:
+  application:
+    name: demo
+
+# settings for metrics reporter
+reporter:
+  metrics:
+    types: console
+#    types: elasticsearch
+    interval: 5
+    timeUnit: seconds
+    es:
+      hosts: elasticsearch-server:9200

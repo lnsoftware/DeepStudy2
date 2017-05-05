@@ -1,0 +1,19 @@
+
+spring:
+  application:
+    name: local-test
+
+# routes to serviceId
+zuul:
+  routes:
+    local:
+      path: /local/**
+      serviceId: local
+
+local:
+  ribbon:
+    listOfServers: http://localhost:${server.port}
+
+ribbon:
+  eureka:
+    enabled: false

@@ -1,0 +1,5 @@
+2016/06/15 16:04:18 [alert] 30180#18768: lua_code_cache is off; this will hurt performance in ./conf/nginx.conf:36
+2016/06/15 16:04:18 [notice] 30180#18768: signal process started
+2016/06/15 16:04:18 [error] 30180#18768: CreateFile() "./logs/nginx.pid" failed (2: The system cannot find the file specified)
+2016/06/15 16:04:22 [alert] 93008#23532: lua_code_cache is off; this will hurt performance in E:\Github\DeepStudy\nginx\helloworld/conf/nginx.conf:36
+2016/06/15 16:04:23 [alert] 83864#18336: lua_code_cache is off; this will hurt performance in E:\Github\DeepStudy\nginx\helloworld/conf/nginx.conf:36

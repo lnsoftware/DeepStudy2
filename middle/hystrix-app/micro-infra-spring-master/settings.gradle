@@ -1,0 +1,22 @@
+include ':stub-runner:stub-runner'
+include ':stub-runner:stub-runner-spring'
+include 'micro-infra-spring-boot-starter'
+include 'micro-infra-spring-base'
+include 'micro-infra-spring-test'
+include 'micro-infra-camel'
+include ':swagger:micro-infra-spring-swagger'
+include 'micro-infra-spring'
+include 'micro-infra-spring-config'
+include ':micro-deps:micro-deps'
+include ':micro-deps:micro-deps-jax-rs-jersey'
+include ':micro-deps:micro-deps-spring-config'
+include ':micro-deps:micro-deps-spring-test-config'
+include ':activity-tracker-root'
+include ':activity-tracker-root:activity-tracker'
+include ':activity-tracker-root:activity-tracker-boot-starter'
+
+rootProject.name = 'micro-infra-spring-root'
+
+//to prevent StackOverflow in Sonar
+project(":micro-deps").name = "micro-deps-root"
+project(":stub-runner").name = "stub-runner-root"

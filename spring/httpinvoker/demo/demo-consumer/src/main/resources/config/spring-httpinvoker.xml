@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns="http://www.springframework.org/schema/beans"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+	 http://www.springframework.org/schema/beans/spring-beans-3.0.xsd">
+
+    <bean id="remoteDemoService" class="org.springframework.remoting.httpinvoker.HttpInvokerProxyFactoryBean">
+        <property name="serviceUrl">
+            <value>http://localhost:8080/demoService</value>
+            <!--<value>http://172.17.159.115:8180/demoService</value>-->
+        </property>
+        <property name="serviceInterface">
+            <value>com.zhiyin.rpc.httpinvoker.demo.service.DemoService</value>
+        </property>
+    </bean>
+
+    <bean id="remoteDemoService2" class="org.springframework.remoting.httpinvoker.HttpInvokerProxyFactoryBean">
+        <property name="serviceUrl">
+            <value>http://localhost:8080/demoService</value>
+            <!--<value>http://172.17.159.115:8180/demoService</value>-->
+        </property>
+        <property name="serviceInterface">
+            <value>com.zhiyin.rpc.httpinvoker.demo.service.DemoService</value>
+        </property>
+        <property name="httpInvokerRequestExecutor" ref="httpInvokerRequestExecutor" />
+    </bean>
+
+
+    <bean id="httpInvokerRequestExecutor"
+          class="org.springframework.remoting.httpinvoker.CommonsHttpInvokerRequestExecutor">
+        <property name="httpClient" ref="httpclient"/>
+    </bean>
+    <!--  HttpClient 启用Apache HttpClient 通信
+        默认实现，服务器平均10s左右才能响应一个请求。
+        多线程实现，服务器平均20ms左右响应一个请求。 -->
+    <bean id="httpclient" class="org.apache.commons.httpclient.HttpClient">
+        <constructor-arg>
+            <ref bean="connectionManager"/>
+        </constructor-arg>
+    </bean>
+
+    <!-- http管理参数配置 -->
+    <bean id="connectionManager"
+          class="org.apache.commons.httpclient.MultiThreadedHttpConnectionManager">
+        <property name="params" ref="connectionManagerParams"/>
+    </bean>
+
+    <!-- httpclient线程池 -->
+    <bean id="connectionManagerParams"
+          class="org.apache.commons.httpclient.params.HttpConnectionManagerParams">
+        <!-- 设置 连接超时时间(毫秒),默认为0不使用 -->
+        <property name="connectionTimeout" value="500"/>
+        <!-- 设置 读取数据超时(毫秒),默认为0不使用 -->
+        <property name="soTimeout" value="1000"/>
+        <!-- 设置默认的连接数量最大允许对一个给定的主机配置 -->
+        <property name="maxTotalConnections" value="30"/>
+        <!-- 允许的最大连接数 -->
+        <property name="defaultMaxConnectionsPerHost" value="20"/>
+    </bean>
+
+
+</beans>

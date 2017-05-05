@@ -1,0 +1,4 @@
+1464844823660,230,测试Get,200,OK,Sample Thread Group 1-1,text,true,234,1,1,230
+1464844823900,32,测试Post,415,Unsupported Media Type,Sample Thread Group 1-1,text,false,514,1,1,31
+1464845071950,101,测试Post,415,Unsupported Media Type,Sample Thread Group 1-1,text,false,514,1,1,100
+1464845072059,109,测试Get,200,OK,Sample Thread Group 1-1,text,true,234,1,1,109

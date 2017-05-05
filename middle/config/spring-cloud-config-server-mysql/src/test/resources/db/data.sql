@@ -1,0 +1,1 @@
+insert into config_info(key, value) values ('db.property','this is a db property');

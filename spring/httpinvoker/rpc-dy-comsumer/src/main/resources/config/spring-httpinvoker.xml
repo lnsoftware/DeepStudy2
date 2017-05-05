@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns="http://www.springframework.org/schema/beans"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+	 http://www.springframework.org/schema/beans/spring-beans-3.0.xsd">
+
+    <bean id="remoteDemoService" class="org.springframework.remoting.httpinvoker.HttpInvokerProxyFactoryBean">
+        <property name="serviceUrl">
+            <value>http://localhost:8180/demoService</value>
+            <!--<value>http://172.17.159.115:8180/demoService</value>-->
+        </property>
+        <property name="serviceInterface">
+            <value>com.zhiyin.rpc.httpinvoker.demo.service.DemoService</value>
+        </property>
+        <property name="httpInvokerRequestExecutor" ref="httpInvokerRequestExecutor"/>
+    </bean>
+
+    <bean id="timeConsumeService" class="org.springframework.remoting.httpinvoker.HttpInvokerProxyFactoryBean">
+        <property name="serviceUrl">
+            <value>http://localhost:8180/timeConsumeService</value>
+            <!--<value>http://172.17.159.115:8180/demoService</value>-->
+        </property>
+        <property name="serviceInterface">
+            <value>com.zhiyin.rpc.httpinvoker.demo.service.TimeConsumeService</value>
+        </property>
+        <property name="httpInvokerRequestExecutor" ref="httpInvokerRequestExecutor"/>
+    </bean>
+
+    <bean id="tlService" class="org.springframework.remoting.httpinvoker.HttpInvokerProxyFactoryBean">
+        <property name="serviceUrl">
+            <value>http://localhost:8180/tlService</value>
+            <!--<value>http://172.17.159.115:8180/demoService</value>-->
+        </property>
+        <property name="serviceInterface">
+            <value>com.zhiyin.rpc.httpinvoker.demo.service.IThreadLocalService</value>
+        </property>
+        <property name="httpInvokerRequestExecutor" ref="httpInvokerRequestExecutor"/>
+    </bean>
+
+
+    <bean id="httpInvokerRequestExecutor"
+          class="com.zhiyin.rpc.shi.demo.rpc.HystrixInvoker">
+        <property name="connectTimeout" value="3000" />
+        <property name="readTimeout" value="60000" />
+    </bean>
+
+
+
+</beans>

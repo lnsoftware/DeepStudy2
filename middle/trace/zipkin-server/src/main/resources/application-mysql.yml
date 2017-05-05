@@ -1,0 +1,12 @@
+
+
+#spring:
+#  datasource:
+#    schema: classpath:/mysql.sql
+#    url: jdbc:mysql://localhost:3306/zipkin
+#    username: root
+#    password: root
+#    driver-class-name: com.mysql.jdbc.Driver
+#      # Switch this on to create the schema on startup:
+#    initialize: true
+#    continueOnError: true

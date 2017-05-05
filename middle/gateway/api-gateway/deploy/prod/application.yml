@@ -1,0 +1,41 @@
+
+eureka:
+  client:
+    serviceUrl:
+#      defaultZone: http://localhost:8761/eureka/
+#      defaultZone: http://10.44.145.103:8761/eureka/
+      defaultZone: http://101.200.181.234:8761/eureka/
+
+  instance:
+    preferIpAddress: true
+    home-page-url-path: ${server.contextPath}/
+    statusPageUrlPath: ${server.contextPath}/info
+    healthCheckUrlPath: ${server.contextPath}/health
+
+
+server:
+  tomcat:
+    max-threads: 128 # Maximum amount of worker threads.
+    min-spare-threads: 64 # Minimum amount of worker threads.
+
+hystrix:
+  command:
+    default:
+      execution:
+        isolation:
+          thread:
+            timeoutInMilliseconds: 2000
+
+ribbon:
+#  # Max number of next servers to retry (excluding the first server)
+#  MaxAutoRetries: 1
+#  # Whether all operations can be retried for this client
+#  MaxAutoRetriesNextServer: 1
+#  # Interval to refresh the server list from the source
+#  OkToRetryOnAllOperations: true
+#  # Interval to refresh the server list from the source
+#  ServerListRefreshInterval: 2000
+#  # Connect timeout used by Apache HttpClient
+  ConnectTimeout: 3000
+#  # Read timeout used by Apache HttpClient
+  ReadTimeout: 3000

@@ -1,0 +1,63 @@
+version: '2'
+services:
+    elasticsearch-server:
+        container_name: elasticsearch-server
+        image: huiwq1990/elasticsearch:2.4.0
+        ports:
+            - "9300:9300"
+            - "9200:9200"
+        expose:
+            - 9200
+            - 9300
+        environment:
+#        限制内存使用
+          - "ES_JAVA_OPTS=-Xms512m -Xmx512m"
+          - "http.host=0.0.0.0"
+          - "transport.host=127.0.0.1"
+        networks:
+            - spring-cloud-network
+    grafana:
+        container_name: grafana
+        image: huiwq1990/grafana:latest
+        expose:
+            - 3000
+        ports:
+            - "3000:3000"
+        networks:
+            - spring-cloud-network
+#        volumes:
+#            - spring-cloud-config-repo:/var/lib/spring-cloud/config-repo
+        logging:
+            driver: json-file
+        links:
+            - elasticsearch-server:elasticsearch-server
+        depends_on:
+            - elasticsearch-server
+
+
+    reporter-example:
+        container_name: reporter-example
+#        build:
+#            context: .
+#            dockerfile: Dockerfile.reporter-example
+        image: huiwq1990/reporter-example:latest
+        expose:
+            - 8080
+        ports:
+            - "8080:8080"
+        networks:
+            - spring-cloud-network
+#        volumes:
+#            - spring-cloud-config-repo:/var/lib/spring-cloud/config-repo
+        logging:
+            driver: json-file
+        links:
+            - elasticsearch-server:elasticsearch-server
+        depends_on:
+            - elasticsearch-server
+networks:
+    spring-cloud-network:
+        driver: bridge
+#volumes:
+#    spring-cloud-config-repo:
+#        external: true

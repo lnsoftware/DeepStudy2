@@ -1,0 +1,13 @@
+option java_package = "com.xiyuan.demo.model";
+message Request {
+    required string id = 1;
+    required string deviceId = 2;
+    required string userId = 3;
+    required string method = 4;
+}
+
+message Responce{
+    required string id = 1;
+    required bool success = 2;
+    required string msg = 3;
+}

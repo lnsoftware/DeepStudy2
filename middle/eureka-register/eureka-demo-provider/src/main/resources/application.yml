@@ -1,0 +1,26 @@
+server:
+  contextPath: /demo-provider
+  port: 10002
+
+spring:
+  application:
+    name: demo-provider
+    version: 0.0.1
+
+eureka:
+  client:
+    serviceUrl:
+#      defaultZone: http://101.200.185.137:8761/eureka/
+      defaultZone: http://localhost:8761/eureka/
+  instance:
+    preferIpAddress: true
+    home-page-url-path: ${server.contextPath}/
+    statusPageUrlPath: ${server.contextPath}/info
+    healthCheckUrlPath: ${server.contextPath}/health
+    metadataMap:
+
+      instanceId: ${spring.application.name}:${random.value}
+      version: GRAY
+
+logging:
+  file: logs/${spring.application.name}.log

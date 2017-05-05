@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns="http://www.springframework.org/schema/beans"
+       xsi:schemaLocation="
+            http://www.springframework.org/schema/beans
+            http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <bean id="demoService" class="com.hg.dubbo.study.rundemo.UserServiceImpl"/>
+    <!-- 不适用dubbo的bean定义，自己初始化类-->
+
+    <bean id="hello-world-app" class="com.alibaba.dubbo.config.ApplicationConfig"/>
+
+    <bean id="registryConfig" class="com.alibaba.dubbo.config.RegistryConfig">
+        <property name="address" value="10.125.195.174:2181"/>
+        <property name="protocol" value="zookeeper"/>
+    </bean>
+    <bean id="dubbo" class="com.alibaba.dubbo.config.ProtocolConfig">
+        <property name="port" value="20880"/>
+    </bean>
+    <bean id="demo.service.DemoService" class="com.alibaba.dubbo.config.spring.ServiceBean">
+        <property name="interface" value="com.hg.dubbo.study.rundemo.UserService"/>
+        <property name="ref" ref="demoService"/>
+    </bean>
+</beans>

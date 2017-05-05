@@ -1,0 +1,170 @@
+##
+## DOES NOT WORK, GIVES CIRCULAR DEPENDENCIES...
+##
+#  links:
+#    - discovery2
+#  command: java -jar -Dspring.profiles.active=docker1 microservices/support/discovery-server/build/libs/discovery-server-0.0.1-SNAPSHOT.jar
+#  
+#discovery2:
+#  image: magnus-larsson/spring-boot
+#  restart: always
+#  ports:
+#    - "8762:8762"
+#  volumes:
+#    - $PWD:/data
+#  links:
+#    - discovery
+#  command: java -jar -Dspring.profiles.active=docker2 microservices/support/discovery-server/build/libs/discovery-server-0.0.1-SNAPSHOT.jar
+
+
+
+#    docker run -it -d --restart=always --name elastic elasticsearch
+#    docker run -it -d --restart=always --name kibana --link elastic:elasticsearch -p 5601:5601 kibana
+#    docker run -it -d --restart=always --name logstash -v $PWD/logstash:/config -v $PWD/logs:/logs --link elastic:elastic logstash logstash -f /config/logevent-docker-2.conf
+
+# docker stop 5c7d3eb0a239 3f9dc950137b 863faef13f4a def151f15fc9
+
+#elasticsearch:
+#  image: elasticsearch
+#  restart: always
+#
+#kibana:
+#  image: kibana
+#  restart: always
+#  ports:
+#    - "5601:5601"
+#  links:
+#    - elasticsearch
+#
+#logstash:
+#  image: logstash
+#  restart: always
+#  links:
+#    - elasticsearch
+#  volumes:
+#    - $PWD/logstash:/config
+#    - $PWD/logs:/logs
+#  command: logstash -f /config/logevent-docker-2.conf
+
+#statsd:
+#  image: magnuslarsson/ms-blog-graphite-statsd
+##  image: hopsoft/graphite-statsd
+#  restart: always
+#  ports:
+#    - "80:80"
+#    - "2003:2003"
+#    - "8125:8125/udp"
+#    - "8126:8126"
+
+rabbitmq:
+  image: rabbitmq:3-management
+  restart: always
+  ports:
+#    - "5672:5672"
+    - "15672:15672"
+
+discovery:
+  image: magnuslarsson/ms-blog-discovery-server
+  restart: always
+  ports:
+    - "8761:8761"
+
+config:
+  image: magnuslarsson/ms-blog-config-server
+  restart: always
+  ports:
+    - "8888:8888"
+  links:
+    - discovery
+    - rabbitmq
+
+auth:
+  image: magnuslarsson/ms-blog-auth-server
+  restart: always
+  ports:
+    - "9999:9999"
+
+#turbine:
+#  image: magnuslarsson/ms-blog-turbine
+##  volumes:
+##    - $PWD/logs:/logs
+#  links:
+#    - rabbitmq
+#    - config
+
+
+pro:
+  image: magnuslarsson/ms-blog-product-service
+  restart: always
+#  volumes:
+#    - $PWD/logs:/logs
+  links:
+    - discovery
+    - config
+    - rabbitmq
+#    - statsd
+
+rec:
+  image: magnuslarsson/ms-blog-recommendation-service
+  restart: always
+#  volumes:
+#    - $PWD/logs:/logs
+  links:
+    - discovery
+    - config
+    - rabbitmq
+#    - statsd
+
+rev:
+  image: magnuslarsson/ms-blog-review-service
+  restart: always
+#  volumes:
+#    - $PWD/logs:/logs
+  links:
+    - discovery
+    - config
+    - rabbitmq
+#    - statsd
+
+composite:
+  image: magnuslarsson/ms-blog-product-composite-service
+  restart: always
+#  volumes:
+#    - $PWD/logs:/logs
+  links:
+    - auth
+    - discovery
+    - config
+    - rabbitmq
+#    - statsd
+
+#api:
+#  image: magnuslarsson/ms-blog-product-api-service
+#  restart: always
+#  volumes:
+#    - $PWD/logs:/logs
+#  links:
+#    - auth
+#    - config
+#    - discovery
+#    - rabbitmq
+#    - statsd
+
+monitor:
+  image: magnuslarsson/ms-blog-monitor-dashboard
+  restart: always
+  ports:
+    - "7979:7979"
+  links:
+    - config
+    - composite
+
+edge:
+  image: magnuslarsson/ms-blog-edge-server
+  restart: always
+  ports:
+    - "443:8765"
+  links:
+    - discovery
+    - config
+    - composite

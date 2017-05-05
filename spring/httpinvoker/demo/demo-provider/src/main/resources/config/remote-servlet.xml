@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns="http://www.springframework.org/schema/beans"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/context
+        http://www.springframework.org/schema/context/spring-context.xsd">
+    <!--
+    <mvc:interceptors>
+        <bean class="com.witown.action.core.HttpInvokerInterceptor"/>
+      </mvc:interceptors>
+       -->
+    <context:annotation-config/>
+
+    <bean name="/demoService" class="org.springframework.remoting.httpinvoker.HttpInvokerServiceExporter">
+        <property name="service" ref="demoServiceImpl"/>
+        <property name="serviceInterface" value="com.zhiyin.rpc.httpinvoker.demo.service.DemoService"/>
+    </bean>
+
+    <bean name="/timeConsumeService" class="org.springframework.remoting.httpinvoker.HttpInvokerServiceExporter">
+        <property name="service" ref="timeConsumeServiceImpl"/>
+        <property name="serviceInterface" value="com.zhiyin.rpc.httpinvoker.demo.service.TimeConsumeService"/>
+    </bean>
+
+    <bean name="/tlService" class="org.springframework.remoting.httpinvoker.HttpInvokerServiceExporter">
+        <property name="service" ref="tlService"/>
+        <property name="serviceInterface" value="com.zhiyin.rpc.httpinvoker.demo.service.IThreadLocalService"/>
+    </bean>
+
+</beans>

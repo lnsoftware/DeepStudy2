@@ -1,0 +1,18 @@
+
+
+server:
+  contextPath: /oauth-server
+  port: 8096
+
+#  profiles:
+#    active: test
+
+management:
+  security:
+    enabled: false
+security:
+  basic:
+    enabled: false
+
+#logging:
+#  level: debug

@@ -1,0 +1,81 @@
+
+spring:
+  application:
+    name: zhiyin-gateway
+  config:
+    location: /data/gateway/application.properties
+
+# routes to serviceId
+zuul:
+  routes:
+    local:
+      path: /local/**
+      serviceId: local
+    api-a:
+      path: /api-a/**
+      serviceId: service-A
+    service-b:
+      path: /service-b/**
+      serviceId: service-B
+      stripPrefix: false
+    zhiyin-ranker:
+      path: /zhiyin-ranker/**
+      serviceId: zhiyin-ranker
+    appapi:
+      path: /appapi/**
+      serviceId: appapi
+      stripPrefix: false
+    zipkin:
+      path : /zipkin-server
+      stripPrefix: false
+
+#    appapi2:
+#      path: appapi/**
+#      serviceId: ZHIYIN-APPAPI-PROD
+#      stripPrefix: false
+#    appapi-prod:
+#      path: appapi-prod/**
+#      serviceId: ZHIYIN-APPAPI-PROD
+#      stripPrefix: false
+
+    baidu:
+      path: /baidu/**
+      serviceId: baidu
+    user-api:
+      path: /user-api/**
+      stripPrefix: false
+      serviceId: user-api
+    user-api-gray:
+      path: /user-api-gray/**
+      stripPrefix: false
+      serviceId: user-api-gray
+
+baidu:
+  ribbon:
+    listOfServers: https://www.baidu.com/
+
+#本地服务
+local:
+  ribbon:
+    eureka:
+      enabled: false
+    listOfServers: http://localhost:${server.port}
+
+server:
+  port: 8443
+  additionalPorts: 8088
+
+ribbon:
+  invoker:
+    marks:
+      user-api:
+        serverMark: GRAY
+        candidateServerMarks: ONLINE,*
+
+hystrix:
+  command.default.execution.isolation.strategy: THREAD
+  command.default.execution.isolation.thread.timeoutInMilliseconds: 60000
+  command.default.execution.timeout.enabled: false
+  command.default.fallback.enabled: false
+  threadpool.default.coreSize: 20
+

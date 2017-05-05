@@ -1,0 +1,69 @@
+{“find”: “terms”,   “query”: “name:RedisService.taskSyncRedis.latencyTotal_mean”}
+
+
+
+
+name:RedisService.taskSyncRedis.latencyTotal_mean
+
+
+name:*latencyTotal_mean
+
+
+
+curl -XDELETE  http://localhost:9200/metrics
+
+curl  -XGET http://localhost:9200/metrics/_search {"find": "terms", "field": "name"}
+
+
+curl -XGET http://localhost:9200/metrics/_search?pretty -d'
+query{
+ {"find": "terms", "field": "name"}
+}
+'
+
+
+curl -XGET http://localhost:9200/metrics/_search?pretty -d'{
+  "query":{
+    "term":{
+        "name":"RedisService.taskSyncRedis.latencyTotal_mean"
+    }
+  }
+}'
+
+
+
+
+curl -XGET http://localhost:9200/metrics/_search?pretty -d'{
+  "query":{
+    "match":{
+        "name":"RedisService.taskSyncRedis.latencyTotal_mean"
+    }
+  }
+}'
+
+
+
+
+curl -XGET http://localhost:9200/metrics/_search?pretty -d'{
+  "query":{
+    "term":{
+        "name":"RedisService.taskSyncRedis.latencyTotal_mean"
+    }
+  }
+}'
+
+
+
+
+
+curl -XGET http://localhost:9200/metrics2/_search?pretty -d'{
+  "query":{
+    "match":{
+        "commandKey":"latencytotal_mean"
+    }
+  }
+}'
+
+
+
+curl -XGET http://localhost:9200/metrics2/_search?q=commandKey:latencytotal_mean

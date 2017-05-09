@@ -14,7 +14,7 @@ services:
         depends_on:
             - mqnamesrv
         networks:
-            - spring-cloud-network
+            - rocketmq-network
     mqnamesrv:
         container_name: mqnamesrv
         image: mqnamesrv
@@ -23,7 +23,16 @@ services:
         ports:
             - "9876:9876"
         networks:
-            - spring-cloud-network
+            - rocketmq-network
+    mqconsole:
+        container_name: mqconsole
+        image: mqconsole
+        expose:
+            - 8888
+        ports:
+            - "8888:8888"
+        networks:
+            - rocketmq-network
 networks:
-    spring-cloud-network:
+    rocketmq-network:
         driver: bridge

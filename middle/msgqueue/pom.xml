@@ -2,9 +2,9 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <groupId>com.zhiyin.queue</groupId>
-    <artifactId>zhiyin-queue</artifactId>
+    <artifactId>msgqueue</artifactId>
     <packaging>pom</packaging>
-    <version>0.0.1-SNAPSHOT</version>
+    <version>0.0.2-SNAPSHOT</version>
     <name>${project.artifactId}</name>
 
     <modules>
@@ -13,7 +13,7 @@
 
     <parent>
         <groupId>com.zhiyin.frame</groupId>
-        <artifactId>frame-parent</artifactId>
+        <artifactId>frame-base</artifactId>
         <version>0.0.1-SNAPSHOT</version>
     </parent>
 

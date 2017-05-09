@@ -1,0 +1,35 @@
+version: '2'
+
+services:
+
+  mysql:
+    image: mysql:5.6
+    environment:
+      - MYSQL_ROOT_PASSWORD=root
+      - MYSQL_DATABASE=cat
+      - "TZ=Asia/Shanghai" # offset +09:00 / DST +09:00
+    volumes:
+      - ./cat/:/docker-entrypoint-initdb.d
+    ports:
+      - "3306:3306"
+
+  tomcat:
+    image: tomcat:8.0
+    volumes:
+      - ./cat/client.xml:/data/appdatas/cat/client.xml
+      - ./cat/server.xml:/data/appdatas/cat/server.xml
+      - ./cat/datasources.xml:/data/appdatas/cat/datasources.xml
+      - ./cat/cat.war:/usr/local/tomcat/webapps/cat.war
+    environment:
+      - TOMCAT_USERNAME=root
+      - TOMCAT_PASSWORD=root
+      - "TZ=Asia/Shanghai" # offset +09:00 / DST +09:00
+    expose:
+      - "8080"
+      - "2280"
+    ports:
+      - "8080:8080"
+      - "2280:2280"
+    links:
+      - mysql
+

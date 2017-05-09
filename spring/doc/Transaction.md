@@ -1,0 +1,29 @@
+
+
+
+事务同步管理器
+TransactionSynchronizationManager
+事务管理的基石，主要是为了解决事务管理在多线程环境下资源（如Connection、Session等）的并发访问问题：使用ThreadLocal为不同事务线程维护独立的资源副本，以及事务配置属性和运行状态信息，使各个事务线程互不影响。
+
+org.springframework.jdbc.datasource.DataSourceUtils
+
+
+
+事务管理SPI
+SPI（Service Provider Interface）是一个框架开放给第三方的可扩展服务接口，供其具体实现，以支持框架的扩展性和插件式组件。
+Spring事务管理SPI主要包括3个接口：
+PlatformTransactionManager（进行事务的创建、提交或回滚）
+TransactionDefinition（定义事务属性，如隔离级别）
+TransactionStatus（事务运行时状态，如是否已完成）
+
+
+org.springframework.jdbc.datasource.DataSourceTransactionManager
+DefaultTransactionDefinition
+
+
+
+
+声明式
+
+  基于XML和注解的方式都是属于声明式事务管理，只是提供元数据的形式不用，索性就一起讲了。声明式事务的核心实现就是利用AOP技术，将事务逻辑作为环绕增强MethodInterceptor动态织入目标业务方法中。其中的核心类为TransactionInterceptor。从以下代码注释可知，TransactionInterceptor是专用于声明式事务管理的。
+

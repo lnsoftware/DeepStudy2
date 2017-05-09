@@ -1,5 +1,15 @@
 
+eureka:
+  instance:
+    hostname: localhost
+    metadataMap:
+      instanceId: ${spring.application.name}:${spring.application.instance_id:${random.value}}
+  client:  # Not a client, don't register with yourself
+    registerWithEureka: false
+    fetchRegistry: false
+
 ---
+
 spring:
   profiles: peer1
 server:
@@ -10,6 +20,7 @@ eureka:
   client:
     serviceUrl:
       defaultZone: http://${eureka.instance.hostname}:8762/eureka/
+
 
 ---
 spring:

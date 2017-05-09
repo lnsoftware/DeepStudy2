@@ -8,8 +8,8 @@
     <name>${project.artifactId}</name>
 
     <parent>
-        <groupId>com.zhiyin.dubbo</groupId>
-        <artifactId>dubbo-parent</artifactId>
+        <groupId>com.zhiyin.frame</groupId>
+        <artifactId>dubbo-study</artifactId>
         <version>0.0.1-SNAPSHOT</version>
     </parent>
 
@@ -21,8 +21,9 @@
     <dependencies>
 
         <dependency>
-            <groupId></groupId>
-            <artifactId>dubbo-c</artifactId>
+            <groupId>com.github.sgroschupf</groupId>
+            <artifactId>zkclient</artifactId>
+            <version>0.1</version>
         </dependency>
 
     </dependencies>

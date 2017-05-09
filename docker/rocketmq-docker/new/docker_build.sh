@@ -1,3 +1,3 @@
 #!/bin/bash 
 
-docker build -t rocketmq .
+docker build -t huiwq1990/tomcat .

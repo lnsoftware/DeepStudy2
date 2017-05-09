@@ -10,7 +10,7 @@ import java.io.IOException;
 import java.io.Reader;
 
 /**
- * Created by wangqinghui on 2015/12/23.
+ * Created by hg on 2015/12/23.
  */
 public class MybatisReader {
     public static void main(String[] args) throws IOException {

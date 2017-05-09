@@ -43,7 +43,6 @@ RUN chmod +x bin/mqnamesrv
 
 CMD cd ${ROCKETMQ_HOME}/bin && export JAVA_OPT=" -Duser.home=${BASE_DIR}" && sh mqnamesrv
 
-
 EXPOSE 9876
 VOLUME /opt/logs \
 		/opt/store

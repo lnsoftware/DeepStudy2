@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+
+    <property name="log.project" value="zhiyin-dbcanal"/>
+    <property name="log.base" value="/opt/data/zhiyin-dbcanal/log"/>
+    <property name="log.history.maxday" value="3"/>
+    <property name="log.pattern" value="%X{request_id} %date [%thread] %-5level %logger{80} - %msg%n"/>
+
+    <!-- 控制台日志 -->
+    <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
+            <pattern>${log.pattern}</pattern>
+        </encoder>
+    </appender>
+
+    <!-- 所有info日志 -->
+    <appender name="all_info"
+              class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <filter class="ch.qos.logback.classic.filter.ThresholdFilter">
+            <level>INFO</level>
+        </filter>
+        <File>${log.base}/all_info.log</File>
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <FileNamePattern>${log.base}/all_info.%d{yyyy-MM-dd}.log</FileNamePattern>
+            <MaxHistory>${log.history.maxday}</MaxHistory>
+        </rollingPolicy>
+        <!--<rollingPolicy class="ch.qos.logback.core.rolling.FixedWindowRollingPolicy">-->
+        <!--<FileNamePattern>${log.base}/all_info.%i.log</FileNamePattern>-->
+        <!--<MinIndex>1</MinIndex>-->
+        <!--<MaxIndex>5</MaxIndex>-->
+        <!--</rollingPolicy>-->
+        <!--<triggeringPolicy-->
+        <!--class="ch.qos.logback.core.rolling.SizeBasedTriggeringPolicy">-->
+        <!--<MaxFileSize>5MB</MaxFileSize>-->
+        <!--</triggeringPolicy>-->
+        <layout class="ch.qos.logback.classic.PatternLayout">
+            <Pattern>${log.pattern}</Pattern>
+        </layout>
+    </appender>
+
+    <appender name="all_error"
+              class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <filter class="ch.qos.logback.classic.filter.LevelFilter">
+            <level>ERROR</level>
+            <onMatch>ACCEPT</onMatch>
+            <onMismatch>DENY</onMismatch>
+        </filter>
+        <File>${log.base}/all_error.log</File>
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <FileNamePattern>${log.base}/all_error.%d{yyyy-MM-dd}.log</FileNamePattern>
+            <MaxHistory>${log.history.maxday}</MaxHistory>
+        </rollingPolicy>
+        <!--<rollingPolicy class="ch.qos.logback.core.rolling.FixedWindowRollingPolicy">-->
+        <!--<FileNamePattern>${log.base}/all_error.%i.log-->
+        <!--</FileNamePattern>-->
+        <!--<MinIndex>1</MinIndex>-->
+        <!--<MaxIndex>5</MaxIndex>-->
+        <!--</rollingPolicy>-->
+        <!--<triggeringPolicy-->
+        <!--class="ch.qos.logback.core.rolling.SizeBasedTriggeringPolicy">-->
+        <!--<MaxFileSize>5MB</MaxFileSize>-->
+        <!--</triggeringPolicy>-->
+        <layout class="ch.qos.logback.classic.PatternLayout">
+            <Pattern>${log.pattern}</Pattern>
+        </layout>
+    </appender>
+
+
+    <logger name="jdbc.sqlonly" level="WARN"/>
+
+    <logger name="jdbc.resultsettable" level="WARN"/>
+    <logger name="jdbc.resultset" level="WARN"/>
+    <logger name="jdbc.connection" level="WARN"/>
+    <logger name="jdbc.audit" level="WARN"/>
+
+
+    <logger name="org.quartz.core" level="WARN"/>
+    <logger name="org.mybatis.spring" level="WARN"/>
+    <logger name="org.dozer" level="WARN"/>
+    <logger name="net.bull.javamelody" level="WARN"/>
+    <logger name="javax.activation" level="WARN"/>
+    <logger name="javax.mail" level="WARN"/>
+    <logger name="javax.xml.bind" level="WARN"/>
+    <logger name="ch.qos.logback" level="WARN"/>
+    <logger name="com.codahale.metrics" level="WARN"/>
+    <logger name="com.ryantenney" level="WARN"/>
+    <logger name="com.sun.xml.internal.bind" level="WARN"/>
+    <logger name="com.zaxxer" level="WARN"/>
+    <logger name="io.undertow" level="WARN"/>
+    <logger name="org.apache" level="WARN"/>
+    <logger name="org.apache.catalina.startup.DigesterFactory" level="OFF"/>
+    <logger name="org.bson" level="WARN"/>
+    <logger name="org.hibernate.validator" level="WARN"/>
+    <logger name="org.hibernate" level="WARN"/>
+    <logger name="org.hibernate.ejb.HibernatePersistence" level="OFF"/>
+    <logger name="org.springframework" level="WARN"/>
+    <logger name="org.springframework.web" level="WARN"/>
+    <logger name="org.springframework.security" level="WARN"/>
+    <logger name="org.springframework.cache" level="WARN"/>
+    <logger name="org.thymeleaf" level="WARN"/>
+    <logger name="org.xnio" level="WARN"/>
+    <logger name="com.mangofactory.swagger" level="WARN"/>
+    <logger name="com.wordnik.swagger" level="WARN"/>
+    <logger name="liquibase" level="WARN"/>
+    <logger name="sun.rmi.transport" level="WARN"/>
+    <logger name="com.alibaba.dubbo" level="WARN"/>
+
+    <!-- system  -->
+
+
+    <!--<root level="INFO" >-->
+    <root level="DEBUG">
+        <appender-ref ref="STDOUT"/>
+        <appender-ref ref="all_info" level="INFO"/>
+        <appender-ref ref="all_error"/>
+    </root>
+
+
+</configuration>

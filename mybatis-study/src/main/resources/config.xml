@@ -7,8 +7,8 @@
     <!-- 指定properties配置文件， 我这里面配置的是数据库相关 -->
     <!--<properties resource="dbConfig.properties"></properties>-->
     <properties resource="db.properties">
-        <property name="username" value="dev_user"/>
-        <property name="password" value="F2Fa3!33TYyg"/>
+        <property name="username" value="root"/>
+        <property name="password" value="root"/>
     </properties>
 
     <!-- 指定Mybatis使用log4j -->
@@ -31,8 +31,8 @@
             <dataSource type="POOLED">
                  <!--如果上面没有指定数据库配置的properties文件，那么此处可以这样直接配置-->
                 <property name="driver" value="com.mysql.jdbc.Driver"/>
-                <property name="url" value="jdbc:mysql://localhost:3306/mybatis-study"/>
-                <property name="username" value="root"/>
+                <property name="url" value="jdbc:mysql://localhost:3306/test"/>
+                <property name="username" value="${username}"/>
                 <property name="password" value="root"/>
 
                 <!-- 上面指定了数据库配置文件， 配置文件里面也是对应的这四个属性 -->

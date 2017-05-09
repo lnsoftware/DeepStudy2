@@ -15,7 +15,7 @@ public class HelloServer {
 		EventLoopGroup workerGroup = new NioEventLoopGroup();
 		try {
 			ServerBootstrap b = new ServerBootstrap(); 
-			b.group(bossGroup, workerGroup).channel(NioServerSocketChannel.class) 
+			b.group(bossGroup, workerGroup).channel(NioServerSocketChannel.class)
 					.childHandler(new ChannelInitializer<SocketChannel>() { 
 								@Override
 								public void initChannel(SocketChannel ch) throws Exception {

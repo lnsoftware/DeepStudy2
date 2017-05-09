@@ -13,7 +13,7 @@
 
     <parent>
         <groupId>com.zhiyin.frame</groupId>
-        <artifactId>frame-parent</artifactId>
+        <artifactId>frame-base</artifactId>
         <version>0.0.1-SNAPSHOT</version>
     </parent>
 
@@ -21,13 +21,14 @@
 
         <module>client-core</module>
         <module>eureka-server</module>
+        <module>peer</module>
+
         <!--<module>eureka-server2</module>-->
 
         <!--<module>peer1</module>-->
         <!--<module>peer2</module>-->
         <!--<module>service-A</module>-->
         <!--<module>slave1</module>-->
-        <!--<module>peer</module>-->
 
         <module>eureka-demo-provider</module>
         <module>eureka-demo-consumer</module>
@@ -81,45 +82,5 @@
             </dependency>
         </dependencies>
     </dependencyManagement>
-
-    <!--<build>-->
-        <!--<plugins>-->
-            <!--<plugin>-->
-                <!--<groupId>org.springframework.boot</groupId>-->
-                <!--<artifactId>spring-boot-maven-plugin</artifactId>-->
-            <!--</plugin>-->
-            <!--<plugin>-->
-                <!--<groupId>org.apache.maven.plugins</groupId>-->
-                <!--<artifactId>maven-compiler-plugin</artifactId>-->
-                <!--<configuration>-->
-                    <!--<source>${java.version}</source>-->
-                    <!--<target>${java.version}</target>-->
-                    <!--<testSource>${java.version}</testSource>-->
-                    <!--<testTarget>${java.version}</testTarget>-->
-                <!--</configuration>-->
-                <!--<version>${maven-compiler-plugin.version}</version>-->
-            <!--</plugin>-->
-            <!--<plugin>-->
-                <!--<groupId>org.apache.maven.plugins</groupId>-->
-                <!--<artifactId>maven-resources-plugin</artifactId>-->
-                <!--<version>${maven-resources-plugin.version}</version>-->
-            <!--</plugin>-->
-            <!--<plugin>-->
-                <!--<groupId>org.apache.maven.plugins</groupId>-->
-                <!--<artifactId>maven-jar-plugin</artifactId>-->
-                <!--<version>${maven-jar-plugin.version}</version>-->
-            <!--</plugin>-->
-            <!--<plugin>-->
-                <!--<groupId>org.apache.maven.plugins</groupId>-->
-                <!--<artifactId>maven-javadoc-plugin</artifactId>-->
-                <!--<version>${maven-javadoc-plugin.version}</version>-->
-            <!--</plugin>-->
-            <!--<plugin>-->
-                <!--<groupId>org.apache.maven.plugins</groupId>-->
-                <!--<artifactId>maven-source-plugin</artifactId>-->
-                <!--<version>${maven-source-plugin.version}</version>-->
-            <!--</plugin>-->
-        <!--</plugins>-->
-    <!--</build>-->
 
 </project>

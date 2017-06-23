@@ -3,7 +3,7 @@
   <modelVersion>4.0.0</modelVersion>
 
   <artifactId>spring-source</artifactId>
-  <packaging>jar</packaging>
+  <packaging>pom</packaging>
 
   <parent>
     <groupId>com.zhiyin.frame</groupId>
@@ -12,6 +12,7 @@
   </parent>
 
   <modules>
+    <module>cache-study</module>
     <module>aop-study</module>
     <module>spring-transaction</module>
   </modules>

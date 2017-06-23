@@ -49,7 +49,7 @@
 
     <parent>
         <groupId>com.zhiyin</groupId>
-        <artifactId>msg-notify</artifactId>
+        <artifactId>redis</artifactId>
         <version>4.3.0-SNAPSHOT</version>
     </parent>
 

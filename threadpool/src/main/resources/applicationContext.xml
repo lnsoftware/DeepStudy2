@@ -1,0 +1,23 @@
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+       http://www.springframework.org/schema/beans/spring-beans-3.0.xsd">
+
+    <!-- Beans Declaration -->
+    <bean id="TestTask" class="com.hg.tp.task.TestTask"></bean>
+    <bean id="ThreadPoolMonitorService" class="com.hg.tp.task.ThreadPoolMonitorService">
+        <property name="monitoringPeriod" value="5" />
+    </bean>
+    <bean id="TestRejectedExecutionHandler" class="com.hg.tp.task.TestRejectedExecutionHandler"></bean>
+    <bean id="TestThreadPoolExecutorService" class="com.hg.tp.task.TestThreadPoolExecutorService">
+        <property name="corePoolSize" value="1" />
+        <property name="maxPoolSize" value="3" />
+        <property name="keepAliveTime" value="10" />
+        <property name="queueCapacity" value="3" />
+        <property name="testRejectedExecutionHandler" ref="TestRejectedExecutionHandler" />
+    </bean>
+    <bean id="Starter" class="com.hg.tp.task.Starter">
+        <property name="threadPoolMonitorService" ref="ThreadPoolMonitorService" />
+        <property name="testThreadPoolExecutorService" ref="TestThreadPoolExecutorService" />
+    </bean>
+</beans>

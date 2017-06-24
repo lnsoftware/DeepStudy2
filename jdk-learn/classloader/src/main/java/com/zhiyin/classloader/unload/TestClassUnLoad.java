@@ -1,4 +1,4 @@
-package com.hg.jdk.cl.unload;
+package com.zhiyin.classloader.unload;
 
 public class TestClassUnLoad {
     public static void main(String[] args) throws Exception {

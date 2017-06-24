@@ -1,4 +1,4 @@
-package com.hg.jdk.cl;
+package com.zhiyin.classloader;
 
 public class Hot {
     public void hot() {

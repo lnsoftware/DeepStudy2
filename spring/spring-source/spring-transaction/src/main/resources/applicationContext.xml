@@ -1,0 +1,152 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN//EN" "http://www.springframework.org/dtd/spring-beans.dtd">
+<beans>	
+
+	<bean id="transactionManager" class="org.springframework.transaction.jta.JtaTransactionManager">
+		<constructor-arg>
+			<ref local="jtaTransactionManager" />
+		</constructor-arg>
+	</bean>
+
+	<bean id="orderService" class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean">
+		<property name="transactionManager">
+			<ref local="transactionManager" />
+		</property>
+		<property name="proxyInterfaces">
+			<list>
+				<value>sample.services.OrderService</value>
+			</list>
+		</property>
+		<property name="target">
+			<ref local="orderServiceTarget" />
+		</property>
+		<property name="transactionAttributes">
+			<props>
+				<prop key="save*">PROPAGATION_REQUIRED, ISOLATION_DEFAULT</prop>
+				<prop key="delete*">PROPAGATION_REQUIRED, ISOLATION_DEFAULT</prop>
+				<prop key="find*">PROPAGATION_REQUIRED, ISOLATION_DEFAULT,readOnly</prop>
+			</props>
+		</property>
+	</bean>
+	
+	<!-- If using IBM WebSphere Application Server -->
+	<bean id="jtaTransactionManager" class="org.springframework.transaction.jta.WebSphereTransactionManagerFactoryBean" singleton="true" /> 
+	
+	<bean id="jdbcOperations" class="services.security.ipaddress.mad.storage.JdbcOperationsImpl" singleton="true">
+		<constructor-arg index="0">
+			<!-- Reference to a JdbcTemplate instance with a "read committed" isolation level -->
+			<ref local="rcJdbcTemplate" />
+		</constructor-arg>
+	</bean>
+	
+	<bean id="orderDAO" class="sample.dao.OrderDAOImpl" singleton="true">
+		<property name="jdbcOperations">
+			<ref local="jdbcOperations" />
+		</property>
+	</bean>
+	
+	<bean id="jdbcTemplate" class="org.springframework.beans.factory.config.MethodInvokingFactoryBean">
+		<property name="targetClass">
+			<value>application.services.IsolationLevelUtil</value>
+		</property>
+		<property name="targetMethod">
+			<value>getJdbcTemplate</value>
+		</property>
+		<property name="singleton">
+			<value>false</value>
+		</property>
+	</bean>
+	
+	<bean id="orderServiceIsolationAdvice" class="application.services.IsolationLevelAdvice" singleton="true">
+		<constructor-arg index="0">
+			<map>
+				<entry key="save.*">
+					<ref local="rrJdbcTemplate" />
+				</entry>
+				<entry key="delete.*">
+					<ref local="rcJdbcTemplate" />
+				</entry>
+				<entry key="find.*">
+					<ref local="rcJdbcTemplate" />
+				</entry>
+			</map>
+		</constructor-arg>
+		<constructor-arg index="1">
+			<ref local="rcJdbcTemplate" />
+		</constructor-arg>
+	</bean>
+	
+	<bean id="orderServiceTarget" class="org.springframework.aop.framework.ProxyFactoryBean">
+		<property name="proxyInterfaces">
+			<value>application.services.OrderService</value>
+		</property>
+		<property name="interceptorNames">
+			<value>orderServiceIsolationAdvice</value>
+		</property>
+		<property name="target">
+			<ref local="orderServiceImpl" />
+		</property>
+	</bean>
+	
+	<!-- Order Service implementation object -->
+	<bean id="orderServiceImpl"
+		class="application.services.OrderServiceImpl"
+		singleton="true">
+	</bean>
+	
+	<!-- "Serializable" isolation level - JdbcTemplate -->
+	<bean id="sJdbcTemplate" class="org.springframework.jdbc.core.JdbcTemplate" singleton="true">
+		<property name="dataSource">
+			<ref local="sDataSource" />
+		</property>
+	</bean>
+
+	<!-- "Read repeatable" isolation level - JdbcTemplate -->
+	<bean id="rrJdbcTemplate" class="org.springframework.jdbc.core.JdbcTemplate" singleton="true">
+		<property name="dataSource">
+			<ref local="rrDataSource" />
+		</property>
+	</bean>
+
+	<!-- "Read committed" isolation level - JdbcTemplate -->
+	<bean id="rcJdbcTemplate" class="org.springframework.jdbc.core.JdbcTemplate" singleton="true">
+		<property name="dataSource">
+			<ref local="rcDataSource" />
+		</property>
+	</bean>
+
+	<!-- "Read uncommitted" isolation level - JdbcTemplate -->
+	<bean id="ruJdbcTemplate" class="org.springframework.jdbc.core.JdbcTemplate" singleton="true">
+		<property name="dataSource">
+			<ref local="ruDataSource" />
+		</property>
+	</bean>
+
+	<!-- "Serializable" isolation level - data source -->
+	<bean id="sDataSource" class="org.springframework.jndi.JndiObjectFactoryBean">
+		<property name="jndiName">
+			<value>java:comp/env/jdbc/s_ds</value>
+		</property>
+	</bean>
+
+	<!-- "Repeatable read" isolation level - data source -->
+	<bean id="rrDataSource" class="org.springframework.jndi.JndiObjectFactoryBean">
+		<property name="jndiName">
+			<value>java:comp/env/jdbc/rr_ds</value>
+	</property>
+	</bean>
+
+	<!-- "Read committed" isolation level - data source -->
+	<bean id="rcDataSource" class="org.springframework.jndi.JndiObjectFactoryBean">
+		<property name="jndiName">
+			<value>java:comp/env/jdbc/rc_ds</value>
+		</property>
+	</bean>
+
+	<!-- "Read uncommitted" isolation level - data source -->
+	<bean id="ruDataSource" class="org.springframework.jndi.JndiObjectFactoryBean">
+		<property name="jndiName">
+			<value>java:comp/env/jdbc/ru_ds</value>
+		</property>
+	</bean>
+</beans>

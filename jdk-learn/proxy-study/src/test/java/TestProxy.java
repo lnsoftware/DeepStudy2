@@ -68,7 +68,7 @@ public class TestProxy {
                 proxy.invokeSuper(obj, args);
 
                 System.out.println("after: " + method);
-
+                System.out.println();
                 return null;
             }
         });

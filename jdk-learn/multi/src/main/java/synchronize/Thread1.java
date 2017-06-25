@@ -1,14 +1,14 @@
-package synchronizedCase;
+package synchronize;
 
 public class Thread1 {
 
-	 private byte[] lock = new byte[0]; // ÌØÊâµÄinstance±äÁ¿	
+	 private byte[] lock = new byte[0]; // ï¿½ï¿½ï¿½ï¿½ï¿½instanceï¿½ï¿½ï¿½ï¿½	
 	
 	 public void method1() {
 		 
          synchronized(this) {
         	 
-        	  System.out.println("------"+Thread.currentThread().getName() +"»ñµÃËø------");
+        	  System.out.println("------"+Thread.currentThread().getName() +"ï¿½ï¿½ï¿½ï¿½ï¿½------");
              
               int i = 3;  
               while( i-- > 0) {  
@@ -19,14 +19,14 @@ public class Thread1 {
                 	   e.printStackTrace();
                    }  
               }
-              System.out.println("------"+Thread.currentThread().getName() +"ÊÍ·ÅËø------\n");
+              System.out.println("------"+Thread.currentThread().getName() +"ï¿½Í·ï¿½ï¿½ï¿½------\n");
          }  
     }  
 	 
 	    
 	 public synchronized void method2() {  
 	        
-	    	System.out.println("------"+Thread.currentThread().getName() +"»ñµÃËø------");
+	    	System.out.println("------"+Thread.currentThread().getName() +"ï¿½ï¿½ï¿½ï¿½ï¿½------");
 	    	
 	   	    int i = 3;  
 	        while( i-- > 0) {  
@@ -37,7 +37,7 @@ public class Thread1 {
 	           	  e.printStackTrace();
 	             }  
 	        }
-	        System.out.println("------"+Thread.currentThread().getName() +"ÊÍ·ÅËø------\n");
+	        System.out.println("------"+Thread.currentThread().getName() +"ï¿½Í·ï¿½ï¿½ï¿½------\n");
 	   } 
 	 
 	 
@@ -58,7 +58,7 @@ public class Thread1 {
     
     public synchronized static void method4() {  
         
-    	System.out.println("------"+Thread.currentThread().getName() +"»ñµÃClassËø------");
+    	System.out.println("------"+Thread.currentThread().getName() +"ï¿½ï¿½ï¿½Classï¿½ï¿½------");
     	
    	    int i = 3;  
         while( i-- > 0) {  
@@ -69,14 +69,14 @@ public class Thread1 {
            	  e.printStackTrace();
              }  
         }
-        System.out.println("------"+Thread.currentThread().getName() +"ÊÍ·ÅClassËø------\n");
+        System.out.println("------"+Thread.currentThread().getName() +"ï¿½Í·ï¿½Classï¿½ï¿½------\n");
    } 
     
     public void method5() {  
         
     	synchronized(Thread1.class){
     		
-    		System.out.println("------"+Thread.currentThread().getName() +"»ñµÃClassËø------");        	
+    		System.out.println("------"+Thread.currentThread().getName() +"ï¿½ï¿½ï¿½Classï¿½ï¿½------");        	
        	    int i = 3;  
             while( i-- > 0) {  
                  System.out.println("method5 >>>"+Thread.currentThread().getName() + " : " + i);  
@@ -86,7 +86,7 @@ public class Thread1 {
                	  e.printStackTrace();
                  }  
             }
-            System.out.println("------"+Thread.currentThread().getName() +"ÊÍ·ÅClassËø------\n");	
+            System.out.println("------"+Thread.currentThread().getName() +"ï¿½Í·ï¿½Classï¿½ï¿½------\n");	
     	}    	
    }
     
@@ -94,7 +94,7 @@ public class Thread1 {
 		 
 		synchronized(lock) {
 			
-			System.out.println("\n------"+Thread.currentThread().getName() +"»ñµÃËø------");
+			System.out.println("\n------"+Thread.currentThread().getName() +"ï¿½ï¿½ï¿½ï¿½ï¿½------");
 			int i = 3;			
 			while (i-- > 0) {
 				System.out.println("method2 >>>"+Thread.currentThread().getName() + " : " + i);  
@@ -105,38 +105,38 @@ public class Thread1 {
 				}				
 			}
 			
-			System.out.println("------"+Thread.currentThread().getName() +"ÊÍ·ÅËø------\n");			
+			System.out.println("------"+Thread.currentThread().getName() +"ï¿½Í·ï¿½ï¿½ï¿½------\n");			
 		}		
 	}	
     
     public static void main(String[] args) {
     	
     	/**
-    	 * Çé¿öÒ»£ºThreadAºÍThreadAAA¶Ô±È
-    	 * µ±Á½¸ö²¢·¢Ïß³Ì·ÃÎÊÍ¬Ò»ÀàµÄ²»Í¬¶ÔÏóobjectÖÐµÄÕâ¸ösynchronized(this)Í¬²½´úÂë¿éÊ±£¬²»»á¹¹³ÉÍ¬²½¡£
+    	 * ï¿½ï¿½ï¿½Ò»ï¿½ï¿½ThreadAï¿½ï¿½ThreadAAAï¿½Ô±ï¿½
+    	 * ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ß³Ì·ï¿½ï¿½ï¿½Í¬Ò»ï¿½ï¿½Ä²ï¿½Í¬ï¿½ï¿½ï¿½ï¿½objectï¿½Ðµï¿½ï¿½ï¿½ï¿½synchronized(this)Í¬ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ê±ï¿½ï¿½ï¿½ï¿½ï¿½á¹¹ï¿½ï¿½Í¬ï¿½ï¿½ï¿½ï¿½
     	 * 
-    	 * Çé¿ö¶þ£ºThreadAºÍThreadA¶Ô±È
-    	 * µ±Á½¸ö²¢·¢Ïß³Ì·ÃÎÊÍ¬Ò»¸ö¶ÔÏóobjectÖÐµÄÕâ¸ösynchronized(this)Í¬²½´úÂë¿éÊ±£¬Ò»¸öÊ±¼äÄÚÖ»ÄÜÓÐÒ»¸öÏß³ÌµÃµ½¶ÔÏóËø²¢Ö´ÐÐ¡£ÁíÒ»¸öÏß³Ì±ØÐëµÈ´ýµ±Ç°Ïß³ÌÖ´ÐÐÍêÕâ¸ö´úÂë¿éÊÍ·ÅËøÒÔºó²ÅÄÜÖ´ÐÐ¸Ã´úÂë¿é¡£
+    	 * ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ThreadAï¿½ï¿½ThreadAï¿½Ô±ï¿½
+    	 * ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ß³Ì·ï¿½ï¿½ï¿½Í¬Ò»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½objectï¿½Ðµï¿½ï¿½ï¿½ï¿½synchronized(this)Í¬ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ê±ï¿½ï¿½Ò»ï¿½ï¿½Ê±ï¿½ï¿½ï¿½ï¿½Ö»ï¿½ï¿½ï¿½ï¿½Ò»ï¿½ï¿½ï¿½ß³ÌµÃµï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ö´ï¿½Ð¡ï¿½ï¿½ï¿½Ò»ï¿½ï¿½ï¿½ß³Ì±ï¿½ï¿½ï¿½È´ï¿½ï¿½ï¿½Ç°ï¿½ß³ï¿½Ö´ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Í·ï¿½ï¿½ï¿½ï¿½Ôºï¿½ï¿½ï¿½ï¿½Ö´ï¿½Ð¸Ã´ï¿½ï¿½ï¿½é¡£
     	 * 
-    	 * Çé¿öÈý£ºThreadAºÍThreadC¶Ô±È
-    	 * µ±Ò»¸öÏß³Ì·ÃÎÊobjectµÄÒ»¸ösynchronized(this)Í¬²½´úÂë¿éÊ±£¬ÁíÒ»¸öÏß³ÌÈÔÈ»¿ÉÒÔ·ÃÎÊ¸ÃobjectÖÐµÄ·Çsynchronized(this)Í¬²½´úÂë¿é¡£
+    	 * ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ThreadAï¿½ï¿½ThreadCï¿½Ô±ï¿½
+    	 * ï¿½ï¿½Ò»ï¿½ï¿½ï¿½ß³Ì·ï¿½ï¿½ï¿½objectï¿½ï¿½Ò»ï¿½ï¿½synchronized(this)Í¬ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ê±ï¿½ï¿½ï¿½ï¿½Ò»ï¿½ï¿½ï¿½ß³ï¿½ï¿½ï¿½È»ï¿½ï¿½ï¿½Ô·ï¿½ï¿½Ê¸ï¿½objectï¿½ÐµÄ·ï¿½synchronized(this)Í¬ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½é¡£
     	 * 
-    	 * Çé¿öËÄ£ºThreadAºÍThreadB¶Ô±È
-    	 * µ±Ò»¸öÏß³Ì·ÃÎÊobjectµÄÒ»¸ösynchronized(this)Í¬²½´úÂë¿éÊ±£¬ÆäËûÏß³Ì¶ÔobjectÖÐËùÓÐÆäËüsynchronized(this)Í¬²½´úÂë¿éµÄ·ÃÎÊ½«±»×èÈû¡£
+    	 * ï¿½ï¿½ï¿½ï¿½Ä£ï¿½ThreadAï¿½ï¿½ThreadBï¿½Ô±ï¿½
+    	 * ï¿½ï¿½Ò»ï¿½ï¿½ï¿½ß³Ì·ï¿½ï¿½ï¿½objectï¿½ï¿½Ò»ï¿½ï¿½synchronized(this)Í¬ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ê±ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ß³Ì¶ï¿½objectï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½synchronized(this)Í¬ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ä·ï¿½ï¿½Ê½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
     	 * 
-    	 * Çé¿öËÄ£ºThreadAºÍThreadD¶Ô±È
-    	 * Ò»¸öÓÃsynchronizedÐÞÊÎµÄstaticº¯Êýmethod4()£¬Ò»¸öÓÃsynchronizedÐÞÊÎµÄinstanceº¯Êýmethod3()£¬
-    	 * ÄÇÃ´Õâ¸öÀàµÄÍ¬Ò»¶ÔÏóObjÔÚ¶àÏß³ÌÖÐ·Ö±ð·ÃÎÊAºÍBÁ½¸ö·½·¨Ê±£¬²»»á¹¹³ÉÍ¬²½£¬ÒòÎªËüÃÇµÄËø¶¼²»Ò»Ñù¡£method3()µÄËøÊÇObjÕâ¸ö¶ÔÏó£¬¶ømethod4()µÄËøÊÇObjËùÊôµÄÄÇ¸öClass
+    	 * ï¿½ï¿½ï¿½ï¿½Ä£ï¿½ThreadAï¿½ï¿½ThreadDï¿½Ô±ï¿½
+    	 * Ò»ï¿½ï¿½ï¿½ï¿½synchronizedï¿½ï¿½ï¿½Îµï¿½staticï¿½ï¿½ï¿½ï¿½method4()ï¿½ï¿½Ò»ï¿½ï¿½ï¿½ï¿½synchronizedï¿½ï¿½ï¿½Îµï¿½instanceï¿½ï¿½ï¿½ï¿½method3()ï¿½ï¿½
+    	 * ï¿½ï¿½Ã´ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Í¬Ò»ï¿½ï¿½ï¿½ï¿½Objï¿½Ú¶ï¿½ï¿½ß³ï¿½ï¿½Ð·Ö±ï¿½ï¿½ï¿½ï¿½Aï¿½ï¿½Bï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ê±ï¿½ï¿½ï¿½ï¿½ï¿½á¹¹ï¿½ï¿½Í¬ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Îªï¿½ï¿½ï¿½Çµï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ò»ï¿½ï¿½ï¿½ï¿½method3()ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Objï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ó£¬¶ï¿½method4()ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Objï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ç¸ï¿½Class
     	 *
-    	 * Çé¿öÎå£ºthreadAºÍThreadDºÍThreadF
-    	 * ÈýÖÖÀàÐÍµÄËø²»¹¹³ÉÍ¬²½
+    	 * ï¿½ï¿½ï¿½ï¿½å£ºthreadAï¿½ï¿½ThreadDï¿½ï¿½ThreadF
+    	 * ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Íµï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Í¬ï¿½ï¿½
     	 *  
     	 **/
     	
     	/**
-    	 * method1()ºÍmethod2()º¯ÊýµÄ×÷ÓÃÏàÍ¬-->¶ÔÏóËø
-    	 * method4()ºÍmethod5()º¯ÊýµÄ×÷ÓÃÏàÍ¬-->ÀàËø
-    	 * method6()-->´´½¨Ò»¸öÌØÊâµÄinstance±äÁ¿£¨ËüµÃÊÇÒ»¸ö¶ÔÏó£©À´³äµ±Ëø
+    	 * method1()ï¿½ï¿½method2()ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Í¬-->ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+    	 * method4()ï¿½ï¿½method5()ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Í¬-->ï¿½ï¿½ï¿½ï¿½
+    	 * method6()-->ï¿½ï¿½ï¿½ï¿½Ò»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½instanceï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ò»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½äµ±ï¿½ï¿½
     	 */
     	
          final Thread1 target = new Thread1();  

@@ -21,6 +21,7 @@
 
     <modules>
         <module>basic</module>
+        <module>security</module>
         <module>classinit</module>
         <module>classloader</module>
         <module>nio</module>

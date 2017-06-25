@@ -13,8 +13,6 @@ public interface UserMapper {
 
     public List<User> findAllUsers();
 
-
-
     /**
      * @return all the users
      */

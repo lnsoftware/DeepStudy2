@@ -36,3 +36,54 @@
 
 
 https://segmentfault.com/a/1190000004527951
+
+
+
+
+### 静态块、初始化块、构造函数原理
+
+```
+class C extends B {
+
+    static {
+        System.out.println("Static init C.");
+    }
+
+    {
+        System.out.println("Instance init C.");
+    }
+
+    C() {
+        System.out.println("Constructor C.");
+    }
+}
+```
+
+```
+class C extends B {
+  C();
+    Code:
+       0: aload_0
+       1: invokespecial #1                  // Method B."<init>":()V
+       4: getstatic     #2                  // Field java/lang/System.out:Ljava/io/PrintStream;
+       7: ldc           #3                  // String Instance init C.
+       9: invokevirtual #4                  // Method java/io/PrintStream.println:(Ljava/lang/String;)V
+      12: getstatic     #2                  // Field java/lang/System.out:Ljava/io/PrintStream;
+      15: ldc           #5                  // String Constructor C.
+      17: invokevirtual #4                  // Method java/io/PrintStream.println:(Ljava/lang/String;)V
+      20: return
+
+  static {};
+    Code:
+       0: getstatic     #2                  // Field java/lang/System.out:Ljava/io/PrintStream;
+       3: ldc           #6                  // String Static init C.
+       5: invokevirtual #4                  // Method java/io/PrintStream.println:(Ljava/lang/String;)V
+       8: return
+}
+```
+
+静态初始化块仍然单独分出一部分，输出了我们的调试语句。而另一部分，仍然还是类C的构造函数C();，可以看到它先调用了父类B的构造函数，接着输出了我们初始化块中的语句，然后才输出我们写在构造函数中的语句，最后返回。多次试验也都是如此。于是我们能够推断：初始化块的代码是被加入到子类构造函数的前面，父类初始化的后面了。
+
+
+
+http://www.cnblogs.com/BlackStorm/p/5699965.html

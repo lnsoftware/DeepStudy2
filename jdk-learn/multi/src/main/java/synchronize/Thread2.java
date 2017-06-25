@@ -1,10 +1,10 @@
-package synchronizedCase;
+package synchronize;
 
 public class Thread2 {
 
 	class Inner {
 		
-		// ÌØÊâµÄinstance±äÁ¿
+		// ï¿½ï¿½ï¿½ï¿½ï¿½instanceï¿½ï¿½ï¿½ï¿½
 		private byte[] lock = new byte[0]; 
 		
 		private void method11() {
@@ -22,7 +22,7 @@ public class Thread2 {
 
 		private synchronized void methodd22() {			
 		
-			System.out.println("\n------"+Thread.currentThread().getName() +"»ñµÃËø------");
+			System.out.println("\n------"+Thread.currentThread().getName() +"ï¿½ï¿½ï¿½ï¿½ï¿½------");
 			int i = 3;			
 			while (i-- > 0) {
 				System.out.println("method2 >>>"+Thread.currentThread().getName() + " : " + i);  
@@ -33,14 +33,14 @@ public class Thread2 {
 				}				
 			}
 			
-			System.out.println("------"+Thread.currentThread().getName() +"ÊÍ·ÅËø------\n");
+			System.out.println("------"+Thread.currentThread().getName() +"ï¿½Í·ï¿½ï¿½ï¿½------\n");
 		}
 		
 		private void methodd33() {			
 			 
 			synchronized(lock) {
 				
-				System.out.println("\n------"+Thread.currentThread().getName() +"»ñµÃËø------");
+				System.out.println("\n------"+Thread.currentThread().getName() +"ï¿½ï¿½ï¿½ï¿½ï¿½------");
 				int i = 3;			
 				while (i-- > 0) {
 					System.out.println("method2 >>>"+Thread.currentThread().getName() + " : " + i);  
@@ -51,7 +51,7 @@ public class Thread2 {
 					}				
 				}
 				
-				System.out.println("------"+Thread.currentThread().getName() +"ÊÍ·ÅËø------\n");			
+				System.out.println("------"+Thread.currentThread().getName() +"ï¿½Í·ï¿½ï¿½ï¿½------\n");			
 			}
 			
 		}	
@@ -61,9 +61,9 @@ public class Thread2 {
 		
          synchronized(inner) {
         	 
-        	 System.out.println("\n------"+Thread.currentThread().getName() +"»ñµÃËø------");
+        	 System.out.println("\n------"+Thread.currentThread().getName() +"ï¿½ï¿½ï¿½ï¿½ï¿½------");
         	 inner.method11();
-        	 System.out.println("------"+Thread.currentThread().getName() +"ÊÍ·ÅËø------\n");
+        	 System.out.println("------"+Thread.currentThread().getName() +"ï¿½Í·ï¿½ï¿½ï¿½------\n");
          }         
     }
 
@@ -79,9 +79,9 @@ public class Thread2 {
 		
         synchronized(Inner.class) {
        	 
-       	 System.out.println("\n------"+Thread.currentThread().getName() +"»ñµÃClassËø------");
+       	 System.out.println("\n------"+Thread.currentThread().getName() +"ï¿½ï¿½ï¿½Classï¿½ï¿½------");
        	 inner.method11();
-       	 System.out.println("------"+Thread.currentThread().getName() +"ÊÍ·ÅClassËø------\n");
+       	 System.out.println("------"+Thread.currentThread().getName() +"ï¿½Í·ï¿½Classï¿½ï¿½------\n");
         }         
    }
 	private void method5 (Inner inner) {
@@ -92,15 +92,15 @@ public class Thread2 {
 	public static void main(String[] args) {
 		
 		/** 
-    	 * ÀàThread1ÖĞÍ¬²½µÄ¹æÔò¶ÔÆäËü¶ÔÏóËøÍ¬ÑùÊÊÓÃ
+    	 * ï¿½ï¿½Thread1ï¿½ï¿½Í¬ï¿½ï¿½ï¿½Ä¹ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Í¬ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
     	 * 
-    	 *Çé¿öÎå£ºthreadAºÍThreadC
-    	 * µ±ÓĞÒ»¸öÃ÷È·µÄ¶ÔÏó×÷ÎªËøÊ±£¬¾Í¿ÉÒÔÏñmethod1()ÄÇÑù±àĞ´³ÌĞò£¬
-    	 * µ«µ±Ã»ÓĞÃ÷È·µÄ¶ÔÏó×÷ÎªËø£¬Ö»ÊÇÏëÈÃÒ»¶Î´úÂëÍ¬²½Ê±£¬¿ÉÒÔ´´½¨Ò»¸öÌØÊâµÄinstance±äÁ¿£¨ËüµÃÊÇÒ»¸ö¶ÔÏó£©À´³äµ±Ëø£º
-    	 *×¢Òâ£ºmethod1()/method2()
+    	 *ï¿½ï¿½ï¿½ï¿½å£ºthreadAï¿½ï¿½ThreadC
+    	 * ï¿½ï¿½ï¿½ï¿½Ò»ï¿½ï¿½ï¿½ï¿½È·ï¿½Ä¶ï¿½ï¿½ï¿½ï¿½ï¿½Îªï¿½ï¿½Ê±ï¿½ï¿½ï¿½Í¿ï¿½ï¿½ï¿½ï¿½ï¿½method1()ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ğ´ï¿½ï¿½ï¿½ï¿½
+    	 * ï¿½ï¿½ï¿½ï¿½Ã»ï¿½ï¿½ï¿½ï¿½È·ï¿½Ä¶ï¿½ï¿½ï¿½ï¿½ï¿½Îªï¿½ï¿½ï¿½ï¿½Ö»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ò»ï¿½Î´ï¿½ï¿½ï¿½Í¬ï¿½ï¿½Ê±ï¿½ï¿½ï¿½ï¿½ï¿½Ô´ï¿½ï¿½ï¿½Ò»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½instanceï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ò»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½äµ±ï¿½ï¿½ï¿½ï¿½
+    	 *×¢ï¿½â£ºmethod1()/method2()
     	 *    method3()
     	 *    method4()    	   
-    	 *    ÈıÖÖÀàĞÍµÄËø£¬ÔÚ¶àÏß³ÌÖĞ²»»á¹¹³ÉÍ¬²½¡£
+    	 *    ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Íµï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ú¶ï¿½ï¿½ß³ï¿½ï¿½Ğ²ï¿½ï¿½á¹¹ï¿½ï¿½Í¬ï¿½ï¿½ï¿½ï¿½
     	 **/ 
 		
 		final Thread2 target = new Thread2(); 

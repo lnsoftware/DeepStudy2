@@ -2,17 +2,17 @@ package br.com.fabriciodeb.sample.proxy;
 
 import java.lang.reflect.Method;
 
-import org.apache.commons.logging.LogFactory;
 
-import org.apache.commons.logging.Log;
 
 import net.sf.cglib.proxy.Enhancer;
 import net.sf.cglib.proxy.MethodInterceptor;
 import net.sf.cglib.proxy.MethodProxy;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class LoggerInterceptor<T> implements MethodInterceptor {
 
-	private static final Log LOG = LogFactory.getLog(LoggerInterceptor.class);
+	private static final Logger LOG = LoggerFactory.getLogger(LoggerInterceptor.class);
 
 	public Object intercept(Object obj, Method method, Object[] args, MethodProxy proxy) throws Throwable {
 		LOG.info("before method: " + method);

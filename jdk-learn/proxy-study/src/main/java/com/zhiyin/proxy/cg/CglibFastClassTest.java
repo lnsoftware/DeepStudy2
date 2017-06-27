@@ -1,9 +1,12 @@
 package com.zhiyin.proxy.cg;
 
+/**
+ * 模拟fastclass原理
+ */
 public class CglibFastClassTest {
     public static void main(String[] args){
         Test tt = new Test();
-        Test2 fc = new Test2();
+        TestFastClass fc = new TestFastClass();
         int index = fc.getIndex("f()V");
         fc.invoke(index, tt, null);
     }
@@ -18,7 +21,7 @@ class Test{
         System.out.println("g method");
     }
 }
-class Test2{
+class TestFastClass{
     public Object invoke(int index, Object o, Object[] ol){
         Test t = (Test) o;
         switch(index){

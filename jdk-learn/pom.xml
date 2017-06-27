@@ -20,6 +20,7 @@
     </properties>
 
     <modules>
+        <module>reference</module>
         <module>basic</module>
         <module>security</module>
         <module>classinit</module>

@@ -9,7 +9,7 @@ import org.junit.Before;
 public class BaseTest {
     @Before
     public void be(){
-        System.setProperty(DebuggingClassWriter.DEBUG_LOCATION_PROPERTY, "./target/cglib_proxy");
+        System.setProperty(DebuggingClassWriter.DEBUG_LOCATION_PROPERTY, "./cglib_proxy");
 
     }
 }

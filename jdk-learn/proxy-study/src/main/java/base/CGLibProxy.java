@@ -1,25 +1,25 @@
 package base;
 
+import java.lang.reflect.Method;
 import net.sf.cglib.proxy.Enhancer;
 import net.sf.cglib.proxy.MethodInterceptor;
 import net.sf.cglib.proxy.MethodProxy;
 
-import java.lang.reflect.Method;
-
 /**
  * Created by Administrator on 2016/7/12.
  */
-public class CGLibProxy implements MethodInterceptor{
+public class CGLibProxy implements MethodInterceptor {
 
     private static CGLibProxy proxy = new CGLibProxy();
 
-    private CGLibProxy(){}
+    private CGLibProxy() {
+    }
 
-    public static CGLibProxy getInstance(){
+    public static CGLibProxy getInstance() {
         return proxy;
     }
 
-    public <T> T getProxy(Class<T> cls){
+    public <T> T getProxy(Class<T> cls) {
         return (T) Enhancer.create(cls, this);
     }
 
@@ -31,14 +31,11 @@ public class CGLibProxy implements MethodInterceptor{
         return result;
     }
 
-
-
-
-    public void begin(){
+    public void begin() {
         System.out.println("##begin##");
     }
 
-    public void end(){
+    public void end() {
         System.out.println("##end##");
     }
 }

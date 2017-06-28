@@ -6,24 +6,24 @@ import java.lang.reflect.Proxy;
 
 public class ProxyFoo implements InvocationHandler {
 
-	private Object target;
+    private Object target;
 
-	public ProxyFoo(Object t) {
-		this.target = t;
-	}
+    public ProxyFoo(Object t) {
+        this.target = t;
+    }
 
-	public Object invoke(Object proxy, Method method, Object[] args) throws Throwable {
-		System.out.println("Before testing for the colors of the feathers");
+    public static Object createProxy(Object t) {
+        return Proxy.newProxyInstance(t.getClass().getClassLoader(), t.getClass().getInterfaces(), new ProxyFoo(t));
+    }
 
-		method.invoke(target, args);
+    public Object invoke(Object proxy, Method method, Object[] args) throws Throwable {
+        System.out.println("Before testing for the colors of the feathers");
 
-		System.out.println("After testing for the colors of the feathers");
+        method.invoke(target, args);
 
-		return null;
-	}
+        System.out.println("After testing for the colors of the feathers");
 
-	public static Object createProxy(Object t) {
-		return Proxy.newProxyInstance(t.getClass().getClassLoader(), t.getClass().getInterfaces(), new ProxyFoo(t));
-	}
+        return null;
+    }
 
 }

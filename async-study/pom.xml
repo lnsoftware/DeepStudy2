@@ -2,18 +2,16 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>proxy-study</artifactId>
+    <artifactId>async-study</artifactId>
     <packaging>jar</packaging>
 
-
     <parent>
-        <groupId>com.zhiyin.jdk</groupId>
-        <artifactId>jdk-learn</artifactId>
+        <groupId>com.zhiyin.frame</groupId>
+        <artifactId>frame-base</artifactId>
         <version>0.0.1-SNAPSHOT</version>
     </parent>
 
     <properties>
-        <asm.version>5.2</asm.version>
     </properties>
 
     <dependencies>
@@ -30,37 +28,6 @@
             <version>4.12</version>
             <scope>test</scope>
         </dependency>
-
-        <dependency>
-            <groupId>org.aspectj</groupId>
-            <artifactId>aspectjweaver</artifactId>
-            <version>1.8.9</version>
-        </dependency>
-
-        <dependency>
-            <groupId>log4j</groupId>
-            <artifactId>log4j</artifactId>
-            <version>1.2.17</version>
-        </dependency>
-
-        <!--<dependency>-->
-        <!--<groupId>cglib</groupId>-->
-        <!--<artifactId>cglib-nodep</artifactId>-->
-        <!--&lt;!&ndash;<version>3.2.1</version>&ndash;&gt;-->
-        <!--<version>2.2.2</version>-->
-        <!--</dependency>-->
-
-        <dependency>
-            <groupId>cglib</groupId>
-            <artifactId>cglib</artifactId>
-            <version>3.2.1</version>
-        </dependency>
-        <dependency>
-            <groupId>org.ow2.asm</groupId>
-            <artifactId>asm</artifactId>
-            <version>${asm.version}</version>
-        </dependency>
-
 
         <dependency>
             <groupId>org.apache.commons</groupId>

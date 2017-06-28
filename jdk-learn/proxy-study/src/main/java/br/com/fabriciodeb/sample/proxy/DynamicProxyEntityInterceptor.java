@@ -6,111 +6,109 @@ import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Map.Entry;
-
 import net.sf.cglib.proxy.Enhancer;
 import net.sf.cglib.proxy.MethodInterceptor;
 import net.sf.cglib.proxy.MethodProxy;
 
 public class DynamicProxyEntityInterceptor<T> implements MethodInterceptor {
 
-	private class EntryValue {
+    private T target;
+    private Map<String, EntryValue> properties = new HashMap<String, EntryValue>();
 
-		private Object value;
-		private Class<?> type;
+    public DynamicProxyEntityInterceptor(T target) {
+        this.target = target;
+    }
 
-		public EntryValue(Object value, Class<?> type) {
-			this.value = value;
-			this.type = type;
-		}
-	}
+    @SuppressWarnings({"unchecked"})
+    public static <T> T createProxy(T target) {
+        Enhancer enhancer = new Enhancer();
+        enhancer.setSuperclass(target.getClass());
+        enhancer.setInterfaces(new Class[] {EntityInterceptor.class});
+        enhancer.setCallback(new DynamicProxyEntityInterceptor<T>(target));
 
-	private T target;
+        return (T) enhancer.create();
+    }
 
-	private Map<String, EntryValue> properties = new HashMap<String, EntryValue>();
+    public Object intercept(Object obj, Method method, Object[] args, MethodProxy proxy) throws Throwable {
+        String fieldName = getFieldName(method);
 
-	public DynamicProxyEntityInterceptor(T target) {
-		this.target = target;
-	}
+        if (method.getName().equals("applyChanges")) {
+            return doApplyChanges();
+        }
 
-	public Object intercept(Object obj, Method method, Object[] args, MethodProxy proxy) throws Throwable {
-		String fieldName = getFieldName(method);
+        if (IsGetter(method)) {
 
-		if (method.getName().equals("applyChanges")) {
-			return doApplyChanges();
-		}
+            if (properties.containsKey(fieldName)) {
+                return properties.get(fieldName).value;
+            }
 
-		if (IsGetter(method)) {
+            Object result = method.invoke(target, args);
 
-			if (properties.containsKey(fieldName)) {
-				return properties.get(fieldName).value;
-			}
+            if (result instanceof Collection) {
+                result = proxifyCollection(result);
+            }
 
-			Object result = method.invoke(target, args);
+            properties.put(fieldName, new EntryValue(result, method.getReturnType()));
 
-			if (result instanceof Collection) {
-				result = proxifyCollection(result);
-			}
+            return result;
+        }
 
-			properties.put(fieldName, new EntryValue(result, method.getReturnType()));
+        if (IsSetter(method) && (args.length == 1)) {
+            properties.put(fieldName, new EntryValue(args[0], method.getParameterTypes()[0]));
 
-			return result;
-		}
+            return null;
+        }
 
-		if (IsSetter(method) && (args.length == 1)) {
-			properties.put(fieldName, new EntryValue(args[0], method.getParameterTypes()[0]));
+        return null;
+    }
 
-			return null;
-		}
+    @SuppressWarnings({"rawtypes", "unchecked"})
+    private Object proxifyCollection(Object result) throws InstantiationException, IllegalAccessException {
+        Collection collection = (Collection) result.getClass().newInstance();
 
-		return null;
-	}
+        for (Object item : (Collection) result) {
+            collection.add(DynamicProxyEntityInterceptor.createProxy(item));
+        }
 
-	@SuppressWarnings({ "rawtypes", "unchecked" })
-	private Object proxifyCollection(Object result) throws InstantiationException, IllegalAccessException {
-		Collection collection = (Collection) result.getClass().newInstance();
+        result = collection;
+        return result;
+    }
 
-		for (Object item : (Collection) result) {
-			collection.add(DynamicProxyEntityInterceptor.createProxy(item));
-		}
+    private T doApplyChanges() throws NoSuchMethodException, IllegalAccessException, InvocationTargetException {
+        for (Entry<String, EntryValue> entry : properties.entrySet()) {
+            Method setter = target.getClass().getMethod("set" + entry.getKey(), entry.getValue().type);
 
-		result = collection;
-		return result;
-	}
+            setter.invoke(target, entry.getValue().value);
+        }
 
-	private T doApplyChanges() throws NoSuchMethodException, IllegalAccessException, InvocationTargetException {
-		for (Entry<String, EntryValue> entry : properties.entrySet()) {
-			Method setter = target.getClass().getMethod("set" + entry.getKey(), entry.getValue().type);
+        return target;
+    }
 
-			setter.invoke(target, entry.getValue().value);
-		}
-		
-		return target;
-	}
+    private boolean IsGetter(Method method) {
+        return method.getName().toLowerCase().startsWith("get");
+    }
 
-	private boolean IsGetter(Method method) {
-		return method.getName().toLowerCase().startsWith("get");
-	}
+    private String getFieldName(Method method) {
+        if (IsGetter(method) || IsSetter(method)) {
+            return method.getName().substring(3);
+        }
 
-	private String getFieldName(Method method) {
-		if (IsGetter(method) || IsSetter(method)) {
-			return method.getName().substring(3);
-		}
+        return null;
+    }
 
-		return null;
-	}
+    private boolean IsSetter(Method method) {
+        return method.getName().toLowerCase().startsWith("set");
+    }
 
-	private boolean IsSetter(Method method) {
-		return method.getName().toLowerCase().startsWith("set");
-	}
+    private class EntryValue {
 
-	@SuppressWarnings({ "unchecked" })
-	public static <T> T createProxy(T target) {
-		Enhancer enhancer = new Enhancer();
-		enhancer.setSuperclass(target.getClass());
-		enhancer.setInterfaces(new Class[]{EntityInterceptor.class});
-		enhancer.setCallback(new DynamicProxyEntityInterceptor<T>(target));
+        private Object value;
+        private Class<?> type;
 
-		return (T) enhancer.create();
-	}
+        public EntryValue(Object value, Class<?> type) {
+            this.value = value;
+            this.type = type;
+        }
+    }
 
 }

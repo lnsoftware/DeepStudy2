@@ -28,7 +28,7 @@ import static org.junit.Assert.assertNull;
 public class TestProxy {
 
     @Before
-    public void be(){
+    public void be() {
         System.setProperty(DebuggingClassWriter.DEBUG_LOCATION_PROPERTY, "./target/cglib_proxy");
 
     }

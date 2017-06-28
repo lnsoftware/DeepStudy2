@@ -5,18 +5,18 @@ package com.zhiyin.cglib.cando;
  */
 public class UserService {
 
-    public User selectById(Integer id){
+    public User selectById(Integer id) {
         User u = new User();
         u.setId(id);
-        u.setName("hg-"+id);
+        u.setName("hg-" + id);
         return u;
     }
 
-    public void delById(Integer id){
+    public void delById(Integer id) {
 
     }
 
-    public void hello(){
+    public void hello() {
 
     }
 }

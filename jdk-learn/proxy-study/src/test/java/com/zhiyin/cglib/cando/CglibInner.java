@@ -23,8 +23,6 @@ public class CglibInner extends BaseTest {
         immutableBean.setValue("Hello cglib!"); // Causes exception.
     }
 
-
-
     @Test
     public void testBeanGenerator() throws Exception {
         BeanGenerator beanGenerator = new BeanGenerator();

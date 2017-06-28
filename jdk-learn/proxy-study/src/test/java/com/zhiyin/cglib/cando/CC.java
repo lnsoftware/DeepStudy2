@@ -13,7 +13,7 @@ import static org.junit.Assert.assertNotEquals;
 /**
  * Created by hg on 2017/6/26.
  */
-public class CC  extends BaseTest{
+public class CC extends BaseTest {
 
     @Test
     public void testFixedValue() throws Exception {
@@ -31,7 +31,6 @@ public class CC  extends BaseTest{
 //        proxy.hashCode();
     }
 
-
     @Test
     public void testMethodInterceptor() throws Exception {
         Enhancer enhancer = new Enhancer();
@@ -40,7 +39,7 @@ public class CC  extends BaseTest{
             @Override
             public Object intercept(Object obj, Method method, Object[] args, MethodProxy proxy)
                 throws Throwable {
-                if(method.getDeclaringClass() != Object.class && method.getReturnType() == String.class) {
+                if (method.getDeclaringClass() != Object.class && method.getReturnType() == String.class) {
                     return "Hello cglib!";
                 } else {
                     return proxy.invokeSuper(obj, args);

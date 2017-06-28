@@ -14,7 +14,7 @@ import net.sf.cglib.core.Signature;
 import net.sf.cglib.reflect.FastClass;
 
 public class DemoService$$FastClassByCGLIB$$3215ecb4
-extends FastClass {
+    extends FastClass {
     public DemoService$$FastClassByCGLIB$$3215ecb4(Class class_) {
         super(class_);
     }
@@ -23,19 +23,23 @@ extends FastClass {
         String string = signature.toString();
         switch (string.hashCode()) {
             case 848333779: {
-                if (!string.equals("hello(Ljava/lang/String;)Ljava/lang/String;")) break;
+                if (!string.equals("hello(Ljava/lang/String;)Ljava/lang/String;"))
+                    break;
                 return 0;
             }
             case 1826985398: {
-                if (!string.equals("equals(Ljava/lang/Object;)Z")) break;
+                if (!string.equals("equals(Ljava/lang/Object;)Z"))
+                    break;
                 return 1;
             }
             case 1913648695: {
-                if (!string.equals("toString()Ljava/lang/String;")) break;
+                if (!string.equals("toString()Ljava/lang/String;"))
+                    break;
                 return 2;
             }
             case 1984935277: {
-                if (!string.equals("hashCode()I")) break;
+                if (!string.equals("hashCode()I"))
+                    break;
                 return 3;
             }
         }
@@ -72,11 +76,11 @@ extends FastClass {
     }
 
     public Object invoke(int n, Object object, Object[] arrobject) throws InvocationTargetException {
-        DemoService demoService = (DemoService)object;
+        DemoService demoService = (DemoService) object;
         try {
             switch (n) {
                 case 0: {
-                    return demoService.hello((String)arrobject[0]);
+                    return demoService.hello((String) arrobject[0]);
                 }
                 case 1: {
                     return new Boolean(demoService.equals(arrobject[0]));
@@ -88,8 +92,7 @@ extends FastClass {
                     return new Integer(demoService.hashCode());
                 }
             }
-        }
-        catch (Throwable throwable) {
+        } catch (Throwable throwable) {
             throw new InvocationTargetException(throwable);
         }
         throw new IllegalArgumentException("Cannot find matching method/constructor");
@@ -102,8 +105,7 @@ extends FastClass {
                     return new DemoService();
                 }
             }
-        }
-        catch (Throwable throwable) {
+        } catch (Throwable throwable) {
             throw new InvocationTargetException(throwable);
         }
         throw new IllegalArgumentException("Cannot find matching method/constructor");

@@ -15,7 +15,7 @@ import net.sf.cglib.proxy.Callback;
 import net.sf.cglib.reflect.FastClass;
 
 public class DemoService$$EnhancerByCGLIB$$c23dc77c$$FastClassByCGLIB$$396d31d2
-extends FastClass {
+    extends FastClass {
     public DemoService$$EnhancerByCGLIB$$c23dc77c$$FastClassByCGLIB$$396d31d2(Class class_) {
         super(class_);
     }
@@ -24,87 +24,108 @@ extends FastClass {
         String string = signature.toString();
         switch (string.hashCode()) {
             case -2055565910: {
-                if (!string.equals("CGLIB$SET_THREAD_CALLBACKS([Lnet/sf/cglib/proxy/Callback;)V")) break;
+                if (!string.equals("CGLIB$SET_THREAD_CALLBACKS([Lnet/sf/cglib/proxy/Callback;)V"))
+                    break;
                 return 18;
             }
             case -1882565338: {
-                if (!string.equals("CGLIB$equals$1(Ljava/lang/Object;)Z")) break;
+                if (!string.equals("CGLIB$equals$1(Ljava/lang/Object;)Z"))
+                    break;
                 return 13;
             }
             case -1457535688: {
-                if (!string.equals("CGLIB$STATICHOOK1()V")) break;
+                if (!string.equals("CGLIB$STATICHOOK1()V"))
+                    break;
                 return 11;
             }
             case -1411842725: {
-                if (!string.equals("CGLIB$hashCode$3()I")) break;
+                if (!string.equals("CGLIB$hashCode$3()I"))
+                    break;
                 return 15;
             }
             case -894172689: {
-                if (!string.equals("newInstance(Lnet/sf/cglib/proxy/Callback;)Ljava/lang/Object;")) break;
+                if (!string.equals("newInstance(Lnet/sf/cglib/proxy/Callback;)Ljava/lang/Object;"))
+                    break;
                 return 6;
             }
             case -879968516: {
-                if (!string.equals("CGLIB$hello$0(Ljava/lang/String;)Ljava/lang/String;")) break;
+                if (!string.equals("CGLIB$hello$0(Ljava/lang/String;)Ljava/lang/String;"))
+                    break;
                 return 12;
             }
             case -623122092: {
-                if (!string.equals("CGLIB$findMethodProxy(Lnet/sf/cglib/core/Signature;)Lnet/sf/cglib/proxy/MethodProxy;")) break;
+                if (!string.equals("CGLIB$findMethodProxy(Lnet/sf/cglib/core/Signature;)Lnet/sf/cglib/proxy/MethodProxy;"))
+                    break;
                 return 9;
             }
             case -508378822: {
-                if (!string.equals("clone()Ljava/lang/Object;")) break;
+                if (!string.equals("clone()Ljava/lang/Object;"))
+                    break;
                 return 3;
             }
             case -419626537: {
-                if (!string.equals("setCallbacks([Lnet/sf/cglib/proxy/Callback;)V")) break;
+                if (!string.equals("setCallbacks([Lnet/sf/cglib/proxy/Callback;)V"))
+                    break;
                 return 10;
             }
             case 560567118: {
-                if (!string.equals("setCallback(ILnet/sf/cglib/proxy/Callback;)V")) break;
+                if (!string.equals("setCallback(ILnet/sf/cglib/proxy/Callback;)V"))
+                    break;
                 return 8;
             }
             case 811063227: {
-                if (!string.equals("newInstance([Ljava/lang/Class;[Ljava/lang/Object;[Lnet/sf/cglib/proxy/Callback;)Ljava/lang/Object;")) break;
+                if (!string.equals("newInstance([Ljava/lang/Class;[Ljava/lang/Object;[Lnet/sf/cglib/proxy/Callback;)Ljava/lang/Object;"))
+                    break;
                 return 5;
             }
             case 848333779: {
-                if (!string.equals("hello(Ljava/lang/String;)Ljava/lang/String;")) break;
+                if (!string.equals("hello(Ljava/lang/String;)Ljava/lang/String;"))
+                    break;
                 return 7;
             }
             case 973717575: {
-                if (!string.equals("getCallbacks()[Lnet/sf/cglib/proxy/Callback;")) break;
+                if (!string.equals("getCallbacks()[Lnet/sf/cglib/proxy/Callback;"))
+                    break;
                 return 20;
             }
             case 1221173700: {
-                if (!string.equals("newInstance([Lnet/sf/cglib/proxy/Callback;)Ljava/lang/Object;")) break;
+                if (!string.equals("newInstance([Lnet/sf/cglib/proxy/Callback;)Ljava/lang/Object;"))
+                    break;
                 return 4;
             }
             case 1230699260: {
-                if (!string.equals("getCallback(I)Lnet/sf/cglib/proxy/Callback;")) break;
+                if (!string.equals("getCallback(I)Lnet/sf/cglib/proxy/Callback;"))
+                    break;
                 return 19;
             }
             case 1306468936: {
-                if (!string.equals("CGLIB$toString$2()Ljava/lang/String;")) break;
+                if (!string.equals("CGLIB$toString$2()Ljava/lang/String;"))
+                    break;
                 return 14;
             }
             case 1584330438: {
-                if (!string.equals("CGLIB$SET_STATIC_CALLBACKS([Lnet/sf/cglib/proxy/Callback;)V")) break;
+                if (!string.equals("CGLIB$SET_STATIC_CALLBACKS([Lnet/sf/cglib/proxy/Callback;)V"))
+                    break;
                 return 17;
             }
             case 1800494055: {
-                if (!string.equals("CGLIB$clone$4()Ljava/lang/Object;")) break;
+                if (!string.equals("CGLIB$clone$4()Ljava/lang/Object;"))
+                    break;
                 return 16;
             }
             case 1826985398: {
-                if (!string.equals("equals(Ljava/lang/Object;)Z")) break;
+                if (!string.equals("equals(Ljava/lang/Object;)Z"))
+                    break;
                 return 0;
             }
             case 1913648695: {
-                if (!string.equals("toString()Ljava/lang/String;")) break;
+                if (!string.equals("toString()Ljava/lang/String;"))
+                    break;
                 return 1;
             }
             case 1984935277: {
-                if (!string.equals("hashCode()I")) break;
+                if (!string.equals("hashCode()I"))
+                    break;
                 return 2;
             }
         }
@@ -141,7 +162,7 @@ extends FastClass {
     }
 
     public Object invoke(int n, Object object, Object[] arrobject) throws InvocationTargetException {
-        DemoService$$EnhancerByCGLIB$$c23dc77c demoService$$EnhancerByCGLIB$$c23dc77c = (DemoService$$EnhancerByCGLIB$$c23dc77c)((Object)object);
+        DemoService$$EnhancerByCGLIB$$c23dc77c demoService$$EnhancerByCGLIB$$c23dc77c = (DemoService$$EnhancerByCGLIB$$c23dc77c) ((Object) object);
         try {
             switch (n) {
                 case 0: {
@@ -157,26 +178,26 @@ extends FastClass {
                     return demoService$$EnhancerByCGLIB$$c23dc77c.clone();
                 }
                 case 4: {
-                    return demoService$$EnhancerByCGLIB$$c23dc77c.newInstance((Callback[])arrobject[0]);
+                    return demoService$$EnhancerByCGLIB$$c23dc77c.newInstance((Callback[]) arrobject[0]);
                 }
                 case 5: {
-                    return demoService$$EnhancerByCGLIB$$c23dc77c.newInstance((Class[])arrobject[0], (Object[])arrobject[1], (Callback[])arrobject[2]);
+                    return demoService$$EnhancerByCGLIB$$c23dc77c.newInstance((Class[]) arrobject[0], (Object[]) arrobject[1], (Callback[]) arrobject[2]);
                 }
                 case 6: {
-                    return demoService$$EnhancerByCGLIB$$c23dc77c.newInstance((Callback)arrobject[0]);
+                    return demoService$$EnhancerByCGLIB$$c23dc77c.newInstance((Callback) arrobject[0]);
                 }
                 case 7: {
-                    return demoService$$EnhancerByCGLIB$$c23dc77c.hello((String)arrobject[0]);
+                    return demoService$$EnhancerByCGLIB$$c23dc77c.hello((String) arrobject[0]);
                 }
                 case 8: {
-                    demoService$$EnhancerByCGLIB$$c23dc77c.setCallback(((Number)arrobject[0]).intValue(), (Callback)arrobject[1]);
+                    demoService$$EnhancerByCGLIB$$c23dc77c.setCallback(((Number) arrobject[0]).intValue(), (Callback) arrobject[1]);
                     return null;
                 }
                 case 9: {
-                    return DemoService$$EnhancerByCGLIB$$c23dc77c.CGLIB$findMethodProxy((Signature)arrobject[0]);
+                    return DemoService$$EnhancerByCGLIB$$c23dc77c.CGLIB$findMethodProxy((Signature) arrobject[0]);
                 }
                 case 10: {
-                    demoService$$EnhancerByCGLIB$$c23dc77c.setCallbacks((Callback[])arrobject[0]);
+                    demoService$$EnhancerByCGLIB$$c23dc77c.setCallbacks((Callback[]) arrobject[0]);
                     return null;
                 }
                 case 11: {
@@ -184,7 +205,7 @@ extends FastClass {
                     return null;
                 }
                 case 12: {
-                    return demoService$$EnhancerByCGLIB$$c23dc77c.CGLIB$hello$0((String)arrobject[0]);
+                    return demoService$$EnhancerByCGLIB$$c23dc77c.CGLIB$hello$0((String) arrobject[0]);
                 }
                 case 13: {
                     return new Boolean(demoService$$EnhancerByCGLIB$$c23dc77c.CGLIB$equals$1(arrobject[0]));
@@ -199,22 +220,21 @@ extends FastClass {
                     return demoService$$EnhancerByCGLIB$$c23dc77c.CGLIB$clone$4();
                 }
                 case 17: {
-                    DemoService$$EnhancerByCGLIB$$c23dc77c.CGLIB$SET_STATIC_CALLBACKS((Callback[])arrobject[0]);
+                    DemoService$$EnhancerByCGLIB$$c23dc77c.CGLIB$SET_STATIC_CALLBACKS((Callback[]) arrobject[0]);
                     return null;
                 }
                 case 18: {
-                    DemoService$$EnhancerByCGLIB$$c23dc77c.CGLIB$SET_THREAD_CALLBACKS((Callback[])arrobject[0]);
+                    DemoService$$EnhancerByCGLIB$$c23dc77c.CGLIB$SET_THREAD_CALLBACKS((Callback[]) arrobject[0]);
                     return null;
                 }
                 case 19: {
-                    return demoService$$EnhancerByCGLIB$$c23dc77c.getCallback(((Number)arrobject[0]).intValue());
+                    return demoService$$EnhancerByCGLIB$$c23dc77c.getCallback(((Number) arrobject[0]).intValue());
                 }
                 case 20: {
                     return demoService$$EnhancerByCGLIB$$c23dc77c.getCallbacks();
                 }
             }
-        }
-        catch (Throwable throwable) {
+        } catch (Throwable throwable) {
             throw new InvocationTargetException(throwable);
         }
         throw new IllegalArgumentException("Cannot find matching method/constructor");
@@ -227,8 +247,7 @@ extends FastClass {
                     return new DemoService$$EnhancerByCGLIB$$c23dc77c();
                 }
             }
-        }
-        catch (Throwable throwable) {
+        } catch (Throwable throwable) {
             throw new InvocationTargetException(throwable);
         }
         throw new IllegalArgumentException("Cannot find matching method/constructor");

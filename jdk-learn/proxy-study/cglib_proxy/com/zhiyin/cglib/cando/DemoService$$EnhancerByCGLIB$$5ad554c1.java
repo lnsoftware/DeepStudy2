@@ -14,11 +14,11 @@ import net.sf.cglib.proxy.Factory;
 import net.sf.cglib.proxy.MethodInterceptor;
 
 public class DemoService$$EnhancerByCGLIB$$5ad554c1
-implements Factory {
-    private boolean CGLIB$BOUND;
-    public static Object CGLIB$FACTORY_DATA;
+    implements Factory {
     private static final ThreadLocal CGLIB$THREAD_CALLBACKS;
     private static final Callback[] CGLIB$STATIC_CALLBACKS;
+    public static Object CGLIB$FACTORY_DATA;
+    private boolean CGLIB$BOUND;
     private MethodInterceptor CGLIB$CALLBACK_0;
 
     public DemoService$$EnhancerByCGLIB$$5ad554c1() {
@@ -35,12 +35,12 @@ implements Factory {
     }
 
     private static final void CGLIB$BIND_CALLBACKS(Object object) {
-        DemoService$$EnhancerByCGLIB$$5ad554c1 demoService$$EnhancerByCGLIB$$5ad554c1 = (DemoService$$EnhancerByCGLIB$$5ad554c1)object;
+        DemoService$$EnhancerByCGLIB$$5ad554c1 demoService$$EnhancerByCGLIB$$5ad554c1 = (DemoService$$EnhancerByCGLIB$$5ad554c1) object;
         if (!demoService$$EnhancerByCGLIB$$5ad554c1.CGLIB$BOUND) {
             demoService$$EnhancerByCGLIB$$5ad554c1.CGLIB$BOUND = true;
             Object t = CGLIB$THREAD_CALLBACKS.get();
             if (t != null || (v17 = CGLIB$STATIC_CALLBACKS) != null) {
-                demoService$$EnhancerByCGLIB$$5ad554c1.CGLIB$CALLBACK_0 = (MethodInterceptor)((Callback[])t)[0];
+                demoService$$EnhancerByCGLIB$$5ad554c1.CGLIB$CALLBACK_0 = (MethodInterceptor) ((Callback[]) t)[0];
             }
         }
     }
@@ -52,7 +52,7 @@ implements Factory {
     }
 
     public Object newInstance(Callback callback) {
-        DemoService$$EnhancerByCGLIB$$c23dc77c.CGLIB$SET_THREAD_CALLBACKS(new Callback[]{callback});
+        DemoService$$EnhancerByCGLIB$$c23dc77c.CGLIB$SET_THREAD_CALLBACKS(new Callback[] {callback});
         DemoService$$EnhancerByCGLIB$$c23dc77c.CGLIB$SET_THREAD_CALLBACKS(null);
         return new DemoService$$EnhancerByCGLIB$$c23dc77c();
     }
@@ -66,11 +66,12 @@ implements Factory {
         DemoService$$EnhancerByCGLIB$$c23dc77c.CGLIB$SET_THREAD_CALLBACKS(var3_3);
         switch (var1_1.length) {
             case 0: {
-                ** break;
+                **break;
             }
         }
         throw new IllegalArgumentException("Constructor not found");
-lbl6: // 1 sources:
+        lbl6:
+        // 1 sources:
         DemoService$$EnhancerByCGLIB$$c23dc77c.CGLIB$SET_THREAD_CALLBACKS(null);
         return new DemoService$$EnhancerByCGLIB$$c23dc77c();
     }
@@ -93,7 +94,7 @@ lbl6: // 1 sources:
     public void setCallback(int n, Callback callback) {
         switch (n) {
             case 0: {
-                this.CGLIB$CALLBACK_0 = (MethodInterceptor)callback;
+                this.CGLIB$CALLBACK_0 = (MethodInterceptor) callback;
                 break;
             }
         }
@@ -102,13 +103,13 @@ lbl6: // 1 sources:
     public Callback[] getCallbacks() {
         DemoService$$EnhancerByCGLIB$$5ad554c1.CGLIB$BIND_CALLBACKS(this);
         DemoService$$EnhancerByCGLIB$$5ad554c1 demoService$$EnhancerByCGLIB$$5ad554c1 = this;
-        return new Callback[]{this.CGLIB$CALLBACK_0};
+        return new Callback[] {this.CGLIB$CALLBACK_0};
     }
 
     public void setCallbacks(Callback[] arrcallback) {
         Callback[] arrcallback2 = arrcallback;
         Callback[] arrcallback3 = arrcallback2;
         DemoService$$EnhancerByCGLIB$$5ad554c1 demoService$$EnhancerByCGLIB$$5ad554c1 = this;
-        this.CGLIB$CALLBACK_0 = (MethodInterceptor)arrcallback2[0];
+        this.CGLIB$CALLBACK_0 = (MethodInterceptor) arrcallback2[0];
     }
 }

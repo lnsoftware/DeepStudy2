@@ -13,9 +13,9 @@ public class HelloProxyImpl implements IHello {
     @Override
     public void hello() {
         doSomethingBefore();
-        
+
         inner.hello();
-        
+
         doSomethingAfter();
     }
 

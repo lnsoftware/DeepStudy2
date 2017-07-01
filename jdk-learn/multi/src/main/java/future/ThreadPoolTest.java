@@ -63,7 +63,6 @@ public class ThreadPoolTest {
 
 		@Override
 		public Integer call() {
-			// TODO Auto-generated method stub
 			count = 0;
 			try {
 				File[] files = directory.listFiles();

@@ -28,7 +28,6 @@ reporter:
     es:
       hosts: elasticsearch-server:9200
 
-
 hystrix:
   metrics:
     enabled: true

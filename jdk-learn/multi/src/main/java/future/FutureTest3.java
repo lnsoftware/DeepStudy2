@@ -18,7 +18,6 @@ import java.util.concurrent.FutureTask;
 public class FutureTest3 {
 
 	public static void main(String[] args) {
-		// TODO Auto-generated method stub
 		Scanner in = new Scanner(System.in);
 		System.out.print("Enter base directroy (e.g. /home/han/workspace/TestFile)");
 		String directory = in.nextLine();

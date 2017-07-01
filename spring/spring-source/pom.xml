@@ -12,6 +12,7 @@
   </parent>
 
   <modules>
+    <module>ioc-study</module>
     <module>cache-study</module>
     <module>aop-study</module>
     <module>spring-transaction</module>

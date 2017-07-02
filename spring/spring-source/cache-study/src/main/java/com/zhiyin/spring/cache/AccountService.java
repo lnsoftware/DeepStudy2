@@ -8,6 +8,10 @@ import org.springframework.stereotype.Service;
 @Service
 public class AccountService {
 
+    public AccountService(){
+
+    }
+
     @Cacheable(value = "accountCache")// 使用了一个缓存名叫 accountCache
     public Account getAccountByName(String userName) {
         System.out.println("real query account." + userName);

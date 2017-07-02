@@ -1,5 +1,8 @@
 package com.zhiyin.spring.cache;
 
+import org.springframework.stereotype.Service;
+
+@Service
 public class OtherService {
 
     public Account getAccountByName(String userName) {

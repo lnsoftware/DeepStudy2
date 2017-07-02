@@ -21,6 +21,7 @@ public class CacheConfig {
     public SimpleCacheManager SimpleCacheManager(){
         SimpleCacheManager cacheManager = new SimpleCacheManager();
         cacheManager.setCaches(Arrays.asList(new ConcurrentMapCache("default")));
+        cacheManager.setCaches(Arrays.asList(new ConcurrentMapCache("accountCache")));
         return cacheManager;
     }
 }

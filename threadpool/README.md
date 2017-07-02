@@ -1,5 +1,6 @@
 
 ### 线程池监控
+
 http://www.importnew.com/14163.html
 
 https://gist.github.com/mgandin/7150858
@@ -11,7 +12,4 @@ https://gist.github.com/mgandin/7150858
 
 https://www.javacodegeeks.com/2012/03/threading-stories-about-robust-thread.html
 http://ifeve.com/how-to-calculate-threadpool-size/
-
-
-
 http://www.importnew.com/17633.html

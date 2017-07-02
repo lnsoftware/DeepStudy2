@@ -14,7 +14,7 @@ import java.io.Reader;
  */
 public class MybatisReader {
     public static void main(String[] args) throws IOException {
-        String resource = "config.xml";
+        String resource = "mybatis-config.xml";
 
         Reader reader = Resources.getResourceAsReader(resource);
 

@@ -1,33 +1,33 @@
 package com.hg.tp.task;
 
 import java.util.concurrent.ThreadPoolExecutor;
-
 import lombok.extern.slf4j.Slf4j;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * @author onlinetechvision.com
- * @since 17 Oct 2011
  * @version 1.0.0
- *
+ * @since 17 Oct 2011
  */
-@Slf4j
+
 public class ThreadPoolMonitorService implements IThreadPoolMonitorService {
- 
-//    private static Logger log = Logger.getLogger(ThreadPoolMonitorService.class);
+
+        private static Logger log = LoggerFactory.getLogger(ThreadPoolMonitorService.class);
     ThreadPoolExecutor executor;
-    private long monitoringPeriod; 
- 
+    private long monitoringPeriod;
+
     public void run() {
         try {
-            while (true){
+            while (true) {
                 monitorThreadPool();
-                Thread.sleep(monitoringPeriod*1000);
-            } 
+                Thread.sleep(monitoringPeriod * 1000);
+            }
         } catch (Exception e) {
             log.error(e.getMessage());
         }
     }
- 
+
     public void monitorThreadPool() {
         StringBuffer strBuff = new StringBuffer();
         strBuff.append("CurrentPoolSize : ").append(executor.getPoolSize());
@@ -37,22 +37,22 @@ public class ThreadPoolMonitorService implements IThreadPoolMonitorService {
         strBuff.append(" - CompletedTaskCount : ").append(executor.getCompletedTaskCount());
         strBuff.append(" - TotalTaskCount : ").append(executor.getTaskCount());
         strBuff.append(" - isTerminated : ").append(executor.isTerminated());
- 
+
         log.debug(strBuff.toString());
     }
- 
+
     public ThreadPoolExecutor getExecutor() {
         return executor;
     }
- 
+
     public void setExecutor(ThreadPoolExecutor executor) {
         this.executor = executor;
-    }   
- 
+    }
+
     public long getMonitoringPeriod() {
         return monitoringPeriod;
     }
- 
+
     public void setMonitoringPeriod(long monitoringPeriod) {
         this.monitoringPeriod = monitoringPeriod;
     }

@@ -1,4 +1,4 @@
-package com.zhiyin.mysql.acid.domain;
+package com.zhiyin.mysql.lock.domain;
 
 import java.util.List;
 import org.apache.ibatis.annotations.*;

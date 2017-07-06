@@ -1,6 +1,6 @@
 package com.zhiyin.mysql.acid;
 
-import com.zhiyin.mysql.acid.domain.User;
+import com.zhiyin.mysql.lock.domain.User;
 import java.util.List;
 
 /**

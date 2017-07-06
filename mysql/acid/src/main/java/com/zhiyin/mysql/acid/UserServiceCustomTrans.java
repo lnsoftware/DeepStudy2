@@ -1,7 +1,7 @@
 package com.zhiyin.mysql.acid;
 
-import com.zhiyin.mysql.acid.domain.User;
-import com.zhiyin.mysql.acid.domain.UserMapper;
+import com.zhiyin.mysql.lock.domain.User;
+import com.zhiyin.mysql.lock.domain.UserMapper;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 import org.springframework.beans.factory.annotation.Autowired;

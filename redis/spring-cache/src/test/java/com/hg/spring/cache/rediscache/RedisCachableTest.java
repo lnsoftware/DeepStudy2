@@ -12,7 +12,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.SpringApplicationConfiguration;
 import org.springframework.cache.Cache;
 import org.springframework.cache.CacheManager;
+import org.springframework.dao.DataAccessException;
+import org.springframework.data.redis.connection.RedisConnection;
+import org.springframework.data.redis.core.RedisCallback;
+import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.data.redis.core.StringRedisTemplate;
+import org.springframework.test.context.BootstrapContext;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import java.util.List;
@@ -27,11 +32,30 @@ public class RedisCachableTest {
 
 
     @Autowired
-    private StringRedisTemplate redisTemplate;
+    private StringRedisTemplate stringRedisTemplate;
 
     public void test(){
 
+        stringRedisTemplate.opsForValue().set("name","HG");
 
+//        redisTemplate.execute()
 //        redisTemplate.opsForValue().
+    }
+
+
+
+    @Autowired
+    private RedisTemplate<String,String> redisTemplate;
+
+    public void test2(){
+
+        redisTemplate.execute(new RedisCallback<Boolean>() {
+            @Override public Boolean doInRedis(RedisConnection connection) throws DataAccessException {
+                byte[] key = "name".getBytes();
+                byte[] val = "HG".getBytes();
+                connection.set(key,val);
+                return true;
+            }
+        });
     }
 }

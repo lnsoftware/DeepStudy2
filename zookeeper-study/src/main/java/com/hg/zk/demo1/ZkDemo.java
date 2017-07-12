@@ -8,7 +8,6 @@ public class ZkDemo {
 
  public static void main(String[] args) throws IOException, KeeperException, InterruptedException {
 
-
      // 创建一个与服务器的连接
      ZooKeeper zk = new ZooKeeper("127.0.0.1:2181", 60000, new Watcher() {
          // 监控所有被触发的事件

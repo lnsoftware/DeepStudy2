@@ -23,6 +23,7 @@ public class ZookeeperConstructorSimple implements Watcher {
         System.out.println("sessionId="+zooKeeper.getSessionId());
         System.out.println("password="+zooKeeper.getSessionPasswd());
 
+
 //        zooKeeper.create()
     }
 

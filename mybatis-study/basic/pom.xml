@@ -9,6 +9,12 @@
     <artifactId>basic</artifactId>
     <version>0.0.1</version>
 
+    <parent>
+        <groupId>com.zhiyin.mybatis</groupId>
+        <artifactId>mybatis-study</artifactId>
+        <version>0.0.1</version>
+    </parent>
+
     <dependencies>
         <!-- 添加junit -->
         <dependency>
@@ -29,7 +35,6 @@
         <dependency>
             <groupId>org.mybatis</groupId>
             <artifactId>mybatis</artifactId>
-            <version>3.2.6</version>
         </dependency>
 
         <!-- 添加mysql驱动 -->
@@ -43,7 +48,6 @@
         <dependency>
             <groupId>org.mybatis</groupId>
             <artifactId>mybatis-spring</artifactId>
-            <version>1.2.3</version>
         </dependency>
 
     </dependencies>

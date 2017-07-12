@@ -21,7 +21,7 @@ public class SqlCostInterceptorTest {
     public void intercept() throws Exception {
 
         SqlSessionFactory sessionFactory = null;
-        String resource = "mybatis-plugin-test.xml";
+        String resource = "config/plugin-config.xml";
         try {
             sessionFactory = new SqlSessionFactoryBuilder().build(Resources.getResourceAsReader(resource));
         } catch (IOException e) {
@@ -29,10 +29,12 @@ public class SqlCostInterceptorTest {
         }
 
         SqlSession sqlSession = sessionFactory.openSession();
+        sqlSession.selectOne("MailMapper.selectMailById",1L);
 
-        UserDao userMapper = sqlSession.getMapper(UserDao.class);
-        User user = userMapper.findUserById(2);
-        Assert.assertNotNull("没找到数据", user);
+
+//        UserDao userMapper = sqlSession.getMapper(UserDao.class);
+//        User user = userMapper.findUserById(2);
+//        Assert.assertNotNull("没找到数据", user);
     }
 
 }

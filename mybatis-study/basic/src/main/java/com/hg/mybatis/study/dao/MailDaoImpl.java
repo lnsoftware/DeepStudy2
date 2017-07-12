@@ -19,7 +19,7 @@ public class MailDaoImpl implements MailDao {
     
     static {
         try {
-            reader = Resources.getResourceAsReader("mybatis/config.xml");
+            reader = Resources.getResourceAsReader("mybatis-config.xml");
             ssf = new SqlSessionFactoryBuilder().build(reader);
         } 
         catch (IOException e) {

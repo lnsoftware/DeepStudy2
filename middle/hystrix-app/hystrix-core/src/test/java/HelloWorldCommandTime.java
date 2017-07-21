@@ -1,29 +1,36 @@
-import com.netflix.config.ConfigurationManager;
-import com.netflix.hystrix.*;
-import com.netflix.hystrix.util.HystrixRollingNumberEvent;
-
-import java.util.HashMap;
+import com.netflix.hystrix.HystrixCommand;
+import com.netflix.hystrix.HystrixCommandGroupKey;
+import com.netflix.hystrix.HystrixCommandKey;
+import com.netflix.hystrix.HystrixCommandProperties;
 import java.util.concurrent.TimeUnit;
 
 /**
  * Created by hg on 2016/1/21.
  */
 //重载HystrixCommand 的getFallback方法实现逻辑
-public class HelloWorldCommandTime extends HystrixCommand<String>{
+public class HelloWorldCommandTime extends HystrixCommand<String> {
 
     public static String RetSucc = "Ok";
     public static String RetFail = "fail";
     private final String name;
     private Integer sleepMilliSecond;
-    public HelloWorldCommandTime(String commandKey,Integer sleepMilliSecond) {
+
+    public HelloWorldCommandTime(String commandKey, Integer sleepMilliSecond) {
         super(Setter.withGroupKey(HystrixCommandGroupKey.Factory.asKey("HelloWorldGroup")).andCommandKey(HystrixCommandKey.Factory.asKey(commandKey))
-                .andCommandPropertiesDefaults(
-                        HystrixCommandProperties.Setter()
-                                .withRequestLogEnabled(true)
-                ));
+            .andCommandPropertiesDefaults(
+                HystrixCommandProperties.Setter()
+                    .withRequestLogEnabled(true)
+            ));
         this.name = commandKey;
         this.sleepMilliSecond = sleepMilliSecond;
     }
+
+    public static void main(String[] args) throws Exception {
+        HelloWorldCommandTime command = new HelloWorldCommandTime("test-Fallback", 1000);
+        String result = command.execute();
+        System.out.println(result);
+    }
+
     @Override
     protected String getFallback() {
         return RetFail;
@@ -31,18 +38,12 @@ public class HelloWorldCommandTime extends HystrixCommand<String>{
 
     @Override
     protected String run() throws Exception {
-        if(true){
+        if (true) {
             throw new Exception("ss");
         }
         //sleep 1 秒,调用会超时
-        TimeUnit.MILLISECONDS.sleep( sleepMilliSecond );
+        TimeUnit.MILLISECONDS.sleep(sleepMilliSecond);
         return RetSucc;
-    }
-
-    public static void main(String[] args) throws Exception{
-        HelloWorldCommandTime command = new HelloWorldCommandTime("test-Fallback",1000);
-            String result = command.execute();
-        System.out.println(result);
     }
 //    public static void main(String[] args) throws Exception{
 //
@@ -80,6 +81,5 @@ public class HelloWorldCommandTime extends HystrixCommand<String>{
 //        }
 //
 //    }
-
 
 }

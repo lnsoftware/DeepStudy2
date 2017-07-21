@@ -3,13 +3,11 @@ package com.zhiyin.hystrix.core.property;
 import com.google.common.base.Optional;
 import com.google.common.base.Strings;
 import com.netflix.config.ConfigurationManager;
-import lombok.extern.slf4j.Slf4j;
-
-import javax.servlet.ServletContextEvent;
-import javax.servlet.ServletContextListener;
 import java.util.Date;
 import java.util.Timer;
-import java.util.TimerTask;
+import javax.servlet.ServletContextEvent;
+import javax.servlet.ServletContextListener;
+import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
 //@WebListener
@@ -57,7 +55,6 @@ public class ReloadHystrixPropertyContextListener implements ServletContextListe
     public void contextDestroyed(ServletContextEvent sce) {
         log.info("stopping server");
     }
-
 
 }
 

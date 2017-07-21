@@ -8,7 +8,7 @@
 
     <parent>
         <groupId>com.zhiyin.frame</groupId>
-        <artifactId>eureka-register</artifactId>
+        <artifactId>cloud-compose</artifactId>
         <version>0.0.1-SNAPSHOT</version>
     </parent>
 

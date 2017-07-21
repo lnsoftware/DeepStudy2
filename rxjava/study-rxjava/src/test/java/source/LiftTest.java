@@ -15,10 +15,43 @@ import java.util.concurrent.ExecutionException;
 import java.util.concurrent.Future;
 
 /**
- * Created by callin on 2015-11-05.
+ * Created by hg on 2015-11-05.
  */
 //@Slf4j
 public class LiftTest {
+
+    @Test
+    public void liftObserver() {
+        Observable.Operator<String, String> myOperator = new Observable.Operator<String, String>() {
+            @Override
+            public Subscriber<? super String> call(Subscriber<? super String> subscriber) {
+                return new Subscriber<String>(subscriber) {
+                    @Override
+                    public void onCompleted() {
+                        if (!subscriber.isUnsubscribed()) {
+                            subscriber.onCompleted();
+                        }
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+                        if (!subscriber.isUnsubscribed()) {
+                            subscriber.onError(e);
+                        }
+                    }
+
+                    @Override
+                    public void onNext(String s) {
+                        if (!subscriber.isUnsubscribed()) {
+                            subscriber.onNext("myOperator:" + s);
+                        }
+                    }
+                };
+            }
+
+        };
+         Observable.just(1, 2, 3).map(integer -> "map1:" + integer).lift(myOperator).map(s -> "map2:" + s).subscribe(a -> System.out.println(a));
+    }
 
     @Test
     public void demo1() {
@@ -53,7 +86,7 @@ public class LiftTest {
                     public void onNext(Integer integer) {
                         if (s.isUnsubscribed()) return;
                         s.onNext(integer);
-                        s.onNext(integer);
+//                        s.onNext(integer);
                     }
                 };
             }

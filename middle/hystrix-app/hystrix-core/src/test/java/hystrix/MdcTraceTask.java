@@ -8,6 +8,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 public class MdcTraceTask implements Runnable {
 
     public String tid;
+
     public MdcTraceTask(String tid) {
         this.tid = tid;
     }
@@ -17,18 +18,18 @@ public class MdcTraceTask implements Runnable {
 //        HystrixRequestContext context = HystrixRequestContext.initializeContext();
 
         boolean trace = false;
-        if( Integer.valueOf(tid) % 2 == 0){
-            MDC.put("traceId",tid);
-            trace =true;
+        if (Integer.valueOf(tid) % 2 == 0) {
+            MDC.put("traceId", tid);
+            trace = true;
         }
         HystrixRequestContext context = HystrixRequestContext.initializeContext();
 
         try {
             MdcHystrixCommand d = new MdcHystrixCommand("mdc");
             String retTid = d.execute();
-            if(trace){
+            if (trace) {
                 assertThat(tid).isEqualTo(retTid);
-            }else{
+            } else {
                 assertThat(tid).isNotEmpty();
                 assertThat(retTid).isNullOrEmpty();
             }

@@ -15,5 +15,4 @@ public class ReloadHystrixPropertyAutoConfiguration {
         return new ReloadHystrixPropertyContextListener();
     }
 
-
 }

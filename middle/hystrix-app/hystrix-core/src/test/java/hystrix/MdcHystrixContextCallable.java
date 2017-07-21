@@ -1,9 +1,8 @@
 package hystrix;
 
-import org.slf4j.MDC;
-
 import java.util.Map;
 import java.util.concurrent.Callable;
+import org.slf4j.MDC;
 
 public class MdcHystrixContextCallable<K> implements Callable<K> {
 
@@ -19,7 +18,7 @@ public class MdcHystrixContextCallable<K> implements Callable<K> {
     public K call() throws Exception {
         Map childMDC = MDC.getCopyOfContextMap();
         try {
-            if(parentMDC != null && parentMDC.size() > 0){
+            if (parentMDC != null && parentMDC.size() > 0) {
                 MDC.setContextMap(parentMDC);
             }
             return actual.call();

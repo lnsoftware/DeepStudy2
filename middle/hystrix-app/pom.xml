@@ -28,7 +28,7 @@
 	</properties>
 
     <modules>
-		<module>hystrix-read</module>
+		<!--<module>hystrix-read</module>-->
 		<module>hystrix-core</module>
 		<module>hystrix-dashboard</module>
 	<module>hystrix-democlient</module>

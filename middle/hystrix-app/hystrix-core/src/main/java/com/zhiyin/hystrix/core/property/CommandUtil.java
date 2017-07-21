@@ -8,21 +8,20 @@ import com.netflix.hystrix.HystrixThreadPoolMetrics;
  */
 public class CommandUtil {
 
-    public static CommandStatus status(HystrixCommand c){
+    public static CommandStatus status(HystrixCommand c) {
 
         CommandStatus s = new CommandStatus();
-        s.setCircuitBreakerOpen( c.isCircuitBreakerOpen() );
+        s.setCircuitBreakerOpen(c.isCircuitBreakerOpen());
 
-        s.setExecutionTimeInMilliseconds( c.getExecutionTimeInMilliseconds() );
-        s.setFailedExecutionException( c.getFailedExecutionException() );
+        s.setExecutionTimeInMilliseconds(c.getExecutionTimeInMilliseconds());
+        s.setFailedExecutionException(c.getFailedExecutionException());
         s.setResponseRejected(c.isResponseRejected());
         s.setResponseShortCircuited(c.isResponseShortCircuited());
         s.setResponseTimedOut(c.isResponseTimedOut());
-        s.setExecutionTimeoutInMilliseconds(  c.getProperties().executionTimeoutInMilliseconds().get());
+        s.setExecutionTimeoutInMilliseconds(c.getProperties().executionTimeoutInMilliseconds().get());
         int pool = HystrixThreadPoolMetrics.getInstance(c.getThreadPoolKey()).getCurrentCorePoolSize().intValue();
         s.setCorePoolSize(pool);
         return s;
     }
-
 
 }

@@ -8,12 +8,12 @@ import org.apache.log4j.MDC;
 
 public class MdcHystrixCommand extends HystrixCommand<String> {
 
-    public MdcHystrixCommand(String commandKey ) {
+    public MdcHystrixCommand(String commandKey) {
         super(Setter.withGroupKey(HystrixCommandGroupKey.Factory.asKey("mdc")).andCommandKey(HystrixCommandKey.Factory.asKey(commandKey))
-                .andCommandPropertiesDefaults(
-                        HystrixCommandProperties.Setter()
-                                .withRequestLogEnabled(true)
-                ));
+            .andCommandPropertiesDefaults(
+                HystrixCommandProperties.Setter()
+                    .withRequestLogEnabled(true)
+            ));
     }
 
     @Override

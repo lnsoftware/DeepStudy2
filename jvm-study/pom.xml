@@ -9,7 +9,10 @@
     <version>0.0.1-SNAPSHOT</version>
 
     <modules>
+        <module>basic</module>
         <module>bytecode</module>
+        <module>jvmgo</module>
+        <module>szjvm-master</module>
     </modules>
 
     <dependencies>

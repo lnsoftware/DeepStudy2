@@ -1,0 +1,13 @@
+server:
+  port: 4455
+
+spring:
+  application:
+    name: eureka-feign
+    version: 1.0.0
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://localhost:8761/eureka/
+  instance:
+    preferIpAddress: true

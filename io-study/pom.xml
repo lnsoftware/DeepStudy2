@@ -15,7 +15,7 @@
     <!--</parent>-->
 
     <modules>
-        <module>multi.com.zhiyin.io.reactor.nio-master</module>
+        <module>nio-basic</module>
         <module>io-reactor</module>
     </modules>
 

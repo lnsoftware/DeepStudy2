@@ -1,0 +1,48 @@
+#将要废弃
+FROM ubuntu:14.04
+
+RUN apt-get update && apt-get install -y software-properties-common && apt-get install -y gcc && apt-get install -y gdb && apt-get install -y vim 
+RUN apt-get install -y software-properties-common && \
+  echo oracle-java8-installer shared/accepted-oracle-license-v1-1 select true | debconf-set-selections && \
+  add-apt-repository -y ppa:webupd8team/java && \
+  apt-get update && \
+  apt-get install -y oracle-java8-installer 
+
+# Define working directory.
+WORKDIR /data
+
+# Define commonly used JAVA_HOME variable
+ENV JAVA_HOME /usr/lib/jvm/java-8-oracle
+
+
+# non interactive apt
+#ENV DEBIAN_FRONTEND noninteractive
+
+# upgrade
+RUN add-apt-repository universe
+#RUN apt-get update
+#RUN apt-get install -y libboost-all-dev
+#RUN \
+#apt-get install -y  g++  sed
+RUN apt-get -q -y install ant python-dev libboost-dev libboost-test-dev libboost-program-options-dev libevent-dev \ 
+    automake libtool flex bison pkg-config g++ libssl-dev sed make 
+
+RUN mkdir /opt/thrift && cd /opt/thrift \
+    && wget http://archive.apache.org/dist/thrift/0.8.0/thrift-0.8.0.tar.gz
+RUN cd /opt/thrift  && tar xvzf thrift-0.8.0.tar.gz \
+    && cd thrift-0.8.0 \
+    && ./configure  --without-ruby --without-python --without-perl --without-php --without-c++ --without-cpp
+
+RUN  cd /opt/thrift/thrift-0.8.0  && make -j 2
+RUN  cd /opt/thrift/thrift-0.8.0  && make install 
+RUN  cd /opt/thrift/thrift-0.8.0  && ldconfig
+    #\
+    # && cd / && rm -fr /opt/thrift 
+ #   && apt-get -q -y clean && rm -rf /var/cache/apt/archives/* /var/lib/apt/lists/* && rm -fr /tmp/*
+
+
+# hack Thrift
+#RUN sed -i '/#ifdef HAVE_NETINET_IN_H/ i\#define HAVE_NETINET_IN_H 1' /usr/local/include/thrift/Thrift.h \
+#    && sed -i '/#ifdef HAVE_INTTYPES_H/ i\#define HAVE_INTTYPES_H 1' /usr/local/include/thrift/Thrift.h
+
+CMD ["/usr/local/bin/thrift", "--help"]    

@@ -1,0 +1,8 @@
+
+logging:
+  level: debug
+
+spring:
+  http:
+    converters:
+      preferred-json-mapper: fastjson

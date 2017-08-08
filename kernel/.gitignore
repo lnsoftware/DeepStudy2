@@ -1,0 +1,7 @@
+# IntelliJ project files
+.o
+.idea
+*.iml
+out
+gen
+target

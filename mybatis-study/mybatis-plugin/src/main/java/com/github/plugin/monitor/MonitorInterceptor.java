@@ -1,7 +1,6 @@
 package com.github.plugin.monitor;
 
-import com.alibaba.fastjson.JSONObject;
-import com.github.base.util.JSONUtil;
+import com.alibaba.fastjson.JSON;
 import org.apache.commons.beanutils.BeanUtils;
 import org.apache.commons.dbcp.BasicDataSource;
 import org.apache.ibatis.cache.CacheKey;
@@ -192,7 +191,7 @@ public class MonitorInterceptor implements Interceptor {
 		if (parameterObject == null) {
 			params = "null";
 		} else {
-			params = JSONUtil.bean2Json(parameterObject);
+			params = JSON.toJSONString(parameterObject);
 		}
 		return params;
 	}

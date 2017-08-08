@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zhiyin.mybatis.boot.mapper.OrderTaskMapper">
+
+
+    <resultMap id="BaseResultMap" type="com.zhiyin.mybatis.boot.entity.OrderTask" >
+        <id column="id" property="id" jdbcType="BIGINT" />
+        <result column="created" property="created" jdbcType="TIMESTAMP" />
+        <result column="status" property="status" jdbcType="INTEGER" />
+    </resultMap>
+
+    <select id="selectAll" resultType="OrderTask">
+      select * from order_task
+    </select>
+
+
+    <insert id="add" parameterType="OrderTask">
+        insert into
+        order_task(id,status,created)
+        values(#{id},#{status},#{created})
+    </insert>
+
+    <select id="selectNotIn"
+            resultType="java.lang.Long"
+            parameterType="java.util.HashMap">
+        SELECT id FROM order_task WHERE id not in
+        <foreach item="item" index="index" collection="notInIdList"
+                 open="(" separator="," close=")">
+            #{item}
+        </foreach>
+        and status = #{status}
+        <![CDATA[
+        and created < #{deadline} limit 10
+]]>
+    </select>
+
+    <select id="selectNotIn3"
+            resultType="java.lang.Long"
+            parameterType="java.util.HashMap">
+        SELECT id FROM order_task WHERE id not in
+        <foreach item="item" index="index" collection="notInIdList"
+                 open="(" separator="," close=")">
+            #{item}
+        </foreach>
+        and status = #{status}
+    </select>
+
+
+
+    <select id="selectNotIn2"
+            resultType="java.lang.Long"
+            parameterType="java.util.HashMap">
+        SELECT id FROM order_task WHERE id not in
+      (-1,1)
+        and status = #{status}
+
+      <![CDATA[
+        and created < '2018-01-01'
+]]>
+    </select>
+
+</mapper>

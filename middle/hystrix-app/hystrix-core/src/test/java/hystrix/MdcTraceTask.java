@@ -15,8 +15,6 @@ public class MdcTraceTask implements Runnable {
 
     @Override
     public void run() {
-//        HystrixRequestContext context = HystrixRequestContext.initializeContext();
-
         boolean trace = false;
         if (Integer.valueOf(tid) % 2 == 0) {
             MDC.put("traceId", tid);
@@ -34,7 +32,7 @@ public class MdcTraceTask implements Runnable {
                 assertThat(retTid).isNullOrEmpty();
             }
 
-            System.out.println(Thread.currentThread().getName() + " " + tid + " " + retTid);
+          //  System.out.println(Thread.currentThread().getName() + " " + tid + " " + retTid);
         } catch (Throwable e) {
             e.printStackTrace();
         }

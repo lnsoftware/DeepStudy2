@@ -18,10 +18,7 @@ public class MdcHystrixCommand extends HystrixCommand<String> {
 
     @Override
     protected String run() throws Exception {
-
-//        Thread.currentThread().getName() + " " +
         return (String) MDC.get("traceId");
-
     }
 
 }

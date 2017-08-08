@@ -2,9 +2,11 @@ package source;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.extern.slf4j.Slf4j;
 import org.junit.Test;
 import rx.Observable;
 import rx.Subscriber;
+import rx.Subscription;
 import rx.functions.Action0;
 import rx.functions.Action1;
 import rx.functions.Func1;
@@ -19,6 +21,116 @@ import java.util.concurrent.Future;
  */
 //@Slf4j
 public class LiftTest {
+
+    @Test
+    public void onSub(){
+
+        Observable.OnSubscribe onSubscribe1 = new Observable.OnSubscribe<Integer>() {
+            @Override
+            public void call(Subscriber<? super Integer> subscriber) {
+                subscriber.onNext(1);
+                subscriber.onCompleted();
+            }
+            @Override
+            public String toString(){
+                return "onSubscribe1";
+            }
+        };
+
+        Observable observable1 = Observable.create(onSubscribe1);
+
+        Observable<String> observable2 = observable1.lift(new Observable.Operator<String, Integer>() {
+            @Override
+            public Subscriber<? super Integer> call(final Subscriber<? super String> subscriber) {
+                return new Subscriber<Integer>() {
+                    @Override
+                    public void onNext(Integer integer) {
+                        subscriber.onNext("CustomMap：" + integer);
+                    }
+
+                    @Override
+                    public void onCompleted() {
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+                    }
+                };
+            }
+        });
+
+
+        Subscriber<String> subscriber1 = new Subscriber<String>() {
+            @Override
+            public void onCompleted() {
+            }
+
+            @Override
+            public void onError(Throwable e) {
+            }
+
+            @Override
+            public void onNext(String s) {
+                System.out.println(s);
+            }
+
+            @Override
+            public String toString(){
+                return "subscriber1";
+            }
+        };
+
+        observable2.subscribe(subscriber1);
+    }
+
+
+
+
+    @Test
+    public void liftOp(){
+        Observable<Integer> observable1 = Observable.create(new Observable.OnSubscribe<Integer>() {
+            @Override
+            public void call(Subscriber<? super Integer> subscriber) {
+                subscriber.onNext(1);
+            }
+        });
+
+        Observable<String> observable2 = observable1.lift(new Observable.Operator<String, Integer>() {
+            @Override
+            public Subscriber<? super Integer> call(final Subscriber<? super String> subscriber) {
+                return new Subscriber<Integer>() {
+                    @Override
+                    public void onNext(Integer integer) {
+                        subscriber.onNext("CustomMap：" + integer);
+                    }
+
+                    @Override
+                    public void onCompleted() {
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+                    }
+                };
+            }
+        });
+
+        observable2.subscribe(new Subscriber<String>() {
+                    @Override
+                    public void onCompleted() {
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+                    }
+
+                    @Override
+                    public void onNext(String s) {
+                        System.out.println(s);
+                    }
+                });
+
+    }
 
     @Test
     public void liftObserver() {

@@ -1,0 +1,194 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:p="http://www.springframework.org/schema/p"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:mvc="http://www.springframework.org/schema/mvc"
+       xmlns:util="http://www.springframework.org/schema/util"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans-4.2.xsd
+		http://www.springframework.org/schema/context
+		http://www.springframework.org/schema/context/spring-context-4.2.xsd
+        http://www.springframework.org/schema/util
+        http://www.springframework.org/schema/util/spring-util-4.2.xsd
+        http://www.springframework.org/schema/mvc
+        http://www.springframework.org/schema/mvc/spring-mvc-4.2.xsd">
+
+    <context:component-scan base-package="com.brianway.learning.spring.mvc"/>
+    <!-- 视图前缀,后缀 -->
+    <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver"
+          p:order="100"
+          p:viewClass="org.springframework.web.servlet.view.JstlView"
+          p:prefix="/WEB-INF/views/"
+          p:suffix=".jsp"/>
+
+    <!--  使用 HttpMessageConverter<T> -->
+    <mvc:annotation-driven conversion-service="conversionService"/>
+    <!--bean class="org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter">
+        <property name="messageConverters">
+            <list>
+                <bean class="org.springframework.http.converter.BufferedImageHttpMessageConverter"/>
+                <bean class="org.springframework.http.converter.ByteArrayHttpMessageConverter"/>
+                <bean class="org.springframework.http.converter.StringHttpMessageConverter"/>
+                <bean class="org.springframework.http.converter.json.MappingJackson2HttpMessageConverter"/>
+            </list>
+        </property>
+    </bean-->
+
+    <bean class="org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter"
+          p:messageConverters-ref="messageConverters"/>
+
+    <util:list id="messageConverters">
+        <bean class="org.springframework.http.converter.BufferedImageHttpMessageConverter"/>
+        <bean class="org.springframework.http.converter.ByteArrayHttpMessageConverter"/>
+        <bean class="org.springframework.http.converter.StringHttpMessageConverter"/>
+        <bean class="org.springframework.http.converter.json.MappingJackson2HttpMessageConverter"/>
+        <bean class="org.springframework.http.converter.xml.SourceHttpMessageConverter"/>
+        <bean class="org.springframework.http.converter.xml.MarshallingHttpMessageConverter"
+              p:marshaller-ref="xmlMarshaller" p:unmarshaller-ref="xmlMarshaller">
+        </bean>
+    </util:list>
+
+    <!-- 数据转换 -->
+    <bean id="conversionService"
+          class="org.springframework.format.support.FormattingConversionServiceFactoryBean">
+        <property name="converters">
+            <set>
+                <bean class="com.brianway.learning.spring.mvc.domain.StringToUserConverter"/>
+            </set>
+        </property>
+    </bean>
+
+    <!--  XML -->
+    <bean id="xmlMarshaller" class="org.springframework.oxm.xstream.XStreamMarshaller">
+        <property name="streamDriver">
+            <bean class="com.thoughtworks.xstream.io.xml.StaxDriver"/>
+        </property>
+        <property name="annotatedClasses">
+            <list>
+                <value>com.brianway.learning.spring.mvc.domain.User</value>
+            </list>
+        </property>
+    </bean>
+
+    <!-- 数据校验 mvc:annotation-driven 会默认装配,无需额外配置
+    <bean id="validator" class="org.springframework.validation.beanvalidation.LocalValidatorFactoryBean"/>
+    -->
+
+    <!--国际化资源  -->
+    <bean id="messageSource"
+          class="org.springframework.context.support.ResourceBundleMessageSource">
+        <property name="basenames">
+            <list>
+                <value>conf/i18n/messages</value>
+                <value>conf/i18n/content</value>
+            </list>
+        </property>
+    </bean>
+
+    <!-- FreeMarker基础设施及视图解析器配置 -->
+    <bean class="org.springframework.web.servlet.view.freemarker.FreeMarkerConfigurer"
+          p:templateLoaderPath="/WEB-INF/ftl"
+          p:defaultEncoding="UTF-8">
+        <property name="freemarkerSettings">
+            <props>
+                <prop key="classic_compatible">true</prop>
+            </props>
+        </property>
+    </bean>
+
+    <bean class="org.springframework.web.servlet.view.freemarker.FreeMarkerViewResolver"
+          p:order="5"
+          p:suffix=".ftl"
+          p:contentType="text/html; charset=utf-8"/>
+
+    <!-- Excel及PDF视图解析器配置 -->
+    <bean class="org.springframework.web.servlet.view.BeanNameViewResolver"
+          p:order="10"/>
+
+    <bean id="userListExcel" class="com.brianway.learning.spring.mvc.view.UserListExcelView"/>
+    <bean id="userListPdf" class="com.brianway.learning.spring.mvc.view.UserListPdfView"/>
+
+    <!-- XMl及JSON视图解析器配置 -->
+    <bean id="userListJson"
+          class="org.springframework.web.servlet.view.json.MappingJackson2JsonView"
+          p:modelKey="userList"/>
+
+    <bean id="userListXml"
+          class="org.springframework.web.servlet.view.xml.MarshallingView"
+          p:modelKey="userList"
+          p:marshaller-ref="xmlMarshaller"/>
+
+    <!-- XML文件或国际化资源文件定义视图 -->
+    <bean class="org.springframework.web.servlet.view.XmlViewResolver"
+          p:order="20"
+          p:location="/WEB-INF/views/mvc-views.xml"/>
+
+    <bean class="org.springframework.web.servlet.view.ResourceBundleViewResolver"
+          p:order="30"
+          p:basename="conf/i18n/views"/>
+
+    <!-- 协商多种视图解析器 -->
+    <bean class="org.springframework.web.servlet.view.ContentNegotiatingViewResolver"
+          p:order="0"
+          p:contentNegotiationManager-ref="cnManager">
+        <property name="defaultViews">
+            <list>
+                <bean class="org.springframework.web.servlet.view.json.MappingJackson2JsonView"
+                      p:modelKey="userList"/>
+                <bean class="org.springframework.web.servlet.view.xml.MarshallingView"
+                      p:modelKey="userList"
+                      p:marshaller-ref="xmlMarshaller"/>
+            </list>
+        </property>
+    </bean>
+
+    <bean id="cnManager" class="org.springframework.web.accept.ContentNegotiationManagerFactoryBean"
+          p:ignoreAcceptHeader="true"
+          p:favorPathExtension="true"
+          p:favorParameter="true"
+          p:parameterName="format"
+          p:defaultContentType="text/html">
+        <property name="mediaTypes">
+            <map>
+                <entry key="html" value="text/html"/>
+                <entry key="xml" value="application/xml"/>
+                <entry key="json" value="application/json"/>
+            </map>
+        </property>
+    </bean>
+
+    <!-- 本地化解析 -->
+    <bean id="localeResolver"
+          class="org.springframework.web.servlet.i18n.CookieLocaleResolver"
+          p:cookieName="clientLanguage"
+          p:cookieMaxAge="100000"
+          p:cookiePath="/"
+          p:defaultLocale="zh_CN"/>
+    <mvc:interceptors>
+        <bean class="org.springframework.web.servlet.i18n.LocaleChangeInterceptor"/>
+    </mvc:interceptors>
+
+    <!-- 文件上传 -->
+    <bean id="multipartResolver"
+          class="org.springframework.web.multipart.commons.CommonsMultipartResolver"
+          p:defaultEncoding="UTF-8"
+          p:maxUploadSize="5000000"
+          p:uploadTempDir="/upload/tmp"/>
+
+    <!-- 静态资源映射  -->
+    <mvc:default-servlet-handler/>
+    <bean id="rpe" class="com.brianway.learning.spring.mvc.web.ResourcePathExposer"
+          init-method="init"/>
+    <mvc:resources mapping="#{rpe.resourceRoot}/**"
+                   location="/"
+                   cache-period="31536000"/>
+
+    <mvc:interceptors>
+        <mvc:interceptor>
+            <mvc:mapping path="/user/*"/>
+            <bean class="com.brianway.learning.spring.mvc.web.MyInterceptor"/>
+        </mvc:interceptor>
+    </mvc:interceptors>
+
+</beans>

@@ -4,23 +4,44 @@
 	<modelVersion>4.0.0</modelVersion>
 
 	<artifactId>spring-study</artifactId>
+	<packaging>pom</packaging>
+	<version>0.0.1-SNAPSHOT</version>
 
 	<parent>
 		<groupId>com.zhiyin.frame</groupId>
 		<artifactId>frame-base</artifactId>
 		<version>0.0.1-SNAPSHOT</version>
 	</parent>
-	<packaging>pom</packaging>
-	<version>0.0.1-SNAPSHOT</version>
+
 	<properties>
 
 	</properties>
 
 
 	<modules>
-		<module>Chapter3-2-7</module>
-		<module>longpolling</module>
+		<!--<module>Chapter3-2-7</module>-->
+		<!--<module>longpolling</module>-->
 		<module>spring-source</module>
 	</modules>
+
+
+	<dependencies>
+		<dependency>
+			<groupId>ch.qos.logback</groupId>
+			<artifactId>logback-classic</artifactId>
+			<version>1.2.1</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.slf4j</groupId>
+			<artifactId>slf4j-api</artifactId>
+			<version>1.7.25</version>
+		</dependency>
+
+		<dependency>
+			<groupId>com.alibaba</groupId>
+			<artifactId>fastjson</artifactId>
+		</dependency>
+	</dependencies>
 
 </project>

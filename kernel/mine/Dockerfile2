@@ -1,0 +1,9 @@
+
+FROM ubuntu:16.04
+
+COPY tarup.sh /usr/local/bin/
+
+RUN apt-get update
+
+RUN apt-get install -y nasm make build-essential grub qemu
+RUN apt-get -y install qemu-user-static

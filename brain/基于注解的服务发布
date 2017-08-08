@@ -1,0 +1,4 @@
+
+httpinvoker的服务发布，需要配置xml或者手动创建bean，怎么使用注解方式
+
+https://github.com/philippn/spring-remoting-autoconfigure

@@ -1,0 +1,39 @@
+
+zipkin:
+  storage:
+    type: mem
+  sleuth:
+    enabled: ture
+
+#zipkin:
+#  storage:
+#    type: elasticsearch #mysql #mem
+#    elasticsearch:
+#      cluster: elasticsearch
+#      hosts: http://localhost:9200
+#      cluster: elasticCluster_Prod
+#      hosts: http://10.6.107.40:9200
+
+#  sleuth:
+#    # not use sleuth stream to trace zipkin server itself
+#    enabled: false
+#    #refer to org.springframework.cloud.sleuth.instrument.hystrix.SleuthHystrixAutoConfiguration.java
+#    hystrix:
+#      strategy:
+#      enabled: false
+
+
+
+server:
+  port: 9411
+
+#spring:
+#  datasource:
+#    schema: classpath:/mysql.sql
+#    url: jdbc:mysql://localhost:3306/zipkin
+#    username: root
+#    password: root
+#    driver-class-name: com.mysql.jdbc.Driver
+#      # Switch this on to create the schema on startup:
+#    initialize: true
+#    continueOnError: true

@@ -1,0 +1,7 @@
+First run the server as:
+
+ruby -r 'rubygems' ./sample_ipc_server.rb
+
+Then run the client as:
+
+ruby -r 'rubygems' ./sample_ipc_client.rb avro_user pat Hello_World

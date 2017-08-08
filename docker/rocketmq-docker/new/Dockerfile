@@ -28,7 +28,7 @@ RUN chmod +x bin/start.sh
 
 
 #CMD sh ./start.sh
-ENTRYPOINT ["./bin/start.sh"]
+#ENTRYPOINT ["./bin/start.sh"]
 
 
 EXPOSE 9876 10909 10911

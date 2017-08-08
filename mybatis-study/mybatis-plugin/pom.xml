@@ -4,78 +4,30 @@
 		 xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 
 	<modelVersion>4.0.0</modelVersion>
-
-	<groupId>com.hg.mybatis.study</groupId>
-	<artifactId>plugin</artifactId>
-	<version>0.0.1</version>
+	<artifactId>mybatis-plugin</artifactId>
 
 	<parent>
 		<groupId>com.zhiyin.mybatis</groupId>
 		<artifactId>mybatis-study</artifactId>
-		<version>0.0.1</version>
+		<version>0.0.1-SNAPSHOT</version>
 	</parent>
 
 	<dependencies>
-
-		<dependency>
-			<groupId>com.hg.mybatis.study</groupId>
-			<artifactId>basic</artifactId>
-			<version>0.0.1</version>
-		</dependency>
-
-
-		<dependency>
-			<groupId>commons-beanutils</groupId>
-			<artifactId>commons-beanutils</artifactId>
-			<version>1.9.3</version>
-		</dependency>
-
-		<dependency>
-			<groupId>org.slf4j</groupId>
-			<artifactId>slf4j-api</artifactId>
-			<version>1.7.21</version>
-			<scope>compile</scope>
-		</dependency>
-		<dependency>
-			<groupId>ch.qos.logback</groupId>
-			<artifactId>logback-classic</artifactId>
-			<version>1.1.7</version>
-		</dependency>
-		<!-- 添加junit -->
-		<dependency>
-			<groupId>junit</groupId>
-			<artifactId>junit</artifactId>
-			<version>4.11</version>
-			<scope>test</scope>
-		</dependency>
-
-		<!-- 添加log4j -->
-		<dependency>
-			<groupId>log4j</groupId>
-			<artifactId>log4j</artifactId>
-			<version>1.2.16</version>
-		</dependency>
-
-		<!-- 添加mybatis -->
 		<dependency>
 			<groupId>org.mybatis</groupId>
 			<artifactId>mybatis</artifactId>
 		</dependency>
-
-		<!-- 添加mysql驱动 -->
-		<dependency>
-			<groupId>mysql</groupId>
-			<artifactId>mysql-connector-java</artifactId>
-			<version>5.1.12</version>
-		</dependency>
-
-
-		<dependency>
-			<groupId>org.mybatis</groupId>
-			<artifactId>mybatis-spring</artifactId>
-		</dependency>
-
-	</dependencies>
+        <dependency>
+            <groupId>commons-beanutils</groupId>
+            <artifactId>commons-beanutils</artifactId>
+            <version>1.9.3</version>
+        </dependency>
+        <dependency>
+            <groupId>commons-dbcp</groupId>
+            <artifactId>commons-dbcp</artifactId>
+            <version>1.4</version>
+        </dependency>
+    </dependencies>
 
 	<build>
 		<plugins>

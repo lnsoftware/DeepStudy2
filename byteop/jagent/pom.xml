@@ -1,0 +1,308 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<artifactId>jagent</artifactId>
+	<version>0.0.1</version>
+	<name>${project.artifactId}</name>
+	<packaging>jar</packaging>
+
+	<parent>
+		<groupId>com.zhiyin.byteop</groupId>
+		<artifactId>byteop-parent</artifactId>
+		<version>0.0.1-SNAPSHOT</version>
+	</parent>
+
+	<properties>
+
+		<!-- plugin的属性定义 -->
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<java.version>1.6</java.version>
+		<javassist.version>3.18.1-GA</javassist.version>
+		<dropwizard.version>0.6.2</dropwizard.version>
+		<jackson.version>2.2.0</jackson.version>
+		<guava.version>19.0</guava.version>
+
+	</properties>
+
+
+
+
+	<!-- 依赖项定义 -->
+	<dependencies>
+
+		<dependency>
+			<groupId>org.slf4j</groupId>
+			<artifactId>slf4j-api</artifactId>
+			<version>1.7.21</version>
+		</dependency>
+
+		<!-- 命令行解析 -->
+        <dependency>
+            <groupId>com.beust</groupId>
+            <artifactId>jcommander</artifactId>
+            <version>1.48</version>
+        </dependency>
+
+        <dependency>
+            <groupId>args4j</groupId>
+            <artifactId>args4j</artifactId>
+            <version>2.33</version>
+        </dependency>
+		<!-- end command -->
+
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <version>1.16.8</version>
+        </dependency>
+
+		<dependency>
+			<groupId>com.fasterxml.jackson.core</groupId>
+			<artifactId>jackson-databind</artifactId>
+			<version>${jackson.version}</version>
+		</dependency>
+		<!--<dependency>-->
+			<!--<groupId>com.fasterxml.jackson.datatype</groupId>-->
+			<!--<artifactId>jackson-datatype-guava</artifactId>-->
+			<!--<version>${jackson.version}</version>-->
+			<!--<scope>provided</scope>-->
+			<!--<exclusions>-->
+				<!--<exclusion>-->
+					<!--<artifactId>guava</artifactId>-->
+					<!--<groupId>com.google.guava</groupId>-->
+				<!--</exclusion>-->
+			<!--</exclusions>-->
+		<!--</dependency>-->
+
+		<dependency>
+			<groupId>com.fasterxml.jackson.dataformat</groupId>
+			<artifactId>jackson-dataformat-yaml</artifactId>
+			<version>${jackson.version}</version>
+		</dependency>
+
+
+		<!--<dependency>-->
+			<!--<groupId>asm</groupId>-->
+			<!--<artifactId>asm-all</artifactId>-->
+			<!--<version>3.3.1</version>-->
+		<!--</dependency>-->
+        <dependency>
+            <groupId>org.ow2.asm</groupId>
+            <artifactId>asm-all</artifactId>
+            <version>5.1</version>
+        </dependency>
+
+        <dependency>
+			<groupId>net.bytebuddy</groupId>
+			<artifactId>byte-buddy</artifactId>
+			<version>1.5.2</version>
+		</dependency>
+
+		<!--<dependency>-->
+			<!--<groupId>ch.qos.logback</groupId>-->
+			<!--<artifactId>logback-classic</artifactId>-->
+			<!--<version>1.1.7</version>-->
+		<!--</dependency>-->
+
+		<dependency>
+			<groupId>org.reflections</groupId>
+			<artifactId>reflections</artifactId>
+			<version>0.9.10</version>
+		</dependency>
+
+        <dependency>
+            <groupId>com.alibaba</groupId>
+            <artifactId>transmittable-thread-local</artifactId>
+            <version>2.1.0</version>
+        </dependency>
+
+		<dependency>
+			<groupId>junit</groupId>
+			<artifactId>junit</artifactId>
+			<version>4.12</version>
+			<scope>test</scope>
+		</dependency>
+
+	</dependencies>
+
+
+	<build>
+		<plugins>
+
+			<!--<plugin>-->
+				<!--<groupId>org.apache.maven.plugins</groupId>-->
+				<!--<artifactId>maven-assembly-plugin</artifactId>-->
+				<!--<configuration>-->
+					<!--<descriptorRefs>-->
+						<!--<descriptorRef>jar-with-dependencies</descriptorRef>-->
+					<!--</descriptorRefs>-->
+					<!--<finalName>${project.artifactId}-${project.version}-full</finalName>-->
+					<!--<appendAssemblyId>false</appendAssemblyId>-->
+					<!--<archive>-->
+						<!--<manifestEntries>-->
+							<!--<Premain-Class>com.zhiyin.jagent.AgentInstaller</Premain-Class>-->
+							<!--<Agent-Class>com.zhiyin.jagent.AgentInstaller</Agent-Class>-->
+							<!--<Can-Redefine-Classes>true</Can-Redefine-Classes>-->
+							<!--<Can-Retransform-Classes>true</Can-Retransform-Classes>-->
+							<!--<Can-Set-Native-Method-Prefix>true</Can-Set-Native-Method-Prefix>-->
+						<!--</manifestEntries>-->
+					<!--</archive>-->
+				<!--</configuration>-->
+				<!--<executions>-->
+					<!--<execution>-->
+						<!--<id>assemble-all</id>-->
+						<!--<phase>package</phase>-->
+						<!--<goals>-->
+							<!--<goal>single</goal>-->
+						<!--</goals>-->
+					<!--</execution>-->
+				<!--</executions>-->
+			<!--</plugin>-->
+
+			<!--<plugin>-->
+				<!--<groupId>org.apache.maven.plugins</groupId>-->
+				<!--<artifactId>maven-surefire-plugin</artifactId>-->
+				<!--<version>2.19</version>-->
+				<!--<configuration>-->
+					<!--<argLine>-javaagent:target/${project.artifactId}-${project.version}-full.jar</argLine>-->
+				<!--</configuration>-->
+			<!--</plugin>-->
+
+			<plugin>
+				<artifactId>maven-jar-plugin</artifactId>
+				<version>3.0.2</version>
+				<configuration>
+					<archive>
+						<manifestEntries>
+							<Premain-Class>com.zhiyin.jagent.AgentInstaller</Premain-Class>
+							<Agent-Class>com.zhiyin.jagent.AgentInstaller</Agent-Class>
+							<Can-Redefine-Classes>true</Can-Redefine-Classes>
+							<Can-Retransform-Classes>true</Can-Retransform-Classes>
+							<Can-Set-Native-Method-Prefix>false</Can-Set-Native-Method-Prefix>
+						</manifestEntries>
+					</archive>
+				</configuration>
+			</plugin>
+
+			<plugin>
+				<artifactId>maven-shade-plugin</artifactId>
+				<version>2.4.3</version>
+				<executions>
+					<execution>
+						<phase>package</phase>
+						<goals>
+							<goal>shade</goal>
+						</goals>
+						<configuration>
+							<createSourcesJar>true</createSourcesJar>
+							<relocations>
+								<relocation>
+									<pattern>javassist</pattern>
+									<shadedPattern>com.zhiyin.jagent.javassist</shadedPattern>
+								</relocation>
+
+
+                                <relocation>
+                                    <pattern>net.bytebuddy</pattern>
+                                    <shadedPattern>com.zhiyin.jagent.bytebuddy</shadedPattern>
+                                </relocation>
+
+								<relocation>
+									<pattern>com.fasterxml</pattern>
+									<shadedPattern>com.zhiyin.jagent.fasterxml</shadedPattern>
+								</relocation>
+
+								<relocation>
+									<pattern>com.google</pattern>
+									<shadedPattern>com.zhiyin.jagent.google</shadedPattern>
+								</relocation>
+
+                                <relocation>
+                                    <pattern>javax.annotation</pattern>
+                                    <shadedPattern>com.zhiyin.jagent.javax</shadedPattern>
+                                </relocation>
+
+                                <relocation>
+                                    <pattern>net.bytebuddy</pattern>
+                                    <shadedPattern>com.zhiyin.jagent.bytebuddy</shadedPattern>
+                                </relocation>
+                                <relocation>
+                                    <pattern>org.objectweb.asm</pattern>
+                                    <shadedPattern>com.zhiyin.jagent.asm</shadedPattern>
+                                </relocation>
+                                <relocation>
+                                    <pattern>net.jcip</pattern>
+                                    <shadedPattern>com.zhiyin.jagent.jcip</shadedPattern>
+                                </relocation>
+                                <relocation>
+                                    <pattern>edu.umd</pattern>
+                                    <shadedPattern>com.zhiyin.jagent.edu</shadedPattern>
+                                </relocation>
+                                <relocation>
+                                    <pattern>org.reflections</pattern>
+                                    <shadedPattern>com.zhiyin.jagent.reflections</shadedPattern>
+                                </relocation>
+                                <relocation>
+                                    <pattern>lombok</pattern>
+                                    <shadedPattern>com.zhiyin.jagent.lombok</shadedPattern>
+                                </relocation>
+                            </relocations>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
+
+
+
+		<!--<plugin>-->
+			<!--<artifactId>maven-jar-plugin</artifactId>-->
+			<!--<version>2.3.1</version>-->
+			<!--<configuration>-->
+				<!--<archive>-->
+					<!--<addMavenDescriptor>false</addMavenDescriptor>-->
+				<!--</archive>-->
+				<!--<archive>-->
+					<!--<manifestFile>-->
+						<!--src/main/resources/META-INF/MANIFEST.MF-->
+					<!--</manifestFile>-->
+					<!--<manifest>-->
+						<!--<addClasspath>true</addClasspath>-->
+						<!--<classpathPrefix>lib/</classpathPrefix>-->
+						<!--<mainClass>-->
+							<!--com.hg.awesome.java.agent.PrintBeforeMethodAgentTest-->
+						<!--</mainClass>-->
+					<!--</manifest>-->
+				<!--</archive>-->
+			<!--</configuration>-->
+			<!--<executions>-->
+				<!--<execution>-->
+					<!--<id>jar</id>-->
+					<!--<phase>package</phase>-->
+					<!--<goals>-->
+						<!--<goal>jar</goal>-->
+					<!--</goals>-->
+					<!--<configuration>-->
+						<!--<classifier></classifier>-->
+						<!--<includes>-->
+							<!--<include>com/**</include>-->
+						<!--</includes>-->
+
+					<!--</configuration>-->
+				<!--</execution>-->
+			<!--</executions>-->
+		<!--</plugin>-->
+
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<configuration>
+					<source>1.7</source>
+					<target>1.7</target>
+				</configuration>
+			</plugin>
+
+		</plugins>
+	</build>
+
+</project>

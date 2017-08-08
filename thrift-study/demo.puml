@@ -1,0 +1,35 @@
+
+
+
+@startuml
+title Authentication Sequence
+
+"movie-trade" -> "UnifiedOrderServiceImpl.submitUnifiedOrder": 调用远程服务提交订单
+    "UnifiedOrderServiceImpl.submitUnifiedOrder" -> "maoyan-ordercenter-receiver": 远程调用
+
+        "maoyan-ordercenter-receiver" -> "SubmitOrderExportServiceImpl#submitOrder": 执行任务
+            "SubmitOrderExportServiceImpl#submitOrder" -> OrderTaskService: 将SubmitOrderParam转为OrderTaskModel \n 写入表order_task
+            "SubmitOrderExportServiceImpl#submitOrder" <- OrderTaskService
+            "SubmitOrderExportServiceImpl#submitOrder" -> OrderSnapshotService: 将SubmitOrderParam转为OrderSnapshotModel \n 写入表order_snapshot
+            "SubmitOrderExportServiceImpl#submitOrder" <- OrderSnapshotService
+
+            "SubmitOrderExportServiceImpl#submitOrder" ->  "SubmitOrderExportServiceImpl#submitOrder": 入库后，获取taskId
+
+            "SubmitOrderExportServiceImpl#submitOrder" -> "maoyan-ordercenter-engine": 调用远程服务TaskNotifyServiceExport.Iface.notifyTaskExecute
+                "maoyan-ordercenter-engine" -> "TaskNotifyServiceExportImpl.notifyTaskExecute": 执行notify任务
+                    "TaskNotifyServiceExportImpl.notifyTaskExecute" -> "TaskNotifyServiceExportImpl.notifyTaskExecute": 根据taskId查询任务
+                    "TaskNotifyServiceExportImpl.notifyTaskExecute" -> "OrderProcessEngine#executeOrderTask":执行订单对应的任务处理
+                        "OrderProcessEngine#executeOrderTask" -> "OrderProcessEngine#executeOrderTask": 流程编号和对应的执行器编号获取执行器（跟flowId,step相关）
+                        "OrderProcessEngine#executeOrderTask" -> "OrderProcessEngine#executeOrderTask": 获取执行器TaskExecutor
+                        "OrderProcessEngine#executeOrderTask" -> threadrun: 线程池执行
+                            threadrun -> threadrun: 根据订单号和流程编号Id来获取业务数据 OrderSnapshotModel
+                            threadrun -> threadrun: 执行NotifyMaoyanOrderCreatedProcessor，\n 调用远程服务SubmitOrderServiceExport.Iface.submitOrder
+                            threadrun -> threadrun: 级联调用NotifyOrderCenterCreatedProcessor, \n 调用猫眼同一订单中心服务，OrderDetailService.Iface.submitOrder
+
+                "maoyan-ordercenter-engine" <- "TaskNotifyServiceExportImpl.notifyTaskExecute"
+            "SubmitOrderExportServiceImpl#submitOrder" <- "maoyan-ordercenter-engine":
+
+        "maoyan-ordercenter-receiver" <- "SubmitOrderExportServiceImpl#submitOrder":
+    "UnifiedOrderServiceImpl.submitUnifiedOrder" -> "maoyan-ordercenter-receiver"
+"movie-trade" <- "UnifiedOrderServiceImpl.submitUnifiedOrder" : 返回
+@enduml

@@ -1,6 +1,8 @@
 package hystrix;
 
 import com.netflix.hystrix.strategy.HystrixPlugins;
+
+import java.util.UUID;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import org.junit.Test;
@@ -17,7 +19,16 @@ public class MdcTest {
     static ExecutorService executorService = Executors.newFixedThreadPool(30);
 
     @Test
-    public void test() {
+    public void basicTest() {
+        MDC.put("traceId", UUID.randomUUID().toString());
+        HystrixPlugins.getInstance().registerConcurrencyStrategy(new MdcHystrixConcurrencyStrategy());
+        MdcHystrixCommand command = new MdcHystrixCommand("mdc");
+        String traceId = command.execute();
+        assertThat(traceId).isEqualTo(MDC.get("traceId"));
+    }
+
+    @Test
+    public void batchTest() {
 
         HystrixPlugins.getInstance().registerConcurrencyStrategy(new MdcHystrixConcurrencyStrategy());
 
@@ -32,13 +43,4 @@ public class MdcTest {
         }
     }
 
-
-    @Test
-    public void test2() {
-        MDC.put("traceId", "sss");
-        HystrixPlugins.getInstance().registerConcurrencyStrategy(new MdcHystrixConcurrencyStrategy());
-        MdcHystrixCommand d = new MdcHystrixCommand("mdc");
-        String retTid = d.execute();
-        System.out.println(retTid);
-    }
 }

@@ -1,0 +1,10 @@
+
+spring:
+  application:
+    name: provider
+  zipkin:
+    enabled: true
+    baseUrl: http://localhost:9411
+
+server:
+  port: 8181

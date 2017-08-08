@@ -26,7 +26,6 @@ public class SchedulerWorkerDemo {
         });
 
         TimeUnit.MILLISECONDS.sleep(200);
-        worker.schedule(() -> printThread("Again"));
     }
 
     // 延时任务
@@ -82,6 +81,6 @@ public class SchedulerWorkerDemo {
     }
 
     public static void printThread(String name) {
-        System.out.println(name);
+        System.out.println(Thread.currentThread().getName()+":" + name);
     }
 }

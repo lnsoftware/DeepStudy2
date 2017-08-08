@@ -1,3 +1,4 @@
+#!/bin/bash
 
 cd ${ROCKETMQ_HOME}/bin
 
@@ -14,9 +15,5 @@ sleep 2
 echo 'mqbroker start'
 sh mqbroker  -n localhost:9876 -c broker.properties &
 echo 'mqbroker end'
-
-
-
-
 
 

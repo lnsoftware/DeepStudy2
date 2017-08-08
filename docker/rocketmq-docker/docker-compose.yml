@@ -30,7 +30,7 @@ services:
         expose:
             - 8888
         ports:
-            - "8888:8888"
+            - "8888:8080"
         networks:
             - rocketmq-network
 networks:

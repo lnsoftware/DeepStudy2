@@ -1,7 +1,10 @@
 package source;
 
+import lombok.extern.slf4j.Slf4j;
 import org.junit.Test;
 import rx.Observable;
+import rx.Scheduler;
+import rx.Subscriber;
 import rx.functions.Action1;
 import rx.schedulers.Schedulers;
 
@@ -11,34 +14,65 @@ import java.util.concurrent.TimeUnit;
  * https://tomstechnicalblog.blogspot.jp/2016/02/rxjava-understanding-observeon-and.html
  * Created by hg on 2017/7/21.
  */
+@Slf4j
 public class SubOnObsOnTest {
 
     @Test
     public void subscribeOn() throws InterruptedException {
-        Observable.just(1, 2, 3, 4)
-                .subscribeOn(Schedulers.io()) // 指定 subscribe() 发生在 IO 线程
-                .subscribe(new Action1<Integer>() {
-                    @Override
-                    public void call(Integer number) {
-                        System.out.println(number + Thread.currentThread().getName());
-                    }
-                });
+
+        Observable<String> observable1 = Observable.create(new Observable.OnSubscribe<String>() {
+            @Override
+            public void call(Subscriber<? super String> subscriber) {
+                System.out.println(Thread.currentThread().getName() + ":OnSub");
+                subscriber.onNext("hello");
+            }
+        });
+
+        Observable<String> observable2 = observable1.subscribeOn(Schedulers.io());
+
+        Subscriber<String> subscriber1 = new Subscriber<String>() {
+            @Override
+            public void onCompleted() {
+            }
+
+            @Override
+            public void onError(Throwable e) {
+            }
+
+            @Override
+            public void onNext(String s) {
+                System.out.println(Thread.currentThread().getName() + ":" +s);
+            }
+
+            @Override
+            public String toString(){
+                return "subscriber1";
+            }
+        };
+        observable2.subscribe(subscriber1);
         TimeUnit.MILLISECONDS.sleep(200);
     }
 
     @Test
     public void observeOn() throws InterruptedException {
 
-        Observable<Integer> source = Observable.range(1,10);
+        Observable<String> observable1 = Observable.create(new Observable.OnSubscribe<String>() {
+            @Override
+            public void call(Subscriber<? super String> subscriber) {
+                System.out.println(Thread.currentThread().getName() + ":OnSub");
+                subscriber.onNext("hello");
+            }
+        });
 
-        source.map(i -> i * 100)
-                .doOnNext(i ->
-                        System.out.println("Emitting " + i
-                                + " on thread " + Thread.currentThread().getName()))
-                .observeOn(Schedulers.computation())
-                .map(i -> i * 10)
-                .subscribe(i -> System.out.println("Received " + i + " on thread "
-                        + Thread.currentThread().getName()));
+//        observable1 = observable1.subscribeOn(Schedulers.computation());
+        Observable<String> observable2 = observable1.observeOn(Schedulers.io());
+
+        observable2.subscribe(new Action1<String>() {
+            @Override
+            public void call(String str) {
+                System.out.println( Thread.currentThread().getName() + ":" + str);
+            }
+        });
 
         sleep(3000);
     }

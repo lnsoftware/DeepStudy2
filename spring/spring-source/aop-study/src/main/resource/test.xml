@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+      http://www.springframework.org/schema/beans/spring-beans.xsd
+      http://www.springframework.org/schema/aop
+      http://www.springframework.org/schema/aop/spring-aop.xsd">
+
+        <!-- 目标业务对象  -->
+<bean id="phoneBiz" class="s3spring.ch2.biz.impl.PhoneBizImpl"></bean>
+        <!-- 日志管理切面类  -->
+<bean id="logAspectBean" class="s3spring.ch2.log.LogAspect"></bean>
+        <!-- Aop配置  -->
+<aop:config>
+<aop:pointcut id="p1" expression="execution( void *Phone(int) )"/>
+<!-- 配置日志管理切面  -->
+<aop:aspect id="logAspect" ref="logAspectBean">
+    <!-- 配置日志记录前置通知  -->
+    <aop:before method="before" pointcut-ref="p1" />
+</aop:aspect>
+</aop:config>
+        </beans>

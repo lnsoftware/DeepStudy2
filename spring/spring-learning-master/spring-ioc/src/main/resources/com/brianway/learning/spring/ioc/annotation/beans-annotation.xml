@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+         http://www.springframework.org/schema/beans/spring-beans-4.2.xsd
+         http://www.springframework.org/schema/context
+         http://www.springframework.org/schema/context/spring-context-4.2.xsd"
+>
+    <context:component-scan base-package="com.brianway.learning.spring.ioc.annotation"/>
+
+    <!-- context:component-scan base-package="com.brianway.learning.spring.ioc" resource-pattern="annotation/*.class"/ -->
+    <!--context:component-scan base-package="com.brianway.learning.spring.ioc">
+        <context:include-filter type="regex" expression="com\.brianway\.learning\.spring\.ioc\.annotation.*Dao "/>
+        <context:include-filter type="regex" expression="com\.brianway\.learning\.spring\.ioc\.annotation.*Service"/>
+        <context:exclude-filter type="aspectj" expression="com.brianway.learning.spring.ioc..*Controller+"/>
+    </context:component-scan-->
+</beans>

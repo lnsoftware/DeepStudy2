@@ -7,18 +7,11 @@
 	<version>0.0.1-SNAPSHOT</version>
 	<packaging>pom</packaging>
 
-    <repositories>
-        <repository>
-            <id>zhiyin-maven-repo</id>
-            <url>https://raw.githubusercontent.com/huiwq1990/MavenRepository/master/repository</url>
-        </repository>
-    </repositories>
-
-	<parent>
-		<groupId>com.zhiyin.frame</groupId>
-		<artifactId>frame-parent</artifactId>
-		<version>0.0.1-SNAPSHOT</version>
-	</parent>
+	<!--<parent>-->
+		<!--<groupId>com.zhiyin.frame</groupId>-->
+		<!--<artifactId>frame-parent</artifactId>-->
+		<!--<version>0.0.1-SNAPSHOT</version>-->
+	<!--</parent>-->
 
 
 	<properties>
@@ -55,6 +48,7 @@
 				<type>pom</type>
 				<scope>import</scope>
 			</dependency>
+
 		</dependencies>
 	</dependencyManagement>
 
@@ -110,10 +104,6 @@
 			<artifactId>spring-boot-starter-test</artifactId>
 			<scope>test</scope>
 		</dependency>
-
-
-
-
 
 	</dependencies>
 

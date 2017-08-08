@@ -4,11 +4,14 @@
 
 	<groupId>com.hg</groupId>
 	<artifactId>StudyRxjava</artifactId>
-	<version>1.1.6-SNAPSHOT</version>
-
     <packaging>jar</packaging>
-
 	<name>${project.artifactId}</name>
+
+    <parent>
+        <groupId>com.zhiyin.rxjava</groupId>
+        <artifactId>rxjava-parent</artifactId>
+        <version>0.0.1-SNAPSHOT</version>
+    </parent>
 
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -16,28 +19,10 @@
 	<dependencies>
 
         <dependency>
-            <groupId>org.projectlombok</groupId>
-            <artifactId>lombok</artifactId>
-            <version>1.16.8</version>
+            <groupId>com.google.code.gson</groupId>
+            <artifactId>gson</artifactId>
+            <version>2.3.1</version>
         </dependency>
-		<dependency>
-			<groupId>io.reactivex</groupId>
-			<artifactId>rxjava</artifactId>
-			<version>1.1.10</version>
-		</dependency>
-
-        <!--<dependency>-->
-            <!--<groupId>org.apache.httpcomponents</groupId>-->
-            <!--<artifactId>httpcomponents-client</artifactId>-->
-            <!--<version>4.5.2</version>-->
-        <!--</dependency>-->
-
-        <dependency>
-            <groupId>io.reactivex</groupId>
-            <artifactId>rxapache-http</artifactId>
-            <version>0.21.0</version>
-        </dependency>
-
         <dependency>
             <groupId>org.apache.httpcomponents</groupId>
             <artifactId>httpcore-nio</artifactId>
@@ -51,9 +36,21 @@
         </dependency>
 
         <dependency>
-            <groupId>com.google.code.gson</groupId>
-            <artifactId>gson</artifactId>
-            <version>2.3.1</version>
+        <groupId>org.apache.httpcomponents</groupId>
+        <artifactId>httpcomponents-client</artifactId>
+        <version>4.5.2</version>
+        </dependency>
+
+        <dependency>
+			<groupId>io.reactivex</groupId>
+			<artifactId>rxjava</artifactId>
+			<version>1.1.10</version>
+		</dependency>
+
+        <dependency>
+            <groupId>io.reactivex</groupId>
+            <artifactId>rxapache-http</artifactId>
+            <version>0.21.0</version>
         </dependency>
 
 		<dependency>

@@ -4,7 +4,7 @@
 	<groupId>com.zhiyin.test</groupId>
 	<artifactId>test-parent</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-
+	<packaging>pom</packaging>
 	<parent>
 		<groupId>com.zhiyin.frame</groupId>
 		<artifactId>frame-base</artifactId>
@@ -13,7 +13,8 @@
 
     <modules>
         <module>wiremock-sample-master</module>
-        <module>spring-boot-features-demo</module>
+        <!--<module>spring-boot-features-demo</module>-->
+		<module>junit-base</module>
     </modules>
 
 	<properties>
@@ -21,5 +22,16 @@
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 	</properties>
 
+
+	<dependencyManagement>
+		<dependencies>
+			<dependency>
+				<groupId>org.springframework.boot</groupId>
+				<artifactId>spring-boot-starter</artifactId>
+				<version>1.4.1.RELEASE</version>
+				<type></type>
+			</dependency>
+		</dependencies>
+	</dependencyManagement>
 
 </project>

@@ -22,6 +22,7 @@
 		<!--<module>Chapter3-2-7</module>-->
 		<!--<module>longpolling</module>-->
 		<module>spring-source</module>
+		<module>spring-learning-master</module>
 	</modules>
 
 

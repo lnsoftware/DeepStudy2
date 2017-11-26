@@ -27,13 +27,15 @@
         <module>security</module>
         <module>classinit</module>
         <module>classloader</module>
-        <module>nio</module>
+        <module>generics</module>
         <module>multi</module>
-        <module>java-nio-server-master</module>
+        <module>mbean</module>
+        <module>jdi</module>
         <!--<module>java-dynamic-load-jar</module>-->
         <module>proxy-study</module>
         <module>timer</module>
         <module>threadpool</module>
+
     </modules>
 
     <dependencies>

@@ -12,8 +12,7 @@ WORKDIR  ${ROCKETMQ_HOME}
 RUN mkdir -p \
 		${BASE_DIR}/logs \
 		${BASE_DIR}/store
-
-RUN curl https://dist.apache.org/repos/dist/release/incubator/rocketmq/${ROCKETMQ_VERSION}/rocketmq-all-${ROCKETMQ_VERSION}-bin-release.zip -o rocketmq.zip \
+RUN curl http://mirror.bit.edu.cn/apache/rocketmq/${ROCKETMQ_VERSION}/rocketmq-all-${ROCKETMQ_VERSION}-bin-release.zip -o rocketmq.zip \
           && unzip rocketmq.zip \
           && mv apache-rocketmq-all/* . \
           && rmdir apache-rocketmq-all  \
@@ -27,7 +26,8 @@ RUN chmod +x bin/*.sh
 
 ADD broker.properties ${ROCKETMQ_HOME}/bin/
 
-CMD cd ${ROCKETMQ_HOME}/bin && export JAVA_OPT=" -Duser.home=${BASE_DIR}" && echo ${JAVA_OPT} && sh mqbroker  -n mqnamesrv:9876 -c broker.properties
+# 配置nameserver的地址
+CMD cd ${ROCKETMQ_HOME}/bin && export JAVA_OPT=" -Duser.home=${BASE_DIR}" && echo ${JAVA_OPT} && sh mqbroker -n mqnamesrv:9876 -c broker.properties
 EXPOSE 10909 10911
 VOLUME /opt/logs \
 		/opt/store

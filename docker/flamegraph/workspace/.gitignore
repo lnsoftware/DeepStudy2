@@ -1,0 +1,4 @@
+*.data
+*.svg
+perf.data*
+*.class

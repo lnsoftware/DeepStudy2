@@ -11,6 +11,8 @@ public class MdcHystrixConcurrencyStrategy extends HystrixConcurrencyStrategy {
     public Callable wrapCallable(Callable callable) {
         return new MdcCallable(callable);
     }
+
+
     static class MdcCallable<K> implements Callable<K> {
         private final Callable<K> actual;
         private final Map parentMDC;

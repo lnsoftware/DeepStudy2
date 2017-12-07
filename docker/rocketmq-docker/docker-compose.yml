@@ -14,7 +14,7 @@ services:
         depends_on:
             - mqnamesrv
         networks:
-            - rocketmq-network
+            - mqnetwork
     mqnamesrv:
         container_name: mqnamesrv
         image: mqnamesrv
@@ -23,16 +23,32 @@ services:
         ports:
             - "9876:9876"
         networks:
-            - rocketmq-network
+            - mqnetwork
+    # mqconsole:
+    #     container_name: mqconsole
+    #     image: mqconsole
+    #     expose:
+    #         - 8888
+    #     ports:
+    #         - "8888:8080"
+    #     networks:
+    #         - rocketmq-network
     mqconsole:
         container_name: mqconsole
-        image: mqconsole
+        image: styletang/rocketmq-console-ng
+        environment:
+            - JAVA_OPTS=-Drocketmq.config.namesrvAddr=mqnamesrv:9876 -Dcom.rocketmq.sendMessageWithVIPChannel=false -Xdebug -Xrunjdwp:transport=dt_socket,address=9081,server=y,suspend=n
         expose:
-            - 8888
+            - 9080
+            - 9081
         ports:
-            - "8888:8080"
+            - "9080:8080"
+            - "9081:9081"
+        links:
+            - mqnamesrv
+
         networks:
-            - rocketmq-network
+            - mqnetwork    
 networks:
-    rocketmq-network:
+    mqnetwork:
         driver: bridge

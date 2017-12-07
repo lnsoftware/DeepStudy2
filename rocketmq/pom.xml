@@ -1,0 +1,43 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+
+  <groupId>com.zhiyin.rocketmq</groupId>
+  <artifactId>rocketmq-parent</artifactId>
+  <version>0.0.1-SNAPSHOT</version>
+  <packaging>pom</packaging>
+  <name>${project.artifactId}</name>
+
+  <properties>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+      <maven.compiler.source>1.7</maven.compiler.source>
+      <maven.compiler.target>1.7</maven.compiler.target>
+  </properties>
+
+    <modules>
+        <module>basic-demo</module>
+    </modules>
+
+  <dependencies>
+      <dependency>
+          <groupId>com.google.guava</groupId>
+          <artifactId>guava</artifactId>
+          <version>21.0</version>
+      </dependency>
+      <dependency>
+          <groupId>org.apache.rocketmq</groupId>
+          <artifactId>rocketmq-client</artifactId>
+          <version>4.2.0-incubating-SNAPSHOT</version>
+      </dependency>
+  </dependencies>
+
+  <dependencyManagement>
+      <dependencies>
+          <dependency>
+              <groupId>org.apache.rocketmq</groupId>
+              <artifactId>rocketmq-all</artifactId>
+              <version>4.2.0-incubating-SNAPSHOT</version>
+          </dependency>
+      </dependencies>
+  </dependencyManagement>
+</project>

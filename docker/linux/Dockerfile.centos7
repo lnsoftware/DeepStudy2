@@ -1,0 +1,16 @@
+FROM centos:7
+
+ADD centos7.sh centos7.sh
+RUN sh centos7.sh
+
+
+## 按照编译环境
+RUN yum install -y wget
+RUN wget https://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm 
+RUN rpm -ivh epel-release-latest-7.noarch.rpm 
+RUN yum clean all && yum clean metadata && yum clean dbcache && yum makecache 
+RUN yum -y upgrade
+RUN yum install -y autogen openssl-static make rpm-build chrpath \
+    blas-static libXt-devel valgrind lapack-devel epel-release
+RUN yum install -y cmake gcc gcc-c++ gcc-gfortran 
+RUN yum install -y git

@@ -17,3 +17,18 @@ docker rmi $(docker images | grep "^<none>" | awk "{print $3}")
 
 ### 登录容器
 
+
+
+
+
+
+docker run
+
+
+docker run -v "$(pwd):/root" ubuntu:16:04  /bin/bash
+
+
+docker run -i -t -v `pwd`:/root ubuntu:16.04 /bin/bash
+
+
+docker build -f Dockerfile -t huiwq1990/linux-study .

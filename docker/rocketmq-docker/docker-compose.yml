@@ -15,6 +15,11 @@ services:
             - mqnamesrv
         networks:
             - mqnetwork
+        environment:
+            HOSTNAME: mqbroker
+ 
+        extra_hosts:
+            mqbroker: 192.168.0.100
     mqnamesrv:
         container_name: mqnamesrv
         image: mqnamesrv
@@ -51,4 +56,4 @@ services:
             - mqnetwork    
 networks:
     mqnetwork:
-        driver: bridge
+        driver: host

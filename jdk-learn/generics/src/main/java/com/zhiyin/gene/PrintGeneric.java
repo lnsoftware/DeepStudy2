@@ -6,6 +6,7 @@ import lombok.Data;
 
 import java.io.Serializable;
 import java.lang.reflect.ParameterizedType;
+import java.util.List;
 import java.util.Map;
 //http://blog.csdn.net/gengv/article/details/5178055
 public class PrintGeneric{
@@ -31,15 +32,23 @@ class TeaDaoSupport extends BaseDao<Tea>{
 
 }
 
-abstract class BaseDao<T>{
+abstract class BaseDao<T extends Base>{
     private Class<T> entityClass;
+    private String simpleName;
     public BaseDao() {
         entityClass =(Class<T>) ((ParameterizedType) getClass()
                 .getGenericSuperclass()).getActualTypeArguments()[0];
+
     }
     public T get(Long id) {
         T o = (T) get(entityClass, id);
         return o;
+    }
+
+    public void putList(List<T> list){
+        for (T t : list) {
+            map.put(simpleName + t.getId(),t);
+        }
     }
 
     static Map<String,Object> map = Maps.newHashMap();
@@ -56,15 +65,21 @@ abstract class BaseDao<T>{
 
 @Data
 @AllArgsConstructor
-class Stu implements Serializable {
+class Stu extends Base implements Serializable {
     private Long id;
     private String name;
 }
 @Data
 @AllArgsConstructor
-class Tea implements Serializable {
+class Tea extends Base implements Serializable {
     private Long id;
     private String name;
+}
+
+class Base{
+    public Long getId(){
+        return 0L;
+    }
 }
 
 class GT1 extends GT2<Integer>{

@@ -1,0 +1,4 @@
+.vagrant
+busybox
+*.log
+busybox-sh-rootfs.tar.gz

@@ -78,7 +78,7 @@ public class TestDebugger {
         eventRequestManager = vm.eventRequestManager();
 
         // 三、取得要关注的类和方法
-        List<ReferenceType> classesByName = vm.classesByName("Test");
+        List<ReferenceType> classesByName = vm.classesByName("com.zhiyin.jdi.DemoServer.Test");
         if (classesByName == null || classesByName.size() == 0) {
             System.out.println("No class found");
             return;
@@ -115,7 +115,7 @@ public class TestDebugger {
 //        breakpointRequest.enable();
 
         // ClassPrepareRequest classPrepareRequest = eventRequestManager.createClassPrepareRequest();
-        // classPrepareRequest.addClassFilter("test.Test");
+        // classPrepareRequest.addClassFilter("test.com.zhiyin.jdi.DemoServer.Test");
         // classPrepareRequest.addCountFilter(1);
         // classPrepareRequest.setSuspendPolicy(EventRequest.SUSPEND_ALL);
         // classPrepareRequest.enable();
@@ -144,7 +144,7 @@ public class TestDebugger {
             System.out.println("VM started");
             eventSet.resume();
         } else if (event instanceof BreakpointEvent) {
-            System.out.println("Reach Method printHello of test.Test");
+            System.out.println("Reach Method printHello of test.com.zhiyin.jdi.DemoServer.Test");
 
             BreakpointEvent breakpointEvent = (BreakpointEvent) event;
             ThreadReference threadReference = breakpointEvent.thread();
@@ -174,7 +174,7 @@ public class TestDebugger {
         } else if (event instanceof ClassPrepareEvent) {
             ClassPrepareEvent classPrepareEvent = (ClassPrepareEvent) event;
             String mainClassName = classPrepareEvent.referenceType().name();
-            if (mainClassName.equals("test.Test")) {
+            if (mainClassName.equals("test.com.zhiyin.jdi.DemoServer.Test")) {
                 System.out.println("Class " + mainClassName + " is already prepared");
             }
             if (true) {

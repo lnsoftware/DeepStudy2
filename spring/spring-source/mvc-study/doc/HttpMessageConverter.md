@@ -42,7 +42,7 @@ RssChannelHttpMessageConverter:           负责读取和写入RSS格式的数�
 ### 配置
 
 
-http://blog.csdn.net/mickjoust/article/details/51671060
+**````**http://blog.csdn.net/mickjoust/article/details/51671060
 
 ### 代码分析
 
@@ -65,7 +65,7 @@ public boolean canWrite(Class<?> clazz, MediaType mediaType) {
 }
 ```
 
-FormHttpMessageConverter的canWrite仅仅支持controller返回值为MultiValueMap类型数据，所以不可以。
+FormHttpMessageConverter的canWrite仅仅``支持controller返回值为MultiValueMap类型数据，所以不可以。
 
 FastJsonHttpMessageConverter.canWrite支持任何类型class和任何类型的mediatype
 所以配置FastJsonHttpMessageConverter后问题解决。

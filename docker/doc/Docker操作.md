@@ -17,8 +17,8 @@ docker rmi $(docker images | grep "^<none>" | awk "{print $3}")
 
 ### 登录容器
 
-
-
+ docker attach 44fc0f0582d9  
+ docker exec -it 775c7c9ee1e1 /bin/bash  
 
 
 

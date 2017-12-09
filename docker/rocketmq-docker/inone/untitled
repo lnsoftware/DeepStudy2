@@ -1,0 +1,25 @@
+
+
+
+movieOrderTrade	UnionPayService.requestUnionPay
+
+
+
+PayPlatformService.requestPay
+
+com.meituan.movie.order
+com.sankuai.movie.emember
+maoyan-show-deal-service
+
+
+PayPlatformService.refund
+
+
+PayPlatformService.migrateConfirmAndRefund
+
+
+PayPlatformService.queryRefund
+
+
+com.meituan.movie.order
+com.sankuai.movie.maoyan.movieticket

@@ -35,7 +35,9 @@
         <module>proxy-study</module>
         <module>timer</module>
         <module>threadpool</module>
-
+        <module>varargs</module>
+    <module>hook</module>
+        <module>escapse</module>
     </modules>
 
     <dependencies>
@@ -53,6 +55,7 @@
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>
             <version>4.12</version>
+            <scope>test</scope>
         </dependency>
     </dependencies>
     <build>

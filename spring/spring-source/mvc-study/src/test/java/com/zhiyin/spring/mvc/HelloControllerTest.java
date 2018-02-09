@@ -2,6 +2,7 @@ package com.zhiyin.spring.mvc;
 
 import com.alibaba.fastjson.JSON;
 import com.google.common.collect.Maps;
+import com.zhiyin.spring.mvc.controller.MediaTypeController;
 import com.zhiyin.spring.mvc.model.User;
 import org.assertj.core.util.Lists;
 import org.junit.Test;
@@ -22,7 +23,7 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
 @RunWith(SpringRunner.class)
-@WebMvcTest(UserInfoController.class)
+@WebMvcTest(MediaTypeController.class)
 public class HelloControllerTest {
     @Autowired
     private MockMvc mvc;
@@ -73,6 +74,28 @@ public class HelloControllerTest {
         this.mvc.perform(post("/postComplex").contentType(MediaType.APPLICATION_JSON).content( reqStr ).accept(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk()) ;
     }
+
+
+    @Test
+    public void mediaTest() throws Exception {
+        User u = new User();
+        u.setId(1L);
+
+        String reqStr = JSON.toJSONString(u);
+        this.mvc.perform(post("/mediaTest").contentType(MediaType.APPLICATION_JSON).content( reqStr ).accept(MediaType.APPLICATION_JSON))
+                .andExpect(status().isOk()) ;
+    }
+
+    @Test
+    public void jackGet() throws Exception {
+        User u = new User();
+        u.setId(1L);
+
+        String reqStr = JSON.toJSONString(u);
+        this.mvc.perform(get("/jackGet?userId=1").contentType(MediaType.APPLICATION_JSON).content( reqStr ).accept(MediaType.APPLICATION_JSON))
+                .andExpect(status().isOk()) ;
+    }
+
 
 
 }

@@ -1,0 +1,109 @@
+<?xml version="1.0" ?>
+<project name="Scripting demo" default="run-hello" basedir=".">
+    <property name="java.src.dir" location="src/main/java" />
+    <property name="test.src.dir" location="src/test/java" />
+    <property name="lib.dir" location="lib" />
+    <property name="build.dir" location="build-main" />
+    <property name="test.build.dir" location="${build.dir}/test" />
+    <property name="test.results.dir" location="${build.dir}/test-results" />
+    <property name="script.dir" location="src/main/scripts" />
+    <property name="mortgage.script.dir" location="${script.dir}/mortgage-products" />
+    <property name="compile.debug" value="true"/>
+    <property name="compile.deprecation" value="false"/>
+    <property name="compile.optimize" value="false"/>
+    <property name="junit.jar" location="lib/junit-3.8.1.jar" />
+
+    <target name="clean" description="Delete all derived artifacts">
+        <delete dir="${build.dir}" />
+    </target>
+
+    <target name="compile" description="Compile the sample code">
+        <mkdir dir="${build.dir}/classes"/>
+        <javac srcdir="${java.src.dir}"
+            destdir="${build.dir}/classes"
+            debug="${compile.debug}"
+            deprecation="${compile.deprecation}"
+            optimize="${compile.optimize}"
+        />
+    </target>
+    
+    <target name="run-hello" 
+    	description="Run HelloScriptingWorld application" 
+    	depends="compile"
+    >
+        <java classname="com.mcqueeney.scripting.HelloScriptingWorld" fork="true">
+            <classpath>
+                <pathelement path="${build.dir}/classes" />
+            </classpath>
+        </java>
+    </target>
+
+    <target name="run" depends="run-hello" />
+
+	<target name="compile-tests" description="Compiles the unit tests"
+        depends="compile"
+    >
+        <mkdir dir="${test.build.dir}/classes"/>
+        <javac srcdir="${test.src.dir}"
+            destdir="${test.build.dir}/classes"
+            debug="${compile.debug}"
+            deprecation="${compile.deprecation}"
+            optimize="${compile.optimize}"
+        >
+            <classpath>
+                <path location="${build.dir}/classes" />
+                <path location="${junit.jar}" />
+            </classpath>
+        </javac>
+    </target>
+
+    <target name="junit"
+        depends="clean,junit-run"
+        description="Create a clean build and run JUnit tests"
+    >
+        <fail message="One or more Junit tests had an error" if="junit-error"/>
+        <fail message="One or more Junit tests failed" if="junit-failed"/>
+    </target>
+	
+	<target name="test" depends="junit" />
+
+    <target name="junit-run"
+        depends="compile-tests">
+        <delete dir="${test.results.dir}" />
+        <mkdir dir="${test.results.dir}" />
+        <junit
+            printsummary="yes"
+            fork="no"
+            errorproperty="junit-error"
+            failureproperty="junit-failed"
+            reloading="false"
+        >
+            <classpath location="${junit.jar}" />
+            <classpath location="${build.dir}/classes" />
+            <classpath location="${test.build.dir}/classes" />
+            <formatter type="plain" />
+            <formatter type="xml"/>
+
+            <batchtest todir="${test.results.dir}" if="testcase">
+                <fileset dir="${test.build.dir}/classes"
+                    includes="**/${testcase}.class"
+                />
+            </batchtest>
+            <batchtest todir="${test.results.dir}" unless="testcase">
+                <fileset dir="${test.build.dir}/classes"
+                    includes="**/*Test.class"
+                />
+            </batchtest>
+        </junit>
+    </target>
+
+    <target name="zip" description="Make ZIP file of project code">
+    	<delete file="${build.dir}/java-scripting-part1.zip" />
+    	<mkdir dir="${build.dir}"/>
+    	
+    	<zip destfile="${build.dir}/java-scripting-part1.zip" basedir="."
+    		excludes="build-main/** eclipse-bin/** .* "
+    	/>
+    </target>
+
+</project>

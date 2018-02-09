@@ -1,0 +1,43 @@
+#spring:
+#  datasource:
+#    url: jdbc:mysql://localhost:3306
+#    username: root
+#    password: root
+#    driver-class-name: org.gjt.mm.mysql.Driver
+
+# 服务器配置
+server:
+  port: 8080
+
+# mybatis配置
+mybatis:
+  # 配置映射类所在包名
+  type-aliases-package: com.zhiyin.cases.shutdown.entity
+  mapper-locations:
+    - mappers/*.xml
+  config-location: classpath:mybatis-config.xml
+
+#logging:
+#  level:
+#    com.zhiyin.mybatis.boot.mapper: DEBUG
+
+spring:
+  # 数据库配置
+  datasource:
+#    type: org.apache.commons.dbcp.BasicDataSource
+    type: com.zhiyin.cases.shutdown.component.CustomoDataSource
+    url: jdbc:h2:mem:test
+    username: root
+    password: 123456
+    driver-class-name: org.h2.Driver
+    schema: classpath:sql/schema.sql
+    data: classpath:sql/data.sql
+
+# 优雅关机配置
+endpoints:
+  shutdown:
+    sensitive: false
+    enabled: true
+
+elegant:
+  close: false

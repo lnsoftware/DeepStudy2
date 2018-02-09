@@ -16,9 +16,12 @@ import java.util.Map;
  */
 public class SimpleDebugger {
 
-    private static final String CLASS_NAME = "";
-    private static final int LINE = 16;
-    private static final String VAR_NAME = "i";
+    private static final String CLASS_NAME = "com.zhiyin.devtools.demo.controller.HelloUtil";
+    private static final int LINE = 10;
+    private static final String VAR_NAME = "random";
+
+    public static final String HOST = "localhost";
+    public static final String PORT = "5005";
 
     public static void main(String[] args) {
         List<Connector> connectors = Bootstrap.virtualMachineManager().allConnectors();
@@ -54,8 +57,8 @@ public class SimpleDebugger {
                     Map<String, Connector.Argument> defaultArguments = sac.defaultArguments();
                     Connector.Argument hostArg = defaultArguments.get("hostname"); // SocketAttachingConnector#ARG_HOST
                     Connector.Argument portArg = defaultArguments.get("port"); // SocketAttachingConnector#ARG_PORT
-                    hostArg.setValue("localhost");
-                    portArg.setValue("8787");
+                    hostArg.setValue(HOST);
+                    portArg.setValue(PORT);
                     vm = sac.attach(defaultArguments);
                 }
             }
@@ -104,3 +107,6 @@ public class SimpleDebugger {
     }
 
 }
+
+
+

@@ -10,3 +10,8 @@ HashedWheelTimer
 https://segmentfault.com/a/1190000010987765
 https://zacard.net/2016/12/02/netty-hashedwheeltimer/
 
+
+方案对比
+
+http://www.cnblogs.com/haoxinyue/p/6663720.html
+https://wiki.sankuai.com/pages/viewpage.action?pageId=1245919439

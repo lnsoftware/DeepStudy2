@@ -34,11 +34,11 @@ public class HotSwapper {
             Map<String, Connector.Argument> defaultArguments = sac.defaultArguments();
             Connector.Argument hostArg = defaultArguments.get("hostname");
             Connector.Argument portArg = defaultArguments.get("port");
-            hostArg.setValue("localhost");
-            portArg.setValue("8787");
+            hostArg.setValue(DebugeeConfig.HotswapConfig.ServerHost);
+            portArg.setValue(DebugeeConfig.HotswapConfig.ServerPort);
             VirtualMachine vm = sac.attach(defaultArguments);
 
-            List<ReferenceType> rtList = vm.classesByName("me.kisimple.just4fun.Foo");
+            List<ReferenceType> rtList = vm.classesByName(DebugeeConfig.HotswapConfig.ClassName);
             ReferenceType rt = rtList.get(0);
             Map<ReferenceType, byte[]> newByteCodeMap = new HashMap<ReferenceType, byte[]>(1);
             byte[] newByteCode = genNewByteCodeUsingJavaCompiler();
@@ -51,19 +51,17 @@ public class HotSwapper {
     }
 
     private static byte[] genNewByteCodeUsingJavaCompiler() throws Exception {
-        JavaCompiler compiler = ToolProvider.getSystemJavaCompiler();
-
-//        compiler.run(null, null, null, "E:\\Projects\\just4fun\\src\\main\\java\\me\\kisimple\\just4fun\\Foo.java");
-
-        File javaFile =
-                new File("E:\\Projects\\just4fun\\src\\main\\java\\me\\kisimple\\just4fun\\Foo.java");
-        StandardJavaFileManager fileManager = compiler.getStandardFileManager(null, null, null);
-        Iterable<? extends JavaFileObject> compilationUnit =
-                fileManager.getJavaFileObjectsFromFiles(Arrays.asList(javaFile));
-        compiler.getTask(null, fileManager, null, null, null, compilationUnit).call();
+//        JavaCompiler compiler = ToolProvider.getSystemJavaCompiler();
+//
+//        File javaFile =
+//                new File(DebugeeConfig.BreakpointClassPath);
+//        StandardJavaFileManager fileManager = compiler.getStandardFileManager(null, null, null);
+//        Iterable<? extends JavaFileObject> compilationUnit =
+//                fileManager.getJavaFileObjectsFromFiles(Arrays.asList(javaFile));
+//        compiler.getTask(null, fileManager, null, null, null, compilationUnit).call();
 
         File classFile =
-                new File("E:\\Projects\\just4fun\\src\\main\\java\\me\\kisimple\\just4fun\\Foo.class");
+                new File(DebugeeConfig.HotswapConfig.ClassFilePath);
         InputStream in = new FileInputStream(classFile);
         byte[] buf = new byte[(int)classFile.length()];
         while (in.read(buf) != -1) {}

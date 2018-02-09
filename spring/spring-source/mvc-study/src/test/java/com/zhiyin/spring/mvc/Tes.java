@@ -32,7 +32,7 @@ public class Tes {
         Parameter firstParam = params[0];
         System.out.println( firstParam.getName() );
         System.out.println(params[0].getType());
-        System.out.println(firstParam.);
+//        System.out.println(firstParam.);
 //        System.out.println( firstParam.get);
         
 //        ResolvableType methodType = ResolvableType.forMethodParameter( classMethods[0], 0);

@@ -8,11 +8,21 @@ import static org.junit.Assert.*;
  */
 public class LocalPathClassLoaderTest {
 
-    String clazRootPath = "/Users/hg/Github/DeepStudy/jdk-learn/classloader/clasz";
+    String clazRootPath = "/Users/hg/Github/DeepStudy2/jdk-learn/classloader/clasz";
     String className = "com.zhiyin.classloader.TestLoadClass";
 
     @Test
     public void findClass() throws Exception {
+
+        LocalPathClassLoader loader = new LocalPathClassLoader(clazRootPath);
+        Class clazz = loader.loadClass(className);
+        System.out.println(clazz.getClassLoader());
+        assertEquals(loader,clazz.getClassLoader());
+    }
+
+
+    @Test
+    public void findClass2() throws Exception {
 
         LocalPathClassLoader loader = new LocalPathClassLoader(clazRootPath);
         Class clazz = loader.loadClass(className);

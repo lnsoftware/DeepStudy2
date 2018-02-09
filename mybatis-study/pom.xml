@@ -14,6 +14,7 @@
         <module>mybatis-basic</module>
         <module>springboot-mybatis</module>
         <!--<module>cache</module>-->
+        <module>springboot-master</module>
         <module>mybatis-plugin</module>
         <!--<module>mybatis-page</module>-->
     </modules>

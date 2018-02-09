@@ -1,0 +1,28 @@
+# -*- mode: ruby -*-
+# vi: set ft=ruby :
+
+Vagrant.configure("2") do |config|
+  #config.ssh.insert_key = false
+  #config.vm.synced_folder '.', '/vagrant', type: 'nfs'
+  config.vm.network "public_network", bridge: "en0: Wi-Fi (AirPort)"
+
+  # VirtualBox.
+  # `vagrant up virtualbox --provider=virtualbox`
+  config.vm.define "virtualbox" do |virtualbox|
+    virtualbox.vm.hostname = "ubuntu1604"
+
+    # 自己打包的系统
+    virtualbox.vm.box = "ubuntu1604-desktop"
+
+    config.vm.provider :virtualbox do |v|
+      v.gui = true
+      v.memory = 2048
+      v.cpus = 2
+      #v.customize ["modifyvm", :id, "--natdnshostresolver1", "on"]
+      #v.customize ["modifyvm", :id, "--ioapic", "on"]
+    end
+
+    config.vm.provision "shell", inline: "echo Hello, World"
+  end
+
+end

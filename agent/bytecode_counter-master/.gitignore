@@ -1,0 +1,6 @@
+.DS_Store
+*.log
+*.class
+*.o
+*.jnilib
+*.so

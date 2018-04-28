@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xsi:schemaLocation="
+            http://www.springframework.org/schema/beans
+            http://www.springframework.org/schema/beans/spring-beans-2.0.xsd
+            http://www.springframework.org/schema/aop
+            http://www.springframework.org/schema/aop/spring-aop-2.5.xsd"
+       default-autowire="autodetect">
+    <aop:config>
+        <aop:aspect id="TestAspect" ref="aspectBean">
+            <!--配置com.spring.service包下所有类或接口的所有方法-->
+            <aop:pointcut id="businessService"
+                          expression="execution(* com..*(..))" />
+            <!--<aop:before pointcut-ref="businessService" method="doBefore"/>-->
+            <!--<aop:after pointcut-ref="businessService" method="doAfter"/>-->
+            <aop:around pointcut-ref="businessService" method="doAround"/>
+            <!--<aop:after-throwing pointcut-ref="businessService" method="doThrowing" throwing="ex"/>-->
+        </aop:aspect>
+    </aop:config>
+
+    <bean id="aspectBean" class="com.zhiyin.spring.aop.demo4.aspect.PrintAspect" />
+
+    <bean name="userService" class="com.zhiyin.spring.aop.demo4.service.impl.UserServiceImpl"></bean>
+
+    <bean class="com.zhiyin.spring.aop.demo4.ProxyCreator" />
+    <bean class="com.zhiyin.spring.aop.demo4.ProxyCreator2" />
+
+</beans>

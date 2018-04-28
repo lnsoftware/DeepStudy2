@@ -14,7 +14,6 @@
     <apache.commons.lang3.version>3.4</apache.commons.lang3.version>
     <aspectjrt.version>1.8.9</aspectjrt.version>
     <aspectjweaver.version>1.8.9</aspectjweaver.version>
-    <spring.context.version>4.3.1.RELEASE</spring.context.version>
   </properties>
 
   <dependencies>
@@ -22,7 +21,7 @@
       <groupId>junit</groupId>
       <artifactId>junit</artifactId>
       <version>4.12</version>
-      <scope>test</scope>
+      <!--<scope>test</scope>-->
     </dependency>
 
     <dependency>

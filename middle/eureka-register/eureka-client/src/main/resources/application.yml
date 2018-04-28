@@ -1,0 +1,31 @@
+server:
+  port: 9000
+  context-path: /democlient
+
+spring:
+  application:
+    name: demo-consumer2
+    version: 0.0.1
+  mvc:
+    throw-exception-if-no-handler-found: true
+eureka:
+  client:
+    enabled: true
+    serviceUrl:
+      defaultZone: http://localhost:8761/eureka/
+  instance:
+    ip-address: 1.1.1.14
+    preferIpAddress: true
+#    hostname: 1.1.1.14
+#    home-page-url-path: /${server.context-path}
+    home-page-url: http://ssss.bnbb.cc:888/
+    metadata-map:
+      a: a
+com:
+  deswaef:
+    reddit:
+      url: https://www.reddit.com/r
+
+
+logging:
+  file: logs/${spring.application.name}.log

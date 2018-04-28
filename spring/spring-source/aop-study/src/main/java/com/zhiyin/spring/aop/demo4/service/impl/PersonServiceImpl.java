@@ -13,7 +13,8 @@ public class PersonServiceImpl implements PersonService {
 	public PersonServiceImpl(String username){
 		this.username = username;
 	}
-	
+
+	@Override
 	public String getUsername() {
 		username = "lisi";
 		return username;

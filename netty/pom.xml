@@ -15,14 +15,17 @@
     </parent>
 
     <modules>
-        <module>netty</module>
-        <module>netty-simple</module>
+        <!--<module>netty</module>-->
+        <!--<module>netty-simple</module>-->
+        <module>04pro-netty</module>
     </modules>
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <junit.version>4.12</junit.version>
-        <netty.version>4.0.41.Final</netty.version>
+        <!--<netty.version>4.0.41.Final</netty.version>-->
+        <netty.version>4.1.6.Final</netty.version>
+
     </properties>
 
     <dependencyManagement>

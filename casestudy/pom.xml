@@ -16,7 +16,7 @@
 
     <modules>
         <module>classnotfound</module>
-        <module>classnotfound</module>
+        <module>shutdownhook</module>
     </modules>
 
 </project>

@@ -9,7 +9,7 @@ cd $gitCatPath
 mvn clean install -DskipTests
 
 # gen sql xml config file
-mvn cat:install
+#mvn cat:install
 
 cp $gitCatPath/script/Cat.sql $workDir/cat
 cp $gitCatPath/cat-home/target/*.war $workDir/cat/cat.war

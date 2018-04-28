@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE beans PUBLIC  "-//SPRING//DTD BEAN//EN" "http://www.springframework.org/dtd/spring-beans.dtd">
+
+<beans>
+
+    <!--
+        Tests of lifecycle callbacks
+    -->
+    <!--<bean id="mustBeInitialized" class="org.springframework.beans.factory.MustBeInitialized">-->
+    <!--</bean>-->
+
+    <bean class="com.zhiyin.spring.service.UserServiceImpl">
+           <property name="rootName">
+               <value>${}</value>
+           </property>
+    </bean>
+
+    <bean id="lifecycle" class="com.zhiyin.spring.lifecycle.LifecycleBean" />
+
+</beans>

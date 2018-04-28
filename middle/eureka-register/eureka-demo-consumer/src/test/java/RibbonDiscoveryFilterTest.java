@@ -26,8 +26,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.boot.test.IntegrationTest;
-import org.springframework.boot.test.SpringApplicationConfiguration;
+
 import org.springframework.cloud.client.loadbalancer.LoadBalanced;
 import org.springframework.cloud.netflix.eureka.EnableEurekaClient;
 import org.springframework.context.annotation.Bean;
@@ -57,7 +56,7 @@ import static org.springframework.web.bind.annotation.RequestMethod.GET;
 //@DirtiesContext(classMode = AFTER_EACH_TEST_METHOD)
 //@WebAppConfiguration
 //@IntegrationTest
-@SpringApplicationConfiguration(classes = {DemoConsumerApplication.class})
+//@SpringApplicationConfiguration(classes = {DemoConsumerApplication.class})
 @RunWith(SpringJUnit4ClassRunner.class)
 public class RibbonDiscoveryFilterTest {
 

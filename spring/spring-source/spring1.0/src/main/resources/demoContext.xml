@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE beans PUBLIC  "-//SPRING//DTD BEAN//EN" "http://www.springframework.org/dtd/spring-beans.dtd">
+
+<beans>
+
+	<bean class="com.zhiyin.spring.bfpr.HelloBeanFactoryPostProcessor" />
+	<bean class="com.zhiyin.spring.bfpr.RemarkBeanFactoryPostProcessor" />
+
+	<bean class="com.zhiyin.spring.bpr.CustomBeanPostProcessor" />
+
+	<bean class="com.zhiyin.spring.aca.ApplicationContextAwareUtil" />
+	<bean name="service" class="com.zhiyin.spring.service.UserService"/>
+
+	<bean id="user"
+		  class="com.zhiyin.spring.service.User"
+		  singleton="false">
+		<property name="date">
+			<value>2000-02-02</value>
+		</property>
+		<property name="password">
+			<value>123456</value>
+		</property>
+		<property name="systemMark">
+			<value>init</value>
+		</property>
+	</bean>
+
+	<!-- 处理date类型属性的初始化 -->
+	<bean id="customEditorConfigurer" class="org.springframework.beans.factory.config.CustomEditorConfigurer">
+		<property name="customEditors">
+			<map>
+				<entry key="java.util.Date">
+					<bean class="com.zhiyin.spring.pe.CustomDatePropertyEditor">
+						<property name="format">
+								<value>yyyy-MM-dd</value>
+						</property>
+					</bean>
+				</entry>
+			</map>
+		</property>
+	</bean>
+
+	<!--<bean id="customEditorConfigurer"-->
+		  <!--class="org.springframework.beans.factory.config.CustomEditorConfigurer">-->
+		<!--<property name="customEditors">-->
+			<!--<map>-->
+				<!--<entry key="java.util.Date">-->
+					<!--<bean class="org.springframework.beans.propertyeditors.CustomDateEditor">-->
+						<!--<constructor-arg index="0">-->
+							<!--<bean class="java.text.SimpleDateFormat">-->
+								<!--<constructor-arg>-->
+									<!--<value>yyyy-MM-dd</value>-->
+								<!--</constructor-arg>-->
+							<!--</bean>-->
+						<!--</constructor-arg>-->
+						<!--<constructor-arg index="1">-->
+							<!--<value>true</value>-->
+						<!--</constructor-arg>-->
+
+					<!--</bean>-->
+				<!--</entry>-->
+			<!--</map>-->
+		<!--</property>-->
+	<!--</bean>-->
+
+</beans>

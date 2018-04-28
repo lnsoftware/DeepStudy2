@@ -10,6 +10,7 @@ import java.lang.reflect.Method;
  */
 public class TicketServiceBeforeAdvice implements MethodBeforeAdvice {
 
+    @Override
     public void before(Method method, Object[] args, Object target) throws Throwable {
         System.out.println("BEFORE_ADVICE: 欢迎光临本代售点....");
     }

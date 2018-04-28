@@ -30,7 +30,6 @@ public class App {
         proxyFactoryBean.setProxyTargetClass(true);
 
         //5. 添加不同的Advice
-
         proxyFactoryBean.addAdvice(afterReturningAdvice);
         proxyFactoryBean.addAdvice(aroundAdvice);
         proxyFactoryBean.addAdvice(throwsAdvice);

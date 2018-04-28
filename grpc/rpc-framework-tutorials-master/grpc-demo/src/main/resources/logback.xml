@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+
+    <contextName>grpc-demo</contextName>
+
+    <property name="LOG_DIR" value="D:/logs" />
+
+    <!-- Console -->
+    <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder>
+            <pattern>%date{yyyy-MM-dd HH:mm:ss.SSS} | %thread | %-5level | %logger [%file:%line] | %msg%n</pattern>
+        </encoder>
+    </appender>
+
+    <appender name="appInfo" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>${LOG_DIR}/info/grpc-demo-info.log</file>
+        <append>true</append>
+
+        <filter class="ch.qos.logback.classic.filter.ThresholdFilter">
+            <level>INFO</level>
+        </filter>
+
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <fileNamePattern>${LOG_DIR}/info/grpc-demo.%d{yyyy-MM-dd}-info.log.gz
+            </fileNamePattern>
+            <maxHistory>360</maxHistory>
+        </rollingPolicy>
+
+        <encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
+            <pattern>%date{yyyy-MM-dd HH:mm:ss.SSS} | %thread | %-5level | %logger | %msg%n</pattern>
+        </encoder>
+    </appender>
+
+    <appender name="appError" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>${LOG_DIR}/error/grpc-demo-error.log</file>
+        <append>true</append>
+
+        <filter class="ch.qos.logback.classic.filter.ThresholdFilter">
+            <level>ERROR</level>
+        </filter>
+
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <fileNamePattern>${LOG_DIR}/error/grpc-demo.%d{yyyy-MM-dd}-error.log.gz
+            </fileNamePattern>
+            <maxHistory>360</maxHistory>
+        </rollingPolicy>
+
+        <encoder>
+            <pattern>%date{yyyy-MM-dd HH:mm:ss.SSS} | %thread | %-5level | %logger | %msg%n</pattern>
+        </encoder>
+    </appender>
+
+    <!-- AsyncAppender -->
+    <appender name="appInfoAsync" class="ch.qos.logback.classic.AsyncAppender">
+        <discardingThreshold>10</discardingThreshold>
+        <queueSize>2000</queueSize>
+        <appender-ref ref="appInfo" />
+    </appender>
+
+    <appender name="appErrorAsync" class="ch.qos.logback.classic.AsyncAppender">
+        <discardingThreshold>10</discardingThreshold>
+        <queueSize>2000</queueSize>
+        <appender-ref ref="appError" />
+    </appender>
+
+    <root level="INFO">
+        <appender-ref ref="STDOUT" />
+        <appender-ref ref="appInfoAsync" />
+        <appender-ref ref="appErrorAsync" />
+    </root>
+
+</configuration>

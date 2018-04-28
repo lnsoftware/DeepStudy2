@@ -40,4 +40,4 @@ endpoints:
     enabled: true
 
 elegant:
-  close: false
+  close: true

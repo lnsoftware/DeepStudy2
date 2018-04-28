@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:util="http://www.springframework.org/schema/util"
+       xmlns:motan="http://api.weibo.com/schema/motan"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+       	http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util.xsd
+       	http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd
+        http://api.weibo.com/schema/motan http://api.weibo.com/schema/motan.xsd">
+
+    <context:component-scan base-package="com.mindflow.motan.consumer" />
+    <context:annotation-config />
+
+    <motan:protocol id="motan" name="motan" />
+
+    <!--使用Zookeeper作为注册中心-->
+    <motan:registry regProtocol="zookeeper" name="zk" address="localhost:2181"/>
+
+    <!-- 通用配置，多个rpc服务使用相同的基础配置. group和module定义具体的服务池。export格式为“protocol id:提供服务的端口” -->
+    <motan:basicService id="serviceBasicConfig" export="motan:20910" group="motan-demo-rpc" module="motan-demo-rpc" registry="zk"/>
+
+    <motan:referer id="demoService" interface="com.mindflow.api.DemoService" timeout="5000"/>
+  
+</beans>

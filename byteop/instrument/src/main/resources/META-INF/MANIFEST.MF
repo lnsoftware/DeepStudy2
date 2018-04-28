@@ -1,0 +1,4 @@
+Manifest-Version: 1.0
+Premain-Class: com.hg.awesome.java.agent.PrintBeforeMethodAgent
+Agent-Class: com.hg.awesome.java.agent.GetAllLoadedClassAgent
+Created-By: 1.6.0_29

@@ -19,6 +19,8 @@
     <module>aop-study</module>
     <!--<module>spring-transaction</module>-->
     <module>mvc-study</module>
+    <module>spring1.0</module>
+    <module>threadpool-study</module>
   </modules>
 
 

@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE beans PUBLIC  "-//SPRING//DTD BEAN//EN" "http://www.springframework.org/dtd/spring-beans.dtd">
+
+<beans>
+
+	<bean name="user" class="com.zhiyin.spring.service.User" init-method="ini">
+		<property name="name">
+			<value>${rootName}</value>
+		</property>
+	</bean>
+
+	<bean id="propertyConfigurer" class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+		<property name="locations">
+			<list>
+				<value>test.properties</value>
+			</list>
+		</property>
+	</bean>
+
+	<!-- 这是一个beanfactory -->
+	<!--<bean id="properties" class="org.springframework.beans.factory.config.PropertiesFactoryBean">-->
+		<!--<property name="location"><value>test.properties</value></property>-->
+	<!--</bean>-->
+
+</beans>
